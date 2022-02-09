@@ -40,7 +40,7 @@
                 <Button Content="Параметры" Style="{DynamicResource ControlButton}"/>
                 <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
             </Grid>
-            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="5" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="10" HorizontalAlignment="Center"/>
         </Grid>
         <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
     </Grid>
