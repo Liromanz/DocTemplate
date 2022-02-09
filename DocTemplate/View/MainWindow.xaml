@@ -1,0 +1,47 @@
+﻿<Window x:Class="DocTemplate.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DocTemplate"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="DocTemplate" Height="1000" Width="1800" 
+        Foreground="White"
+        FontSize="20"
+        Background="{DynamicResource BackgroundColor}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" MinWidth="150"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition MinWidth="600"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="{DynamicResource MainColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="ШАБЛОНЫ" Padding="5"/>
+                <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}"/>
+                <TextBlock Text="ФАЙЛ" Padding="5"/>
+                <Button Content="•    Открыть" Style="{DynamicResource MenuButton}" />
+                <Button Content="•    Сохранить" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Сохранить как" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Печать" Style="{DynamicResource MenuButton}"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Параметры" Style="{DynamicResource ControlButton}"/>
+                <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
+            </Grid>
+            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="5" HorizontalAlignment="Center"/>
+        </Grid>
+        <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
+    </Grid>
+</Window>

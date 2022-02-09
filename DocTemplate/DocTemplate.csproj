@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Language\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Model\" />
+    <Folder Include="View\ControlPanels\" />
+  </ItemGroup>
+
+</Project>
