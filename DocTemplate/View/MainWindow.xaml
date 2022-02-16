@@ -4,12 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocTemplate"
+        xmlns:viewModel="clr-namespace:DocTemplate.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="DocTemplate" Height="1000" Width="1800" 
         Foreground="White"
+        WindowStyle="None"
+        AllowsTransparency="True"
         FontSize="20"
         Background="{DynamicResource BackgroundColor}">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" MinWidth="150"/>
@@ -37,11 +43,12 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Параметры" Style="{DynamicResource ControlButton}"/>
+                <Button Content="Параметры" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}"/>
                 <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
             </Grid>
-            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="10" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="5" HorizontalAlignment="Center"/>
         </Grid>
         <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
+        <ContentControl Grid.Column="2" Content="{Binding CurrentView}" Margin="30"/>
     </Grid>
 </Window>
