@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Brush x:Key="MainColor">#E6A20E</Brush>
-    <Brush x:Key="BackgroundColor">#181520</Brush>
-    <Brush x:Key="FocusColor">#F7E7CD</Brush>
+    <Brush x:Key="MainColor">#547062</Brush>
+    <Brush x:Key="BackgroundColor">#121617</Brush>
+    <Brush x:Key="FocusColor">#c5e3db</Brush>
 </ResourceDictionary>

@@ -2,16 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DocTemplate"
+             xmlns:vmSettings="clr-namespace:DocTemplate.ViewModel.ControlPanels.Settings"
+             xmlns:viewSettings="clr-namespace:DocTemplate.View.ControlPanels.Settings"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--Цвета-->
-                <ResourceDictionary Source="Resources/Colors/Peach.xaml"/>
-                <!--Стили-->
-                <ResourceDictionary Source="Resources/Controls/Button/MenuButton.xaml"/>
-                <ResourceDictionary Source="Resources/Controls/Button/ControlButton.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Colors/Peach.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/Button/MenuButton.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/Button/ControlButton.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/Separator/VerticalSeparator.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/Separator/HorizontalSeparatop.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <!--Связь моделей и представлений-->
+            <DataTemplate DataType="{x:Type vmSettings:SettingsVm}">
+                <viewSettings:SettingsControlPanel />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

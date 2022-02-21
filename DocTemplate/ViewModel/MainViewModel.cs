@@ -6,7 +6,7 @@ namespace DocTemplate.ViewModel
     public class MainViewModel : ObservableObject
     {
         #region Команды
-        public RelayCommand SettingsCommand { get; set; }
+        public BindableCommand SettingsCommand { get; set; }
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace DocTemplate.ViewModel
 
             SettingsVm = new SettingsVm();
 
-            SettingsCommand = new RelayCommand(o => {ChangeCurrentView(SettingsVm);});
+            SettingsCommand = new BindableCommand(o => {ChangeCurrentView(SettingsVm);});
         }
 
         private void ChangeCurrentView(object viewToChange)

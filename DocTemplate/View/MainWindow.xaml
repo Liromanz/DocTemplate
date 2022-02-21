@@ -16,19 +16,23 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" MinWidth="150"/>
+            <ColumnDefinition Width="400" MinWidth="300" MaxWidth="700"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition MinWidth="600"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Background="{DynamicResource MainColor}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Margin="10">
+            <TextBlock Grid.Row="0" Text="DocTemplate v0.1" Padding="5" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
+            <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}" />
+            <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
                 <TextBlock Text="ШАБЛОНЫ" Padding="5"/>
                 <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}"/>
                 <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}"/>
@@ -38,7 +42,7 @@
                 <Button Content="•    Сохранить как" Style="{DynamicResource MenuButton}"/>
                 <Button Content="•    Печать" Style="{DynamicResource MenuButton}"/>
             </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="3" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -46,9 +50,8 @@
                 <Button Content="Параметры" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}"/>
                 <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
             </Grid>
-            <TextBlock Grid.Row="2" Text="DocTemplate v0.1" Padding="5" HorizontalAlignment="Center"/>
         </Grid>
-        <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
+        <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext" Background="White"/>
         <ContentControl Grid.Column="2" Content="{Binding CurrentView}" Margin="30"/>
     </Grid>
 </Window>
