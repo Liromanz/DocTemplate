@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace DocTemplate.View
 {
@@ -10,6 +11,12 @@ namespace DocTemplate.View
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void DragWindow(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

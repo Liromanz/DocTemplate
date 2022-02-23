@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="DocTemplate.CardViews.View.WindowManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocTemplate.CardViews.View"
+             Foreground="Gray"
+             FontSize="20"
+             Padding="0,10,10,0"
+             HorizontalAlignment="Right"
+             VerticalAlignment="Top"
+             mc:Ignorable="d" >
+    <StackPanel Orientation="Horizontal">
+        <Button Content="−" Padding="10,0,10,3" FontSize="23" Background="Transparent" BorderThickness="0" Foreground="White" Click="RollApplication">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Padding="10,0,10,0" Content="◻" FontSize="20" Background="Transparent" BorderThickness="0" Foreground="White" Height="28" Click="MaximizeApplication">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="×" Padding="10,0,10,0" FontSize="23" Background="Transparent" BorderThickness="0" Foreground="White" Click="CloseApplication">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </StackPanel>
+</UserControl>

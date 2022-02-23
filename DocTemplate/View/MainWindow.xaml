@@ -5,23 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocTemplate"
         xmlns:viewModel="clr-namespace:DocTemplate.ViewModel"
+        xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="DocTemplate" Height="1000" Width="1800" 
-        Foreground="White"
-        WindowStyle="None"
+        Title="DocTemplate" Padding="10"
+        Height="1000" Width="1800"
+        MinWidth="1550" MinHeight="640"
+        MaxHeight="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenHeight}}"
+        MaxWidth="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"
+        Foreground="White" 
+        BorderThickness="1" BorderBrush="{DynamicResource MainColor}"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
-        FontSize="20"
-        Background="{DynamicResource BackgroundColor}">
+        FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" MinWidth="300" MaxWidth="700"/>
+            <ColumnDefinition Width="400" MinWidth="270" MaxWidth="400"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="{DynamicResource MainColor}">
             <Grid.RowDefinitions>
@@ -53,7 +58,8 @@
                 <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
             </Grid>
         </Grid>
-        <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext" Background="White"/>
-        <ContentControl Grid.Column="2" Content="{Binding CurrentView}" Margin="30"/>
+        <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext" Background="White" HorizontalAlignment="Center"/>
+        <view:WindowManager Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <ContentControl Grid.Column="2" Content="{Binding CurrentView}" Margin="30,30,30,30" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
