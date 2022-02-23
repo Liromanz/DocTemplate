@@ -36,6 +36,8 @@
                 <TextBlock Text="ШАБЛОНЫ" Padding="5"/>
                 <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}"/>
                 <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Создать" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Импортировать" Style="{DynamicResource MenuButton}"/>
                 <TextBlock Text="ФАЙЛ" Padding="5"/>
                 <Button Content="•    Открыть" Style="{DynamicResource MenuButton}" />
                 <Button Content="•    Сохранить" Style="{DynamicResource MenuButton}"/>
