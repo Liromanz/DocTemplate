@@ -54,8 +54,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Параметры" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}"/>
-                <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1"/>
+                <Button Content="Параметры" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}" Margin="5"/>
+                <Button Content="Помощь"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
             </Grid>
         </Grid>
         <GridSplitter BorderThickness="0.5" BorderBrush="DarkGray" Grid.Column="1" ResizeBehavior="PreviousAndNext" Background="White" HorizontalAlignment="Center"/>
