@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using DocTemplate.Global;
 using DocTemplate.Helpers;
 using DocTemplate.Model.API;
 using DocTemplate.ServerHandler.API;
@@ -15,9 +16,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
         #region Команды
         public ICommand SaveAllCommand => new RelayCommand(SaveAll);
         public ICommand AddMinutesCommand => new RelayCommand(AddMinutes);
-        public ICommand TakeMinutesCommand =>  new RelayCommand(TakeMinutes);
-        public ICommand OpenFolderCommand =>  new RelayCommand(OpenFolder);
-        public ICommand ChangeColorCommand =>  new RelayCommand<string>(ChangeColor);
+        public ICommand TakeMinutesCommand => new RelayCommand(TakeMinutes);
+        public ICommand OpenFolderCommand => new RelayCommand(OpenFolder);
+        public ICommand ChangeColorCommand => new RelayCommand<string>(ChangeColor);
         #endregion
 
         #region Данные
@@ -96,7 +97,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
         }
 
         private void AddMinutes() => AutoSave += 10;
-        private void TakeMinutes() => AutoSave = AutoSave <= 0 ? AutoSave=0 : AutoSave - 10;
+        private void TakeMinutes() => AutoSave = AutoSave <= 0 ? AutoSave = 0 : AutoSave - 10;
 
         private void OpenFolder()
         {
@@ -110,8 +111,11 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
             {
                 if (Username != _settings.Username)
                 {
-                    _settings.Username = Username;
-                    await Requests.PutRequest("Users", JsonConvert.SerializeObject(new Username { CurrentName = Username, NewName = _settings.Username }));
+                    var responce = await Requests.PutRequest("Users",
+                        JsonConvert.SerializeObject(new Username
+                        { CurrentName = _settings.Username, NewName = Username }));
+                    if (responce == GlobalConstants.SuccessMessage)
+                        _settings.Username = Username;
                 }
                 if (FileFormat != _settings.DocFormat)
                     _settings.DocFormat = FileFormat;
