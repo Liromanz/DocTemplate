@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DocTemplate.View.ControlPanels.Settings"
              xmlns:settings="clr-namespace:DocTemplate.ViewModel.ControlPanels.Settings"
              xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              Foreground="White"
              FontSize="20"
@@ -13,48 +14,102 @@
     <UserControl.DataContext>
         <settings:SettingsVm/>
     </UserControl.DataContext>
-    <StackPanel>
-        <StackPanel.Resources>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Padding" Value="0,00,0,20"/>
-            </Style>
-        </StackPanel.Resources>
-        <TextBlock Text="ТЕМА ПРИЛОЖЕНИЯ"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <view:ColorSelector Grid.Column="0" ThemeName="Персик" BackgroundColor="#413F48" MainColor="#ED927F">
-                <view:ColorSelector.InputBindings>
-                    <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Peach" Gesture="LeftClick"/>
-                </view:ColorSelector.InputBindings>
-            </view:ColorSelector>
-            <view:ColorSelector Grid.Column="1" ThemeName="Горчица" BackgroundColor="#1E1915" MainColor="#E6A20E">
-                <view:ColorSelector.InputBindings>
-                    <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Mustard" Gesture="LeftClick"/>
-                </view:ColorSelector.InputBindings>
-            </view:ColorSelector>
-            <view:ColorSelector Grid.Column="2" ThemeName="Малахит" BackgroundColor="#121617" MainColor="#547062">
-                <view:ColorSelector.InputBindings>
-                    <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Malachite" Gesture="LeftClick"/>
-                </view:ColorSelector.InputBindings>
-            </view:ColorSelector>
-            <view:ColorSelector Grid.Column="3" ThemeName="Пляж" BackgroundColor="#464543" MainColor="#456576">
-                <view:ColorSelector.InputBindings>
-                    <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Beach" Gesture="LeftClick"/>
-                </view:ColorSelector.InputBindings>
-            </view:ColorSelector>
-            <view:ColorSelector Grid.Column="4" ThemeName="Светлый" BackgroundColor="#FFFFFF" MainColor="#999999">
-                <view:ColorSelector.InputBindings>
-                    <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Light" Gesture="LeftClick"/>
-                </view:ColorSelector.InputBindings>
-            </view:ColorSelector>
-        </Grid>
-        <TextBlock Text="ПОЛЬЗОВАТЕЛЬ"/>
-        <TextBlock Text="ФАЙЛ"/>
-    </StackPanel>
+    <Grid>
+
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Padding" Value="0,10,0,10"/>
+                </Style>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="0,5,0,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="ТЕМА ПРИЛОЖЕНИЯ"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <view:ColorSelector Grid.Column="0" ThemeName="Персик" BackgroundColor="#413F48" MainColor="#ED927F">
+                    <view:ColorSelector.InputBindings>
+                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Peach" Gesture="LeftClick"/>
+                    </view:ColorSelector.InputBindings>
+                </view:ColorSelector>
+                <view:ColorSelector Grid.Column="1" ThemeName="Горчица" BackgroundColor="#1E1915" MainColor="#E6A20E">
+                    <view:ColorSelector.InputBindings>
+                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Mustard" Gesture="LeftClick"/>
+                    </view:ColorSelector.InputBindings>
+                </view:ColorSelector>
+                <view:ColorSelector Grid.Column="2" ThemeName="Малахит" BackgroundColor="#121617" MainColor="#547062">
+                    <view:ColorSelector.InputBindings>
+                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Malachite" Gesture="LeftClick"/>
+                    </view:ColorSelector.InputBindings>
+                </view:ColorSelector>
+                <view:ColorSelector Grid.Column="3" ThemeName="Пляж" BackgroundColor="#464543" MainColor="#456576">
+                    <view:ColorSelector.InputBindings>
+                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Beach" Gesture="LeftClick"/>
+                    </view:ColorSelector.InputBindings>
+                </view:ColorSelector>
+                <view:ColorSelector Grid.Column="4" ThemeName="Светлый" BackgroundColor="#FFFFFF" MainColor="#999999">
+                    <view:ColorSelector.InputBindings>
+                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Light" Gesture="LeftClick"/>
+                    </view:ColorSelector.InputBindings>
+                </view:ColorSelector>
+            </Grid>
+            <TextBlock Text="ПОЛЬЗОВАТЕЛЬ"/>
+            <Grid Width="750" HorizontalAlignment="Left" Margin="40,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Имя пользователя" />
+                <TextBlock Grid.Row="1" Text="Если вы хотите подключить уже существующий аккаунт, нажмите сюда" TextWrapping="Wrap"/>
+                <TextBox Grid.Column="1" Text="{Binding Username}" Style="{StaticResource DefaultTextBox}"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="Подключить" Style="{DynamicResource ControlButton}"  VerticalAlignment="Center"/>
+            </Grid>
+            <TextBlock Text="ФАЙЛ"/>
+            <Grid Width="750" HorizontalAlignment="Left" Margin="40,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Формат экспорта документов" />
+                <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Расположение файлов по умолчанию"/>
+                <TextBlock Grid.Row="2" Text="Автосохранение каждые" />
+                <CheckBox Grid.Row="3" Content="Выделять изменяемые поля" Style="{StaticResource DefaultCheckBox}" IsChecked="True"/>
+
+                <ComboBox Grid.Column="1" Style="{DynamicResource DefaultComboBox}" SelectedValue="{Binding FileFormat, Mode=TwoWay}" SelectedIndex="0">
+                    <ComboBoxItem>.docx</ComboBoxItem>
+                    <ComboBoxItem>.pdf</ComboBoxItem>
+                    <ComboBoxItem>.txt</ComboBoxItem>
+                </ComboBox>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox Width="230" Style="{StaticResource DefaultTextBox}" Margin="0,0,10,0" Text="{Binding FilePath}"/>
+                    <Button Content="Обзор" Style="{DynamicResource ControlButton}"  VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding OpenFolderCommand}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <Button Width="35" BorderThickness="0" Content="ᐱ" Margin="0,5,0,5" Command="{Binding AddMinutesCommand}"/>
+                    <TextBox Width="70" Style="{StaticResource DefaultTextBox}" Text="{Binding AutoSave}" />
+                    <Button Width="35" BorderThickness="0" Content="ᐯ" Margin="0,5,0,5" Command="{Binding TakeMinutesCommand}"/>
+                    <TextBlock Text="мин" Margin="20,0"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Button Content="Сохранить" Style="{DynamicResource ControlButton}" Command="{Binding SaveAllCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    </Grid>
 </UserControl>

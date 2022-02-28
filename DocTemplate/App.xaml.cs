@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DocTemplate.ServerHandler.API;
 
 namespace DocTemplate
 {
@@ -22,6 +23,13 @@ namespace DocTemplate
             InitializeComponent();
             ColorChanged += App_ColorChanged;
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
+
+            if (DocTemplate.Properties.Settings.Default.FirstTime)
+            { 
+                DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
+                DocTemplate.Properties.Settings.Default.FirstTime = false;
+                DocTemplate.Properties.Settings.Default.Save();
+            }
         }
 
         public static string Color

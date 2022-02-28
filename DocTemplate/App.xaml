@@ -9,6 +9,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Properties/Resources/Colors/Peach.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/CheckBox/DefaultCheckBox.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/ComboBox/DefaultComboBox.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/TextBox/DefaultTextBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/Button/MenuButton.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/Button/ControlButton.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/Separator/VerticalSeparator.xaml"/>

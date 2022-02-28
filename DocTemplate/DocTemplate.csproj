@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Properties\Resources\Language\" />
-    <Folder Include="Model\" />
     <Folder Include="ViewModel\ControlPanels\Files\" />
     <Folder Include="ViewModel\ControlPanels\Templates\" />
     <Folder Include="View\ControlPanels\Templates\" />
@@ -17,11 +16,14 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DocTemplate.CardViews\DocTemplate.CardViews.csproj" />
     <ProjectReference Include="..\DocTemplate.Helpers\DocTemplate.Helpers.csproj" />
+    <ProjectReference Include="..\DocTemplate.ServerHandler\DocTemplate.ServerHandler.csproj" />
   </ItemGroup>
 
   <ItemGroup>
