@@ -8,7 +8,7 @@
              HorizontalAlignment="Stretch"
              Foreground="{DynamicResource BackgroundColor}"
              mc:Ignorable="d"  Background="{DynamicResource FocusColor}"
-             Margin="0,0,0,30">
+             Margin="0,15,0,15">
 
     <Grid Height="130">
         <Grid.ColumnDefinitions>

@@ -31,6 +31,8 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
                 new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
                 new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
+                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
+                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
                 new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"}
             };
         }

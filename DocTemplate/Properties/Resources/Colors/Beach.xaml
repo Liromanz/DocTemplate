@@ -3,4 +3,8 @@
     <Brush x:Key="MainColor">#456576</Brush>
     <Brush x:Key="BackgroundColor">#464543</Brush>
     <Brush x:Key="FocusColor">#AFAAA9</Brush>
+
+    <Color x:Key="MainHex">#456576</Color>
+    <Color x:Key="BackgroundHex">#464543</Color>
+    <Color x:Key="FocusHex">#AFAAA9</Color>
 </ResourceDictionary>

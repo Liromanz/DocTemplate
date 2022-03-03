@@ -18,13 +18,6 @@
             <ColumnDefinition />
             <ColumnDefinition Width="1.7*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="1" ItemsSource="{Binding Cards}"
-                 Background="Transparent"  BorderThickness="0">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
+        <ListBox Grid.Column="1" ItemsSource="{Binding Cards}" Style="{StaticResource VerticalListBox}"/>
     </Grid>
 </UserControl>
