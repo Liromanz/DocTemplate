@@ -9,9 +9,7 @@
   <ItemGroup>
     <Folder Include="Properties\Resources\Language\" />
     <Folder Include="ViewModel\ControlPanels\Files\" />
-    <Folder Include="ViewModel\ControlPanels\Templates\" />
     <Folder Include="ViewModel\Cards\" />
-    <Folder Include="View\ControlPanels\Templates\" />
     <Folder Include="View\ControlPanels\Files\" />
   </ItemGroup>
 

@@ -39,7 +39,7 @@
             <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}" />
             <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
                 <TextBlock Text="ШАБЛОНЫ" Padding="5"/>
-                <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}" Command="{Binding AllTemplatesCommand}"/>
                 <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}"/>
                 <Button Content="•    Создать" Style="{DynamicResource MenuButton}"/>
                 <Button Content="•    Импортировать" Style="{DynamicResource MenuButton}"/>

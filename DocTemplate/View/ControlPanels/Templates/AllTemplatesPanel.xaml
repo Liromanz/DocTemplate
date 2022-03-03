@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DocTemplate.View.ControlPanels.Templates.AllTemplatesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocTemplate.View.ControlPanels.Templates"
+             xmlns:templates="clr-namespace:DocTemplate.ViewModel.ControlPanels.Templates"
+             mc:Ignorable="d" 
+             Foreground="White"
+             FontSize="20"
+             d:DesignHeight="1080" d:DesignWidth="1446"
+             Padding="10">
+    <UserControl.DataContext>
+        <templates:AllTemplatesVm/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="1.7*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="1" ItemsSource="{Binding Cards}"
+                 Background="Transparent"  BorderThickness="0">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocTemplate.View.Cards"
              FontSize="20"
+             HorizontalAlignment="Stretch"
              Foreground="{DynamicResource BackgroundColor}"
-             mc:Ignorable="d" 
-             d:DesignHeight="163" d:DesignWidth="896" Background="{DynamicResource FocusColor}">
-    <Grid>
+             mc:Ignorable="d"  Background="{DynamicResource FocusColor}"
+             Margin="0,0,0,30">
+
+    <Grid Height="130">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -18,9 +20,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Source="/Properties/Resources/docexample.jpg" />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Название" FontWeight="Bold" FontSize="25"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateName, Mode=TwoWay}" FontWeight="Bold" FontSize="25"/>
         <Separator Grid.Column="2" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Работа, Учеба, Дом, ГОСТ 19-208" TextWrapping="Wrap" TextAlignment="Center" />
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateTags, Mode=TwoWay}" TextWrapping="Wrap" TextAlignment="Center" />
         <Separator Grid.Column="4" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
         <StackPanel Grid.Column="5" Width="180" VerticalAlignment="Center">
             <Button Content="Открыть" Style="{DynamicResource FocusButton}"/>

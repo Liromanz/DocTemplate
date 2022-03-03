@@ -19,7 +19,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="/Properties/Resources/docexample.jpg" Grid.RowSpan="2" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="Название" FontWeight="Bold" FontSize="25" Margin="5"/>
-        <TextBlock Grid.Column="1" Grid.Row="1"  Text="Работа, Учеба, Дом, ГОСТ 19-208" TextWrapping="Wrap" Margin="5,0,5,5" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=TemplateName, Mode=TwoWay}" FontWeight="Bold" FontSize="25" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1"  Text="{Binding Path=TemplateTags, Mode=TwoWay}" TextWrapping="Wrap" Margin="5,0,5,5" />
     </Grid>
 </UserControl>
