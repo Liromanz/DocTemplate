@@ -15,14 +15,13 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Source="/Properties/Resources/docexample.jpg" />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateName, Mode=TwoWay}" FontWeight="Bold" FontSize="25"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateCard.Name, Mode=TwoWay}" FontWeight="Bold" FontSize="25" TextWrapping="Wrap" MaxWidth="270"/>
         <Separator Grid.Column="2" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateTags, Mode=TwoWay}" TextWrapping="Wrap" TextAlignment="Center" />
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateCard.Tags, Mode=TwoWay}" TextWrapping="Wrap" MaxWidth="270"/>
         <Separator Grid.Column="4" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
         <StackPanel Grid.Column="5" Width="180" VerticalAlignment="Center">
             <Button Content="Открыть" Style="{DynamicResource FocusButton}"/>

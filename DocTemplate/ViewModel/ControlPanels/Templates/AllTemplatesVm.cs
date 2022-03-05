@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DocTemplate.Global;
 using DocTemplate.Helpers;
 using DocTemplate.View.Cards;
 
@@ -17,24 +18,16 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             get { return _cards; }
             set
             {
-                _cards = value; 
+                _cards = value;
                 OnPropertyChanged();
             }
         }
-        
+
         public AllTemplatesVm()
         {
-            Cards = new List<AdvancedTemplateCard>
-            {
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"},
-                new AdvancedTemplateCard{TemplateName = "Название", TemplateTags = "Темы"}
-            };
+            Cards = new List<AdvancedTemplateCard>();
+            foreach (var template in DataContainers.PublicTemplates)
+                Cards.Add(new AdvancedTemplateCard { TemplateCard = template });
         }
     }
 }

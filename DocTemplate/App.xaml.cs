@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
+using DocTemplate.Global;
+using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
+using Newtonsoft.Json;
 
 namespace DocTemplate
 {
@@ -24,11 +26,20 @@ namespace DocTemplate
             ColorChanged += App_ColorChanged;
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
 
-            if (DocTemplate.Properties.Settings.Default.FirstTime)
-            { 
-                DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
-                DocTemplate.Properties.Settings.Default.FirstTime = false;
-                DocTemplate.Properties.Settings.Default.Save();
+            if (InternetState.IsConnectedToInternet())
+            {
+                var thread = new Thread(() =>
+                {
+                    if (DocTemplate.Properties.Settings.Default.FirstTime)
+                    {
+                        DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
+                        DocTemplate.Properties.Settings.Default.FirstTime = false;
+                        DocTemplate.Properties.Settings.Default.Save();
+                    }
+
+                    DataContainers.PublicTemplates = JsonConvert.DeserializeObject<List<Template>>(Requests.GetRequest("Templates").Result);
+                });
+                thread.Start();
             }
         }
 

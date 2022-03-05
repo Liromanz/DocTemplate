@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using DocTemplate.CardViews.View;
+using DocTemplate.Global.Models;
 
 namespace DocTemplate.View.Cards
 {
@@ -13,22 +13,14 @@ namespace DocTemplate.View.Cards
         {
             InitializeComponent();
         }
-        public string TemplateName
+        public Template TemplateCard
         {
-            get => (string)GetValue(TemplateNameProperty);
-            set => SetValue(TemplateNameProperty, value);
+            get => (Template)GetValue(TemplateCardProperty);
+            set => SetValue(TemplateCardProperty, value);
         }
         // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TemplateNameProperty =
-            DependencyProperty.Register("TemplateName", typeof(string), typeof(AdvancedTemplateCard), new UIPropertyMetadata(null));
+        public static readonly DependencyProperty TemplateCardProperty =
+            DependencyProperty.Register("TemplateCard", typeof(Template), typeof(AdvancedTemplateCard), new UIPropertyMetadata(null));
 
-        public string TemplateTags
-        {
-            get => (string)GetValue(TemplateTagsProperty);
-            set => SetValue(TemplateTagsProperty, value);
-        }
-        // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TemplateTagsProperty =
-            DependencyProperty.Register("TemplateTags", typeof(string), typeof(AdvancedTemplateCard), new UIPropertyMetadata(null));
     }
 }
