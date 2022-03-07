@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocTemplate.CardViews.View.DialogWindows"
         mc:Ignorable="d"
+        x:Name="UserControl"
         Foreground="White" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
         WindowStyle="None" ResizeMode="NoResize" Background="Black" Opacity="50">
     <Grid  Height="236" Width="582" Background="#413F48">
@@ -14,11 +15,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Left" Text="Удаление группы" FontSize="30"/>
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Path=DialogName, ElementName=UserControl}" FontSize="30"/>
             <Button Content="×" Padding="10,0,10,0" FontSize="23" Background="Transparent" BorderThickness="0" Foreground="White" Click="CloseDialog" Style="{DynamicResource HighlightButton}" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="Вы уверены что хотите удалить группу? Публичные шаблоны из нее будут удалены. Созданные вами шаблоны будут находится в группе Созданные мной" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{Binding Path=Description, ElementName=UserControl}" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
-                <Button Content="Удалить" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom"/>
+                <Button Content="ОК" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Command="{Binding Path=ButtonCommand, ElementName=UserControl}"/>
                 <Button Content="Отмена" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Click="CloseDialog" />
             </StackPanel>
         </Grid>
