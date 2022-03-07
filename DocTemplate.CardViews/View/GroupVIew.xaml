@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              x:Name="UserControl"
              Foreground="White" FontSize="25" d:DesignWidth="892">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,10 +17,10 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Моя группа"/>
-            <Button Content="🖉" Padding="10,7,10,0" FontSize="15" Background="Transparent" BorderThickness="0" Foreground="White" Click="EditGroup" Style="{DynamicResource HighlightButton}"/>
+            <Button Content="🖉" Padding="10,7,10,0" FontSize="15" Background="Transparent" BorderThickness="0" Foreground="White" Click="EditGroup" Style="{DynamicResource HighlightButton}" Visibility="{Binding Path=CanEditOrDelete, ElementName=UserControl, Converter={StaticResource BoolToVis}}"/>
             <Button Content="×" Padding="10,0,10,0" FontSize="23" Background="Transparent" BorderThickness="0" Foreground="White" Click="DeleteGroup" Style="{DynamicResource HighlightButton}"/>
         </StackPanel>
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=BackgroundColor, ElementName=UserControl}">
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=GroupedTemplates, ElementName=UserControl}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" />

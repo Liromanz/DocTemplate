@@ -24,6 +24,16 @@ namespace DocTemplate.CardViews.View
         public static readonly DependencyProperty GroupNameProperty =
             DependencyProperty.Register("GroupName", typeof(string), typeof(GroupVIew), new UIPropertyMetadata(null));
 
+        public bool CanEditOrDelete
+        {
+            get => (bool)GetValue(CanEditOrDeleteProperty);
+            set => SetValue(CanEditOrDeleteProperty, value);
+        }
+        // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CanEditOrDeleteProperty =
+            DependencyProperty.Register("CanEditOrDelete", typeof(bool), typeof(GroupVIew), new UIPropertyMetadata(null));
+
+
         public ObservableCollection<object> GroupedTemplates
         {
             get => (ObservableCollection<object>)GetValue(GroupedTemplatesProperty);
