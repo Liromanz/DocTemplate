@@ -18,5 +18,12 @@ namespace DocTemplate.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
+            Close();
+        }
     }
 }

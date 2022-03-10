@@ -18,5 +18,12 @@ namespace DocTemplate.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
+
+        private void CreateTemplate(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = new TemplateCreatorWindow();
+            Application.Current.MainWindow.Show();
+            Close();
+        }
     }
 }
