@@ -3,13 +3,14 @@
     <Style TargetType="{x:Type Button}"
            x:Key="ControlButton">
         <Setter Property="Foreground" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border  
                         BorderThickness="0"
                         Background="{DynamicResource FocusColor}"
-                        MinWidth="130"
+                        MinWidth="{TemplateBinding MinWidth}"
                         Width="{TemplateBinding Width}"
                         Padding="5">
                         <ContentPresenter 

@@ -12,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Properties/Resources/Colors/Peach.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/CheckBox/DefaultCheckBox.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/RadioButton/DefaultRadioButton.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/ComboBox/DefaultComboBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/TextBox/DefaultTextBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/TextBox/PlaceholderBox.xaml"/>
