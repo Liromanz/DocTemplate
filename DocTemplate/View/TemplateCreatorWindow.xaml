@@ -97,7 +97,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Content="Сохранить и выйти" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
-                <Button Content="Открыть редактор"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
+                <Button Content="Открыть редактор"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Click="OpenEditor"/>
             </Grid>
             <Separator Grid.Column="1" Style="{StaticResource VerticalSeparator}"/>
             <RichTextBox Grid.Column="2" Width="664" Height="921" Focusable="False"/>

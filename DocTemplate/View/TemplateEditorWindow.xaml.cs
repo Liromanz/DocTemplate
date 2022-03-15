@@ -4,11 +4,11 @@ using System.Windows.Input;
 namespace DocTemplate.View
 {
     /// <summary>
-    /// Логика взаимодействия для TemplateCreatorWindow.xaml
+    /// Логика взаимодействия для TemplateEditorWindow.xaml
     /// </summary>
-    public partial class TemplateCreatorWindow : Window
+    public partial class TemplateEditorWindow : Window
     {
-        public TemplateCreatorWindow()
+        public TemplateEditorWindow()
         {
             InitializeComponent();
         }
@@ -21,14 +21,7 @@ namespace DocTemplate.View
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow = new MainWindow();
-            Application.Current.MainWindow.Show();
-            Close();
-        }
-
-        private void OpenEditor(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow = new TemplateEditorWindow();
+            Application.Current.MainWindow = new TemplateCreatorWindow();
             Application.Current.MainWindow.Show();
             Close();
         }

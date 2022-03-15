@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\Resources\Icons\aligment-center.png" />
+    <None Remove="Properties\Resources\Icons\aligment-left.png" />
+    <None Remove="Properties\Resources\Icons\aligment-right.png" />
+    <None Remove="Properties\Resources\Icons\aligment-stretch.png" />
+    <None Remove="Properties\Resources\Icons\file-import.png" />
+    <None Remove="Properties\Resources\Icons\file-info.png" />
+    <None Remove="Properties\Resources\Icons\line-separation.png" />
+    <None Remove="Properties\Resources\Icons\list-letter.png" />
+    <None Remove="Properties\Resources\Icons\list-number.png" />
+    <None Remove="Properties\Resources\Icons\list-point.png" />
+    <None Remove="Properties\Resources\Icons\list-romanumber.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Properties\Resources\Language\" />
     <Folder Include="ViewModel\ControlPanels\Files\" />
     <Folder Include="ViewModel\Cards\" />
@@ -23,6 +37,42 @@
     <ProjectReference Include="..\DocTemplate.CardViews\DocTemplate.CardViews.csproj" />
     <ProjectReference Include="..\DocTemplate.Helpers\DocTemplate.Helpers.csproj" />
     <ProjectReference Include="..\DocTemplate.ServerHandler\DocTemplate.ServerHandler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Properties\Resources\Icons\aligment-center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\aligment-left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\aligment-right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\aligment-stretch.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\file-import.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\file-info.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\line-separation.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\list-letter.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\list-number.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\list-point.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Properties\Resources\Icons\list-romanumber.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

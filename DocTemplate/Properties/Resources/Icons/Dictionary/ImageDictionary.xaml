@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Image x:Key="AligmentCenter" Source="/Properties/Resources/Icons/aligment-center.png" />
+    <Image x:Key="AligmentLeft" Source="/Properties/Resources/Icons/aligment-left.png" />
+    <Image x:Key="AligmentRight" Source="/Properties/Resources/Icons/aligment-right.png" />
+    <Image x:Key="AligmentStretch" Source="/Properties/Resources/Icons/aligment-stretch.png" />
+    <Image x:Key="FileImport" Source="/Properties/Resources/Icons/file-import.png" />
+    <Image x:Key="FileInfo" Source="/Properties/Resources/Icons/file-info.png" />
+    <Image x:Key="ListLetter" Source="/Properties/Resources/Icons/list-letter.png" />
+    <Image x:Key="ListNumber" Source="/Properties/Resources/Icons/list-number.png" />
+    <Image x:Key="ListPoint" Source="/Properties/Resources/Icons/list-point.png" />
+    <Image x:Key="ListRomaNumber" Source="/Properties/Resources/Icons/list-romanumber.png" />
+    <Image x:Key="LineSeparation" Source="/Properties/Resources/Icons/line-separation.png" />
+</ResourceDictionary>
