@@ -128,15 +128,35 @@
                 </Grid.RowDefinitions>
                 <ScrollViewer Template="{StaticResource DefaultScrollViewer}">
                     <StackPanel>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
-                        <TextBlock Text="Вставка" HorizontalAlignment="Center" Margin="50"/>
+                        <TextBlock Text="ИЗМЕНЯЕМЫЕ ПОЛЯ" HorizontalAlignment="Center" FontSize="30"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Добавить поле" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Изменить поле"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
+                        </Grid>
+                        <TextBlock Text="Поля для ввода" Margin="5"/>
+                        <WrapPanel ItemWidth="231">
+                            <Button Content="Произвольный текст" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Список"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Нумерация"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Дата" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Текстовый файл"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Фотография"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                        </WrapPanel>
+                        <TextBlock Text="Флаги" Margin="5"/>
+                        <WrapPanel ItemWidth="231">
+                            <Button Content="Множ. выбор" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Единичный выбор"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                        </WrapPanel>
+                        <TextBlock Text="Составные объекты" Margin="5"/>
+                        <WrapPanel ItemWidth="231">
+                            <Button Content="Таблица" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Список с описанием"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Картинка с подписью"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                        </WrapPanel>
                     </StackPanel>
                 </ScrollViewer>
                 <StackPanel Grid.Row="1"  VerticalAlignment="Bottom">
