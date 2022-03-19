@@ -6,7 +6,7 @@
              xmlns:viewSettings="clr-namespace:DocTemplate.View.ControlPanels.Settings"
              xmlns:vmTemplates="clr-namespace:DocTemplate.ViewModel.ControlPanels.Templates"
              xmlns:viewTemplates="clr-namespace:DocTemplate.View.ControlPanels.Templates"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/TemplateEditorWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -31,6 +31,9 @@
             <!--Связь моделей и представлений-->
             <DataTemplate DataType="{x:Type vmTemplates:AllTemplatesVm}">
                 <viewTemplates:AllTemplatesPanel />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmTemplates:MyTemplatesVm}">
+                <viewTemplates:MyTemplatesPanel />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vmSettings:SettingsVm}">
                 <viewSettings:SettingsControlPanel />

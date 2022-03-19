@@ -39,7 +39,7 @@
             <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
                 <TextBlock Text="ШАБЛОНЫ" Padding="5"/>
                 <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}" Command="{Binding AllTemplatesCommand}"/>
-                <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}"/>
+                <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}" Command="{Binding MyTemplatesCommand}"/>
                 <Button Content="•    Создать" Style="{DynamicResource MenuButton}" Click="CreateTemplate"/>
                 <Button Content="•    Импортировать" Style="{DynamicResource MenuButton}"/>
                 <TextBlock Text="ФАЙЛ" Padding="5"/>

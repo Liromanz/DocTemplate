@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.View.DialogWindows;
-using DocTemplate.Global.Models;
 
 namespace DocTemplate.CardViews.View
 {
@@ -34,14 +34,14 @@ namespace DocTemplate.CardViews.View
             DependencyProperty.Register("CanEditOrDelete", typeof(bool), typeof(GroupVIew), new UIPropertyMetadata(null));
 
 
-        public ObservableCollection<object> GroupedTemplates
+        public ObservableCollection<TemplateCard> GroupedTemplates
         {
-            get => (ObservableCollection<object>)GetValue(GroupedTemplatesProperty);
+            get => (ObservableCollection<TemplateCard>)GetValue(GroupedTemplatesProperty);
             set => SetValue(GroupedTemplatesProperty, value);
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GroupedTemplatesProperty =
-            DependencyProperty.Register("GroupedTemplates", typeof(ObservableCollection<object>), typeof(GroupVIew), new UIPropertyMetadata(null));
+            DependencyProperty.Register("GroupedTemplates", typeof(ObservableCollection<TemplateCard>), typeof(GroupVIew), new UIPropertyMetadata(null));
 
 
         private void EditGroup(object sender, RoutedEventArgs e)

@@ -9,4 +9,17 @@
     <ProjectReference Include="..\DocTemplate.Global\DocTemplate.Global.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Cards\TemplateCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Cards\TemplateCard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
