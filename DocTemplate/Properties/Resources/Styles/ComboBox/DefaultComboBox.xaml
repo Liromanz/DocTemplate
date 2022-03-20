@@ -47,7 +47,7 @@
                                     x:Name="DropDownBorder"
                                     BorderThickness="0"
                                     Background="White"/>
-                                <ScrollViewer SnapsToDevicePixels="True">
+                                <ScrollViewer SnapsToDevicePixels="True" Template="{StaticResource DefaultScrollViewer}">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
                             </Grid>

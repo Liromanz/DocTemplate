@@ -5,6 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocTemplate.View"
         xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
+        xmlns:viewModel="clr-namespace:DocTemplate.ViewModel"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:helpers="clr-namespace:DocTemplate.Helpers;assembly=DocTemplate.Helpers"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1800" Padding="10"
@@ -16,6 +20,9 @@
         WindowStyle="None" ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
+    <Window.DataContext>
+        <viewModel:TemplateEditorVm/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
@@ -31,8 +38,8 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox  Style="{StaticResource DefaultComboBox}" Margin="0,0,10,0"/>
-                    <TextBox HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource DefaultTextBox}" />
+                    <ComboBox x:Name="FontCB"  Style="{StaticResource DefaultComboBox}" Margin="0,0,10,0" SelectedItem="{Binding FontFamily}" DisplayMemberPath="Source" SelectedIndex="0" SelectionChanged="ChangeFontFamily"/>
+                    <TextBox x:Name="SizeTB" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource DefaultTextBox}" MaxLength="3" PreviewTextInput="CheckNumeric"  LostFocus="ChangeFontSize"/>
                 </Grid>
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
@@ -43,16 +50,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Ж" FontWeight="Bold" Style="{StaticResource SwitcherButton}" />
-                    <Button Grid.Column="1" Content="К" FontStyle="Italic" Style="{StaticResource SwitcherButton}" />
-                    <Button Grid.Column="2" Style="{StaticResource SwitcherButton}" >
+                    <Button Grid.Column="0" Content="Ж" FontWeight="Bold" Style="{StaticResource SwitcherButton}"  Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="1" Content="К" FontStyle="Italic" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="2" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=rtf}" >
                         <TextBlock TextDecorations="Underline" Text="Ч"/>
                     </Button>
-                    <Button Grid.Column="3" Style="{StaticResource SwitcherButton}" >
+                    <Button Grid.Column="3" Style="{StaticResource SwitcherButton}">
                         <TextBlock TextDecorations="Strikethrough" Text="abc" />
                     </Button>
-                    <Button Grid.Column="4" Content="x₂" Style="{StaticResource SwitcherButton}"/>
-                    <Button Grid.Column="5" Content="x²" Style="{StaticResource SwitcherButton}"/>
+                    <Button Grid.Column="4" Content="x₂" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleSubscript" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="5" Content="x²" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleSuperscript" CommandTarget="{Binding ElementName=rtf}"/>
                 </Grid>
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -62,14 +69,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="AB" Background="#7FFFFF00" VerticalAlignment="Center"/>
-                    <ComboBox Grid.Column="1"  Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0"/>
+                    <ComboBox Grid.Column="1" x:Name="SelectionCB"  Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0" SelectedIndex="0" SelectionChanged="ChangeBackgroundColor"/>
                     <TextBlock Grid.Column="2" Text="AB" VerticalAlignment="Center" Foreground="Red" Margin="10,0,0,0"/>
-                    <ComboBox Grid.Column="3"  Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0"/>
+                    <ComboBox Grid.Column="3" x:Name="TextCB" Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0" SelectedIndex="8"/>
                 </Grid>
 
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
 
-                <TextBlock Text="Абзац" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding SelectedText}" HorizontalAlignment="Center"/>
                 <Grid Margin="0,10,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -77,10 +84,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="{StaticResource AligmentLeft}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="1" Content="{StaticResource AligmentCenter}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="2" Content="{StaticResource AligmentRight}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="3" Content="{StaticResource AligmentStretch}" Style="{DynamicResource SwitcherButton}" Width="40"/>
+                    <Button Grid.Column="0" Content="{StaticResource AligmentLeft}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.AlignLeft" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="1" Content="{StaticResource AligmentCenter}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.AlignCenter" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="2" Content="{StaticResource AligmentRight}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.AlignRight" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="3" Content="{StaticResource AligmentStretch}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.AlignJustify" CommandTarget="{Binding ElementName=rtf}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -88,19 +95,25 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="{StaticResource LineSeparation}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <ComboBox Grid.Column="1"  Style="{StaticResource DefaultComboBox}" Margin="0,0,20,0"/>
+                    <ComboBox Grid.Column="1" x:Name="LineSeparationCB" Style="{StaticResource DefaultComboBox}" Margin="0,0,20,0" SelectedIndex="0" SelectionChanged="ChangeLineSeparation" >
+                        <ComboBox.ItemsSource>
+                            <x:Array Type="{x:Type sys:Double}">
+                                <sys:Double>1.0</sys:Double>
+                                <sys:Double>1.15</sys:Double>
+                                <sys:Double>1.5</sys:Double>
+                                <sys:Double>2.0</sys:Double>
+                                <sys:Double>3.0</sys:Double>
+                            </x:Array>
+                        </ComboBox.ItemsSource>
+                    </ComboBox>
                 </Grid>
                 <Grid Margin="0,10,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="{StaticResource ListPoint}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="1" Content="{StaticResource ListNumber}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="2" Content="{StaticResource ListRomaNumber}" Style="{DynamicResource SwitcherButton}" Width="40"/>
-                    <Button Grid.Column="3" Content="{StaticResource ListLetter}" Style="{DynamicResource SwitcherButton}" Width="40"/>
+                    <Button Grid.Column="0" Content="{StaticResource ListPoint}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.ToggleBullets" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="1" Content="{StaticResource ListNumber}" Style="{DynamicResource SwitcherButton}" Width="40" Command="EditingCommands.ToggleNumbering" CommandTarget="{Binding ElementName=rtf}"/>
                 </Grid>
 
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
@@ -118,7 +131,7 @@
         </Border>
         <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,10"/>
 
-        <RichTextBox Grid.Column="1" Width="664" Height="921"/>
+        <RichTextBox Grid.Column="1" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}"/>
 
         <Border Grid.Column="2" Background="{DynamicResource MainColor}">
             <Grid Margin="10,50,10,10">
