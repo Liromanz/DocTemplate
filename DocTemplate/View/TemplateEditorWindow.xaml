@@ -9,6 +9,7 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:helpers="clr-namespace:DocTemplate.Helpers;assembly=DocTemplate.Helpers"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1800" Padding="10"
@@ -39,7 +40,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <ComboBox x:Name="FontCB"  Style="{StaticResource DefaultComboBox}" Margin="0,0,10,0" SelectedItem="{Binding FontFamily}" DisplayMemberPath="Source" SelectedIndex="0" SelectionChanged="ChangeFontFamily"/>
-                    <TextBox x:Name="SizeTB" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource DefaultTextBox}" MaxLength="3" PreviewTextInput="CheckNumeric"  LostFocus="ChangeFontSize"/>
+                    <TextBox x:Name="SizeTB" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource DefaultTextBox}" MaxLength="3" PreviewTextInput="CheckNumeric"  LostFocus="ChangeFontSize" MaxLines="1" />
                 </Grid>
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
@@ -51,11 +52,11 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="Ж" FontWeight="Bold" Style="{StaticResource SwitcherButton}"  Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=rtf}"/>
-                    <Button Grid.Column="1" Content="К" FontStyle="Italic" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=rtf}"/>
+                    <Button Grid.Column="1" Content="К" FontStyle="Italic" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=rtf}" IsTabStop="False"/>
                     <Button Grid.Column="2" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=rtf}" >
                         <TextBlock TextDecorations="Underline" Text="Ч"/>
                     </Button>
-                    <Button Grid.Column="3" Style="{StaticResource SwitcherButton}">
+                    <Button Grid.Column="3" Style="{StaticResource SwitcherButton}" Click="ChangeStrikethrough">
                         <TextBlock TextDecorations="Strikethrough" Text="abc" />
                     </Button>
                     <Button Grid.Column="4" Content="x₂" Style="{StaticResource SwitcherButton}" Command="EditingCommands.ToggleSubscript" CommandTarget="{Binding ElementName=rtf}"/>
@@ -69,14 +70,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="AB" Background="#7FFFFF00" VerticalAlignment="Center"/>
-                    <ComboBox Grid.Column="1" x:Name="SelectionCB"  Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0" SelectedIndex="0" SelectionChanged="ChangeBackgroundColor"/>
+                    <wpf:ColorPicker Grid.Column="1" x:Name="SelectionCB" Margin="10,0,0,0" SelectedColorChanged="ChangeBackgroundColor" />
                     <TextBlock Grid.Column="2" Text="AB" VerticalAlignment="Center" Foreground="Red" Margin="10,0,0,0"/>
-                    <ComboBox Grid.Column="3" x:Name="TextCB" Style="{StaticResource DefaultComboBox}" Margin="10,0,0,0" SelectedIndex="8"/>
+                    <wpf:ColorPicker Grid.Column="3" x:Name="TextCB" Margin="10,0,0,0" SelectedColorChanged="ChangeForegroundColor" />
                 </Grid>
 
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
 
-                <TextBlock Text="{Binding SelectedText}" HorizontalAlignment="Center"/>
+                <TextBlock Text="Абзац" HorizontalAlignment="Center"/>
                 <Grid Margin="0,10,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -126,12 +127,16 @@
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
 
                 <TextBlock Text="Импорт" HorizontalAlignment="Center"/>
-                <Button Content="Импорт документа" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
+                <Button Content="Импорт документа" Style="{DynamicResource ControlButton}" Margin="5" Command="{Binding ImportDocxCommand}"/>
             </StackPanel>
         </Border>
         <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,10"/>
 
-        <RichTextBox Grid.Column="1" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}"/>
+        <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}">
+            <wpf:RichTextBox.TextFormatter>
+                <wpf:RtfFormatter />
+            </wpf:RichTextBox.TextFormatter>
+        </wpf:RichTextBox>
 
         <Border Grid.Column="2" Background="{DynamicResource MainColor}">
             <Grid Margin="10,50,10,10">

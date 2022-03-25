@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -22,9 +21,6 @@ namespace DocTemplate.View
             InitializeComponent();
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
                 FontCB.Items.Add(fontFamily);
-
-            FillWithColors(SelectionCB);
-            FillWithColors(TextCB);
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -55,6 +51,7 @@ namespace DocTemplate.View
         }
         private void CheckNumeric(object sender, TextCompositionEventArgs e)
         {
+
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -66,17 +63,17 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
-        private void ChangeBackgroundColor(object sender, SelectionChangedEventArgs e)
+        private void ChangeBackgroundColor(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
-            if (SelectionCB.SelectedIndex != -1 && !rtf.Selection.IsEmpty)
-                rtf.Selection.ApplyPropertyValue(TextElement.BackgroundProperty, (SelectionCB.Items[SelectionCB.SelectedIndex] as ComboBoxItem).Background);
+            if (SelectionCB.SelectedColor != null && !rtf.Selection.IsEmpty)
+                rtf.Selection.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush((Color)SelectionCB.SelectedColor));
             rtf.Focus();
         }
 
-        private void ChangeForegroundColor(object sender, SelectionChangedEventArgs e)
+        private void ChangeForegroundColor(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
-            if (TextCB.SelectedIndex != -1 && !rtf.Selection.IsEmpty)
-                rtf.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, (TextCB.Items[TextCB.SelectedIndex] as ComboBoxItem).Background);
+            if (TextCB.SelectedColor != null && !rtf.Selection.IsEmpty)
+                rtf.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush((Color)TextCB.SelectedColor));
             rtf.Focus();
         }
 
@@ -90,6 +87,13 @@ namespace DocTemplate.View
         private void ChangeLineSeparation(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void ChangeStrikethrough(object sender, RoutedEventArgs e)
+        {
+            if (!rtf.Selection.IsEmpty)
+                rtf.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+            rtf.Focus();
         }
     }
 }

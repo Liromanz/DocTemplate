@@ -1,5 +1,5 @@
-﻿using System.Windows.Input;
-using System.Windows.Media;
+﻿using System.IO;
+using System.Windows.Forms;
 using DocTemplate.Helpers;
 
 namespace DocTemplate.ViewModel
@@ -7,31 +7,19 @@ namespace DocTemplate.ViewModel
     public class TemplateEditorVm : ObservableObject
     {
         #region Команды
-        public BindableCommand FontSizeCommand { get; set; }
+        public BindableCommand ImportDocxCommand { get; set; }
 
         #endregion
 
         #region Переменные
+        private string _rtfContent;
 
-        private FontFamily _fontFamily;
-        public FontFamily FontFamily
+        public string RtfContent
         {
-            get => _fontFamily ?? new FontFamily();
+            get { return _rtfContent; }
             set
             {
-                _fontFamily = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _selectedText;
-
-        public string SelectedText
-        {
-            get => _selectedText;
-            set
-            {
-                _selectedText = value; 
+                _rtfContent = value;
                 OnPropertyChanged();
             }
         }
@@ -40,7 +28,17 @@ namespace DocTemplate.ViewModel
 
         public TemplateEditorVm()
         {
-            
+            ImportDocxCommand = new BindableCommand(o => ImportDocx());
+        }
+
+        private void ImportDocx()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "RTF файлы|*.rtf";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                RtfContent = File.ReadAllText(fileDialog.FileName);
+            }
         }
     }
 }
