@@ -17,7 +17,6 @@ namespace DocTemplate.View
     /// </summary>
     public partial class TemplateEditorWindow : Window
     {
-        TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
         public TemplateEditorWindow()
         {
             InitializeComponent();
@@ -90,11 +89,25 @@ namespace DocTemplate.View
 
         #region Создание пунктов
 
-        private void AddTextBox(object sender, RoutedEventArgs e)
+        private void GenerateField(string fieldType)
         {
+            TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
             if (dialog.ShowDialog() == true)
-                rtf.Selection.Text = $"\u2063Текстовое поле «{dialog.WroteText}»\u2063";
+                rtf.Selection.Text = $"\u2063{fieldType} «{dialog.WroteText}»\u2063";
+            rtf.Focus();
         }
+
+        private void AddTextBox(object sender, RoutedEventArgs e) => GenerateField("Текстовое поле");
+        private void AddComboBox(object sender, RoutedEventArgs e) => GenerateField("Список");
+        private void AddNumer(object sender, RoutedEventArgs e) => GenerateField("Нумерация");
+        private void AddDate(object sender, RoutedEventArgs e) => GenerateField("Дата");
+        private void AddTextFile(object sender, RoutedEventArgs e) => GenerateField("Текстовый файл");
+        private void AddImage(object sender, RoutedEventArgs e) => GenerateField("Фотография");
+        private void AddCheckBox(object sender, RoutedEventArgs e) => GenerateField("Множественный выбор");
+        private void AddRadioButton(object sender, RoutedEventArgs e) => GenerateField("Единичный выбор");
+        private void AddTable(object sender, RoutedEventArgs e) => GenerateField("Таблица");
+        private void AddComplexNumer(object sender, RoutedEventArgs e) => GenerateField("Номерной список с описанием");
+        private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью");
         #endregion
     }
 }

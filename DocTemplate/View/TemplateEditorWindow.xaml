@@ -161,22 +161,22 @@
                         <TextBlock Text="Поля для ввода" Margin="5"/>
                         <WrapPanel ItemWidth="231">
                             <Button Content="Произвольный текст" Style="{DynamicResource ControlButton}" Margin="5" Click="AddTextBox"/>
-                            <Button Content="Список"  Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Нумерация"  Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Дата" Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Текстовый файл"  Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Фотография"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Список"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddComboBox"/>
+                            <Button Content="Нумерация"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddNumer"/>
+                            <Button Content="Дата" Style="{DynamicResource ControlButton}" Margin="5" Click="AddDate"/>
+                            <Button Content="Текстовый файл"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddTextFile"/>
+                            <Button Content="Фотография"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddImage"/>
                         </WrapPanel>
                         <TextBlock Text="Флаги" Margin="5"/>
                         <WrapPanel ItemWidth="231">
-                            <Button Content="Множ. выбор" Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Единичный выбор"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Множ. выбор" Style="{DynamicResource ControlButton}" Margin="5" Click="AddCheckBox"/>
+                            <Button Content="Единичный выбор"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddRadioButton"/>
                         </WrapPanel>
                         <TextBlock Text="Составные объекты" Margin="5"/>
                         <WrapPanel ItemWidth="231">
-                            <Button Content="Таблица" Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Список с описанием"  Style="{DynamicResource ControlButton}" Margin="5"/>
-                            <Button Content="Картинка с подписью"  Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Таблица" Style="{DynamicResource ControlButton}" Margin="5" Click="AddTable"/>
+                            <Button Content="Список с описанием"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddComplexNumer"/>
+                            <Button Content="Картинка с подписью"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddComplexImage"/>
                         </WrapPanel>
                     </StackPanel>
                 </ScrollViewer>
