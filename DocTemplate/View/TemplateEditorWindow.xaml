@@ -70,9 +70,11 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="AB" Background="#7FFFFF00" VerticalAlignment="Center"/>
-                    <wpf:ColorPicker Grid.Column="1" x:Name="SelectionCB" Margin="10,0,0,0" SelectedColorChanged="ChangeBackgroundColor" />
+                    <wpf:ColorPicker Grid.Column="1" x:Name="SelectionCB" Margin="10,0,0,0" SelectedColorChanged="ChangeBackgroundColor" 
+                                     AdvancedTabHeader="Расширенный выбор" StandardTabHeader="Стандартный выбор" RecentColorsHeader="Текущий цвет" StandardColorsHeader="Основное" AvailableColorsHeader="Основные цвета"/>
                     <TextBlock Grid.Column="2" Text="AB" VerticalAlignment="Center" Foreground="Red" Margin="10,0,0,0"/>
-                    <wpf:ColorPicker Grid.Column="3" x:Name="TextCB" Margin="10,0,0,0" SelectedColorChanged="ChangeForegroundColor" />
+                    <wpf:ColorPicker Grid.Column="3" x:Name="TextCB" Margin="10,0,0,0" SelectedColorChanged="ChangeForegroundColor" 
+                                     AdvancedTabHeader="Расширенный выбор" StandardTabHeader="Стандартный выбор" RecentColorsHeader="Текущий цвет" StandardColorsHeader="Основное" AvailableColorsHeader="Основные цвета"/>
                 </Grid>
 
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
@@ -132,7 +134,7 @@
         </Border>
         <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,10"/>
 
-        <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}">
+        <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}">
             <wpf:RichTextBox.TextFormatter>
                 <wpf:RtfFormatter />
             </wpf:RichTextBox.TextFormatter>
@@ -147,17 +149,18 @@
                 <ScrollViewer Template="{StaticResource DefaultScrollViewer}">
                     <StackPanel>
                         <TextBlock Text="ИЗМЕНЯЕМЫЕ ПОЛЯ" HorizontalAlignment="Center" FontSize="30"/>
-                        <Grid>
+                        <!--<Grid>
+                            вместо этой верстки будет происходить автоматичекое переключение на изменение, если пользователь нажал на шаблонное поле
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Добавить поле" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Добавить поле" Style="{DynamicResource ControlButton}" Margin="5" Click="Button_Click"/>
                             <Button Content="Изменить поле"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
-                        </Grid>
+                        </Grid>-->
                         <TextBlock Text="Поля для ввода" Margin="5"/>
                         <WrapPanel ItemWidth="231">
-                            <Button Content="Произвольный текст" Style="{DynamicResource ControlButton}" Margin="5"/>
+                            <Button Content="Произвольный текст" Style="{DynamicResource ControlButton}" Margin="5" Click="AddTextBox"/>
                             <Button Content="Список"  Style="{DynamicResource ControlButton}" Margin="5"/>
                             <Button Content="Нумерация"  Style="{DynamicResource ControlButton}" Margin="5"/>
                             <Button Content="Дата" Style="{DynamicResource ControlButton}" Margin="5"/>

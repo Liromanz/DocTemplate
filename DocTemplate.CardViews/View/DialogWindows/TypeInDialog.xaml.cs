@@ -31,6 +31,15 @@ namespace DocTemplate.CardViews.View.DialogWindows
         public static readonly DependencyProperty PlaceholderProperty =
             DependencyProperty.Register("Placeholder", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
 
+        public string WroteText
+        {
+            get => (string)GetValue(WroteTextProperty);
+            set => SetValue(WroteTextProperty, value);
+        }
+        // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WroteTextProperty =
+            DependencyProperty.Register("WroteText", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
+
         public string HelperText
         {
             get => (string)GetValue(HelperTextProperty);
@@ -49,15 +58,8 @@ namespace DocTemplate.CardViews.View.DialogWindows
         public static readonly DependencyProperty ButtonTextProperty =
             DependencyProperty.Register("ButtonText", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
 
-        public ICommand ButtonCommand
-        {
-            get => (ICommand)GetValue(ButtonCommandProperty);
-            set => SetValue(ButtonCommandProperty, value);
-        }
-        // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ButtonCommandProperty =
-            DependencyProperty.Register("ButtonCommand", typeof(ICommand), typeof(TypeInDialog), new UIPropertyMetadata(null));
-
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
+
+        private void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
     }
 }

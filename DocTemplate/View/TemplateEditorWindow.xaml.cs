@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Reflection;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using DocTemplate.Global;
+using DocTemplate.CardViews.View.DialogWindows;
 using DrawColor = System.Drawing.Color;
 
 namespace DocTemplate.View
@@ -16,6 +17,7 @@ namespace DocTemplate.View
     /// </summary>
     public partial class TemplateEditorWindow : Window
     {
+        TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
         public TemplateEditorWindow()
         {
             InitializeComponent();
@@ -36,22 +38,10 @@ namespace DocTemplate.View
             Close();
         }
 
-        private void FillWithColors(ComboBox comboBox)
-        {
-            foreach (PropertyInfo c in DataContainers.ColorInfoList)
-            {
-                var color = DrawColor.FromName(c.Name);
-                comboBox.Items.Add(new ComboBoxItem
-                {
-                    Content = c.Name,
-                    Background = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B)),
-                    BorderThickness = new Thickness(0)
-                });
-            }
-        }
+        #region Изменение RTF
+
         private void CheckNumeric(object sender, TextCompositionEventArgs e)
         {
-
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -95,5 +85,16 @@ namespace DocTemplate.View
                 rtf.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
             rtf.Focus();
         }
+
+        #endregion
+
+        #region Создание пунктов
+
+        private void AddTextBox(object sender, RoutedEventArgs e)
+        {
+            if (dialog.ShowDialog() == true)
+                rtf.Selection.Text = $"\u2063Текстовое поле «{dialog.WroteText}»\u2063";
+        }
+        #endregion
     }
 }
