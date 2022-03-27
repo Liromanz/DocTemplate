@@ -1,0 +1,71 @@
+﻿<Window x:Class="DocTemplate.View.DocumentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DocTemplate.View"
+        xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+     WindowStartupLocation="CenterScreen"
+        Height="1000" Width="1800" Padding="10"
+        MinWidth="1550" MinHeight="640"
+        MaxHeight="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenHeight}}"
+        MaxWidth="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"
+        Foreground="White" 
+        BorderThickness="1" BorderBrush="{DynamicResource MainColor}"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" 
+        AllowsTransparency="True"
+        FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="{DynamicResource MainColor}" >
+            <StackPanel>
+                <view:BackButton VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="-6,10,0,0"/>
+                <Button Content="{StaticResource FileInfo}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
+                <Button Content="{StaticResource FileImport}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Margin="5" Text="НазваниеФайла - Шаблон Название *"/>
+        <xctk:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" TextChanged="rtf_TextChanged">
+            <xctk:RichTextBox.TextFormatter>
+                <xctk:RtfFormatter />
+            </xctk:RichTextBox.TextFormatter>
+        </xctk:RichTextBox>
+
+        <Border Grid.Column="2" Background="{DynamicResource MainColor}">
+            <Grid Margin="10,50,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="ПОЛЯ В ДОКУМЕНТЕ" HorizontalAlignment="Center" FontSize="30"/>
+                <ScrollViewer Grid.Row="1" Template="{StaticResource DefaultScrollViewer}">
+                    <StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Grid.Row="2"  VerticalAlignment="Bottom">
+                    <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Сохранить" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}" Margin="5"/>
+                        <Button Content="Экспортировать"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
+                    </Grid>
+                    <TextBlock Text="Страниц: 2. Символов: 200. Последнее сохранение: 08.02.2022 12:40" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <view:WindowManager Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -11,4 +11,6 @@
     <Image x:Key="ListPoint" Source="/Properties/Resources/Icons/list-point.png" />
     <Image x:Key="ListRomaNumber" Source="/Properties/Resources/Icons/list-romanumber.png" />
     <Image x:Key="LineSeparation" Source="/Properties/Resources/Icons/line-separation.png" />
+    <Image x:Key="Description" Source="/Properties/Resources/Icons/outline_description_white_24dp.png" />
+    <Image x:Key="Upload" Source="/Properties/Resources/Icons/outline_upload_file_white_24dp.png" />
 </ResourceDictionary>
