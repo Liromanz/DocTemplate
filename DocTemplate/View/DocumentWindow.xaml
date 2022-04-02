@@ -33,7 +33,7 @@
         </Border>
 
         <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Margin="5" Text="НазваниеФайла - Шаблон Название *"/>
-        <xctk:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" TextChanged="rtf_TextChanged">
+        <xctk:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" >
             <xctk:RichTextBox.TextFormatter>
                 <xctk:RtfFormatter />
             </xctk:RichTextBox.TextFormatter>

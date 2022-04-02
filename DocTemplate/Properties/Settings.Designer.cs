@@ -106,5 +106,16 @@ namespace DocTemplate.Properties {
                 this["MarkEditable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int UserID {
+            get {
+                return ((int)(this["UserID"]));
+            }
+            set {
+                this["UserID"] = value;
+            }
+        }
     }
 }

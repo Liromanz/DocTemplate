@@ -54,6 +54,8 @@ namespace DocTemplate.ViewModel
             AllTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(AllTemplatesVm); });
             MyTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(MyTemplatesVm); });
             SettingsCommand = new BindableCommand(o => { ChangeCurrentView(SettingsVm); });
+
+            ChangeCurrentView(MyTemplatesVm);
         }
 
         private void ChangeCurrentView(object viewToChange)

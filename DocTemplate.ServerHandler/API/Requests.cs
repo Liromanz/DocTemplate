@@ -9,12 +9,12 @@ namespace DocTemplate.ServerHandler.API
 {
     public class Requests
     {
-        public static async Task<string> GetRequest(string tableName)
+        public static async Task<string> GetRequest(string urlName)
         {
             try
             {
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync($"{GlobalConstants.UrlBase}/{tableName}");
+                HttpResponseMessage response = await client.GetAsync($"{GlobalConstants.UrlBase}/{urlName}");
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
@@ -41,12 +41,12 @@ namespace DocTemplate.ServerHandler.API
             }
         }
 
-        public static async Task<string> PostWithBodyRequest(string tableName, string jsonToSend)
+        public static async Task<string> PostWithBodyRequest(string tableName, string toSend)
         {
             try
             {
                 HttpClient client = new HttpClient();
-                HttpContent content = new StringContent(jsonToSend, Encoding.UTF8, "application/json");
+                HttpContent content = new StringContent(toSend, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync($"{GlobalConstants.UrlBase}/{tableName}", content);
                 response.EnsureSuccessStatusCode();
                 return GlobalConstants.SuccessMessage;
@@ -57,13 +57,13 @@ namespace DocTemplate.ServerHandler.API
             }
         }
 
-        public static async Task<string> PutRequest(string tableName, string dataToSend)
+        public static async Task<string> PutRequest(string tableName, int id, string dataToSend)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 HttpContent content = new StringContent(dataToSend, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}", content);
+                HttpResponseMessage response = await client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}", content);
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Conflict:

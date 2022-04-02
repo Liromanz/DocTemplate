@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocTemplate.View"
         xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
+        xmlns:viewModel="clr-namespace:DocTemplate.ViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1800" Padding="10"
@@ -16,6 +18,9 @@
         WindowStyle="None" ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
+    <Window.DataContext>
+        <viewModel:TemplateCreatorVm/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -59,36 +64,52 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center" />
-                    <TextBox Grid.Column="1" Style="{StaticResource DefaultTextBox}"  Margin="10"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource DefaultTextBox}"  Margin="10" Text="{Binding Template.Name, Mode=TwoWay}"/>
 
                     <TextBlock Grid.Row="1" Text="Тема:" VerticalAlignment="Center" />
-                    <ComboBox Grid.Column="1" Grid.Row="1" Style="{DynamicResource DefaultComboBox}" Margin="10"/>
+                    <TextBox  Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultTextBox}"  Margin="10" Text="{Binding Template.Tags, Mode=TwoWay}" 
+                              ToolTip="Перечислите через запятую все ключевые слова, по которым можно будет найти этот шаблон. Это необязательно!"/>
 
-                    <TextBlock Grid.Row="2" Text="Все темы:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10,10,10"/>
                     <Separator Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource HorizontalSeparator}"/>
 
                     <TextBlock Grid.Row="4" Text="Кто может редактировать шаблон:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10"/>
-                    <RadioButton Grid.Row="5" Content="Только я" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors" IsChecked="True"/>
-                    <RadioButton Grid.Row="6" Content="Некоторые пользователи:" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"/>
+                    <RadioButton Grid.Row="5" Content="Только я" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors" 
+                                 IsChecked="{Binding Path=Template.Editors, Converter={StaticResource RadioButtonToString}, ConverterParameter=Me}"/>
+                    <RadioButton Grid.Row="6" Content="Некоторые пользователи:" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"
+                                 IsChecked="{Binding Path=Template.Editors, Converter={StaticResource RadioButtonToString}, ConverterParameter=Couple}"/>
                     <StackPanel Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Orientation="Horizontal">
                         <TextBlock Text="Имя пользователя:" VerticalAlignment="Center"/>
-                        <TextBox Style="{StaticResource DefaultTextBox}" Width="155" Margin="10"/>
-                        <Button Content="+" Style="{DynamicResource ControlButton}" Width="40"/>
+                        <TextBox Style="{StaticResource DefaultTextBox}" Width="155" Margin="10" Text="{Binding EditorToAdd}" 
+                                 IsEnabled="{Binding Path=Template.Editors, Converter={StaticResource StringToBoolean}, ConverterParameter=Couple}"/>
+                        <Button Content="+" Style="{DynamicResource ControlButton}" Width="40" Command="{Binding AddEditorCommand}"
+                                IsEnabled="{Binding Path=Template.Editors, Converter={StaticResource StringToBoolean}, ConverterParameter=Couple}"/>
                     </StackPanel>
-                    <TextBlock Grid.Row="8" Text="Доступ есть у:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10,10,10"/>
-                    <RadioButton Grid.Row="9" Content="Все" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"/>
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Grid.ColumnSpan="2">
+                        <TextBlock Text="Доступ есть у:" VerticalAlignment="Center" Margin="0,10,10,10"/>
+                        <TextBlock Text="{Binding Editors}" VerticalAlignment="Center" Margin="0,10,10,10" MaxWidth="255" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <RadioButton Grid.Row="9" Content="Все" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"
+                                 IsChecked="{Binding Path=Template.Editors, Converter={StaticResource RadioButtonToString}, ConverterParameter=All}"/>
                     <Separator Grid.Row="10" Grid.ColumnSpan="2" Style="{StaticResource HorizontalSeparator}"/>
 
                     <TextBlock Grid.Row="11" Text="Кто может просматривать шаблон:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10"/>
-                    <RadioButton Grid.Row="12" Content="Только я" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"/>
-                    <RadioButton Grid.Row="13" Content="Некоторые пользователи:" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"/>
+                    <RadioButton Grid.Row="12" Content="Только я" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Readers" 
+                                 IsChecked="{Binding Path=Template.Users, Converter={StaticResource RadioButtonToString}, ConverterParameter=Me}"/>
+                    <RadioButton Grid.Row="13" Content="Некоторые пользователи:" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Readers"
+                                 IsChecked="{Binding Path=Template.Users, Converter={StaticResource RadioButtonToString}, ConverterParameter=Couple}"/>
                     <StackPanel Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Orientation="Horizontal">
                         <TextBlock Text="Имя пользователя:" VerticalAlignment="Center"/>
-                        <TextBox Style="{StaticResource DefaultTextBox}" Width="155" Margin="10"/>
-                        <Button Content="+" Style="{DynamicResource ControlButton}" Width="40"/>
+                        <TextBox Style="{StaticResource DefaultTextBox}" Width="155" Margin="10" Text="{Binding UserToAdd}"
+                                 IsEnabled="{Binding Path=Template.Users, Converter={StaticResource StringToBoolean}, ConverterParameter=Couple}"/>
+                        <Button Content="+" Style="{DynamicResource ControlButton}" Width="40" Command="{Binding AddUserCommand}"
+                                IsEnabled="{Binding Path=Template.Users, Converter={StaticResource StringToBoolean}, ConverterParameter=Couple}"/>
                     </StackPanel>
-                    <TextBlock Grid.Row="15" Text="Доступ есть у:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10,10,10"/>
-                    <RadioButton Grid.Row="16" Content="Все" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Editors"/>
+                    <StackPanel Grid.Row="15" Orientation="Horizontal" MaxWidth="400" Grid.ColumnSpan="2">
+                        <TextBlock Text="Доступ есть у:" VerticalAlignment="Center" Margin="0,10,10,10"/>
+                        <TextBlock Text="{Binding Users}" VerticalAlignment="Center" Margin="0,10,10,10" MaxWidth="255" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <RadioButton Grid.Row="16" Content="Все" Style="{StaticResource DefaultRadioButton}" Grid.ColumnSpan="2" GroupName="Readers"
+                                 IsChecked="{Binding Path=Template.Users, Converter={StaticResource RadioButtonToString}, ConverterParameter=All}"/>
                 </Grid>
             </StackPanel>
             <Grid Grid.Column="0" Margin="0,0,0,20" VerticalAlignment="Bottom">
@@ -96,11 +117,15 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Сохранить и выйти" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
-                <Button Content="Открыть редактор"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Click="OpenEditor"/>
+                <Button Content="Сохранить и выйти" Style="{DynamicResource ControlButton}" Margin="5" Command="{Binding SaveAndExitCommand}"/>
+                <Button Content="Открыть редактор"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Command="{Binding OpenEditorCommand}"/>
             </Grid>
             <Separator Grid.Column="1" Style="{StaticResource VerticalSeparator}"/>
-            <RichTextBox Grid.Column="2" Width="664" Height="921" Focusable="False"/>
+            <xctk:RichTextBox Grid.Column="2" Width="664" Height="921"  Text="{Binding Text, Mode=TwoWay}">
+                <xctk:RichTextBox.TextFormatter>
+                    <xctk:RtfFormatter/>
+                </xctk:RichTextBox.TextFormatter>
+            </xctk:RichTextBox>
         </Grid>
     </Grid>
 </Window>

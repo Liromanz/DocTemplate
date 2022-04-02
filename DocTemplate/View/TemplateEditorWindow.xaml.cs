@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +6,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using DocTemplate.CardViews.View.DialogWindows;
-using DrawColor = System.Drawing.Color;
+using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
 {
@@ -17,6 +15,8 @@ namespace DocTemplate.View
     /// </summary>
     public partial class TemplateEditorWindow : Window
     {
+        public TemplateEditorVm ViewModel => DataContext as TemplateEditorVm;
+
         public TemplateEditorWindow()
         {
             InitializeComponent();
@@ -32,8 +32,6 @@ namespace DocTemplate.View
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow = new TemplateCreatorWindow();
-            Application.Current.MainWindow.Show();
             Close();
         }
 

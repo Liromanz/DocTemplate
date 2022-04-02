@@ -6,12 +6,13 @@
              xmlns:viewSettings="clr-namespace:DocTemplate.View.ControlPanels.Settings"
              xmlns:vmTemplates="clr-namespace:DocTemplate.ViewModel.ControlPanels.Templates"
              xmlns:viewTemplates="clr-namespace:DocTemplate.View.ControlPanels.Templates"
-             StartupUri="View/DocumentWindow.xaml">
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Properties/Resources/Colors/Peach.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Icons/Dictionary/ImageDictionary.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Converters/Dictionary/ConventerDictionary.xaml"/>
 
                 <ResourceDictionary Source="Properties/Resources/Styles/ScrollViewer/DefaultScrollViewer.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/CheckBox/DefaultCheckBox.xaml"/>

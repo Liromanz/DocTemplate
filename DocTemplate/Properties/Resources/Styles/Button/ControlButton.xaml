@@ -22,6 +22,9 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
