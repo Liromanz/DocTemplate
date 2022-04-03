@@ -23,7 +23,7 @@
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=GroupedTemplates, ElementName=UserControl}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" ItemHeight="163" ItemWidth="432"/>
+                    <WrapPanel IsItemsHost="True" Width="924" ItemHeight="163" ItemWidth="410" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

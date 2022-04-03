@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
 
 namespace DocTemplate.CardViews.Cards
 {
@@ -12,22 +15,22 @@ namespace DocTemplate.CardViews.Cards
         {
             InitializeComponent();
         }
-        public string TemplateName
+        public Template TemplateInfo
         {
-            get => (string)GetValue(TemplateNameProperty);
-            set => SetValue(TemplateNameProperty, value);
+            get => (Template)GetValue(TemplateInfoProperty);
+            set => SetValue(TemplateInfoProperty, value);
         }
         // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TemplateNameProperty =
-            DependencyProperty.Register("TemplateName", typeof(string), typeof(TemplateCard), new UIPropertyMetadata(null));
+        public static readonly DependencyProperty TemplateInfoProperty =
+            DependencyProperty.Register("TemplateInfo", typeof(Template), typeof(TemplateCard), new UIPropertyMetadata(null));
 
-        public string TemplateTags
+        public BindableCommand ClickCommand
         {
-            get => (string)GetValue(TemplateTagsProperty);
-            set => SetValue(TemplateTagsProperty, value);
+            get => (BindableCommand)GetValue(ClickCommandProperty);
+            set => SetValue(ClickCommandProperty, value);
         }
         // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TemplateTagsProperty =
-            DependencyProperty.Register("TemplateTags", typeof(string), typeof(TemplateCard), new UIPropertyMetadata(null));
+        public static readonly DependencyProperty ClickCommandProperty =
+            DependencyProperty.Register("ClickCommand", typeof(BindableCommand), typeof(TemplateCard), new UIPropertyMetadata(null));
     }
 }

@@ -115,7 +115,7 @@ namespace DocTemplate.ViewModel
 
             Thread thread = new Thread(x =>
             {
-                Usernames = (List<string>)JsonConvert.DeserializeObject(Requests.GetRequest("Users").Result, typeof(List<string>));
+                Usernames = (List<string>)JsonConvert.DeserializeObject(Requests.GetRequest("Users"), typeof(List<string>));
             });
             thread.Start();
         }

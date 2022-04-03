@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocTemplate.Global\DocTemplate.Global.csproj" />
+    <ProjectReference Include="..\DocTemplate.Helpers\DocTemplate.Helpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

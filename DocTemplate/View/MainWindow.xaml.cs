@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
 {
@@ -8,6 +9,7 @@ namespace DocTemplate.View
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();

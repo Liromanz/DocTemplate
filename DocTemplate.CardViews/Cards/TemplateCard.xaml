@@ -7,10 +7,14 @@
              mc:Ignorable="d" 
              x:Name="UserControl"
              FontSize="20"
+             Margin="0,0,30,30"
              Foreground="{DynamicResource BackgroundColor}"
              Background="{DynamicResource FocusColor}"
-             d:DesignHeight="163" d:DesignWidth="432">
+             d:DesignHeight="163" d:DesignWidth="410">
     <Grid>
+        <Grid.InputBindings>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding  Path=ClickCommand, ElementName=UserControl}"/>
+        </Grid.InputBindings>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -20,7 +24,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="/Properties/Resources/docexample.jpg" Grid.RowSpan="2" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=TemplateName, ElementName=UserControl}" FontWeight="Bold" FontSize="25" Margin="5"/>
-        <TextBlock Grid.Column="1" Grid.Row="1"  Text="{Binding Path=TemplateTags, ElementName=UserControl}" TextWrapping="Wrap" Margin="5,0,5,5" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=TemplateInfo.Name, ElementName=UserControl}" FontWeight="Bold" FontSize="25" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1"  Text="{Binding Path=TemplateInfo.Tags, ElementName=UserControl}" TextWrapping="Wrap" Margin="5,0,5,5" />
     </Grid>
 </UserControl>

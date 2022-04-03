@@ -9,14 +9,14 @@ namespace DocTemplate.ServerHandler.API
 {
     public class Requests
     {
-        public static async Task<string> GetRequest(string urlName)
+        public static string GetRequest(string urlName)
         {
             try
             {
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync($"{GlobalConstants.UrlBase}/{urlName}");
+                HttpResponseMessage response = client.GetAsync($"{GlobalConstants.UrlBase}/{urlName}").Result;
                 response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
+                return response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception e)
             {
