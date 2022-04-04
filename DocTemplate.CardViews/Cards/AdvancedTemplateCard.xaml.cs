@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
 
-namespace DocTemplate.View.Cards
+namespace DocTemplate.CardViews.Cards
 {
     /// <summary>
     /// Логика взаимодействия для AdvancedTemplateCard.xaml
@@ -21,6 +22,14 @@ namespace DocTemplate.View.Cards
         // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TemplateCardProperty =
             DependencyProperty.Register("TemplateCard", typeof(Template), typeof(AdvancedTemplateCard), new UIPropertyMetadata(null));
+        public BindableCommand OpenCommand
+        {
+            get => (BindableCommand)GetValue(OpenCommandProperty);
+            set => SetValue(OpenCommandProperty, value);
+        }
+        // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OpenCommandProperty =
+            DependencyProperty.Register("OpenCommand", typeof(BindableCommand), typeof(AdvancedTemplateCard), new UIPropertyMetadata(null));
 
     }
 }

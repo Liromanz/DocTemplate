@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="DocTemplate.View.Cards.AdvancedTemplateCard"
+﻿<UserControl x:Class="DocTemplate.CardViews.Cards.AdvancedTemplateCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DocTemplate.View.Cards"
+             xmlns:local="clr-namespace:DocTemplate.CardViews.Cards"
              FontSize="20"
              HorizontalAlignment="Stretch"
              Foreground="{DynamicResource BackgroundColor}"
@@ -24,7 +24,7 @@
         <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=TemplateCard.Tags, Mode=TwoWay}" TextWrapping="Wrap" MaxWidth="270"/>
         <Separator Grid.Column="4" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
         <StackPanel Grid.Column="5" Width="180" VerticalAlignment="Center">
-            <Button Content="Открыть" Style="{DynamicResource FocusButton}"/>
+            <Button Content="Открыть" Style="{DynamicResource FocusButton}" Command="{Binding Path=OpenCommand}"/>
             <Button Content="Сохранить к себе" Style="{DynamicResource ControlButton}"/>
         </StackPanel>
     </Grid>

@@ -15,12 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Cards\AdvancedTemplateCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Cards\TemplateCard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Cards\AdvancedTemplateCard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Cards\TemplateCard.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
