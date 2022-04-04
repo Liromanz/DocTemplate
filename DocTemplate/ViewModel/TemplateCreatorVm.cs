@@ -44,6 +44,9 @@ namespace DocTemplate.ViewModel
             set
             {
                 _template = value;
+                Text = value.FileText;
+                Editors = value.Editors;
+                Users = value.Users;
                 OnPropertyChanged();
             }
         }
@@ -109,7 +112,6 @@ namespace DocTemplate.ViewModel
         public TemplateCreatorVm()
         {
             Template = new Template {IdUser = Properties.Settings.Default.UserID};
-            Text = Template.FileText;
             AddEditorCommand = new BindableCommand(x => AddEditor());
             AddUserCommand = new BindableCommand(x => AddUser());
             OpenEditorCommand = new BindableCommand(x => OpenEditor());

@@ -70,7 +70,7 @@ namespace DocTemplate.ServerHandler.API
                         return GlobalConstants.ConflictMessage;
                     case HttpStatusCode.NotFound:
                         return GlobalConstants.NotFoundMessage;
-                    case HttpStatusCode.OK:
+                    case HttpStatusCode.NoContent:
                         return GlobalConstants.SuccessMessage;
                     default:
                         return GlobalConstants.UnsetErrorMessage;

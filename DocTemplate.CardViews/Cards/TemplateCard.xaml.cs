@@ -32,5 +32,13 @@ namespace DocTemplate.CardViews.Cards
         // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ClickCommandProperty =
             DependencyProperty.Register("ClickCommand", typeof(BindableCommand), typeof(TemplateCard), new UIPropertyMetadata(null));
+        public BindableCommand RightClickCommand
+        {
+            get => (BindableCommand)GetValue(RightClickCommandProperty);
+            set => SetValue(RightClickCommandProperty, value);
+        }
+        // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightClickCommandProperty =
+            DependencyProperty.Register("RightClickCommand", typeof(BindableCommand), typeof(TemplateCard), new UIPropertyMetadata(null));
     }
 }

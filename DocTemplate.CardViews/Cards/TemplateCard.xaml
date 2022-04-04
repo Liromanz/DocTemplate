@@ -14,6 +14,7 @@
     <Grid>
         <Grid.InputBindings>
             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding  Path=ClickCommand, ElementName=UserControl}"/>
+            <MouseBinding Gesture="RightClick" Command="{Binding  Path=RightClickCommand, ElementName=UserControl}"/>
         </Grid.InputBindings>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

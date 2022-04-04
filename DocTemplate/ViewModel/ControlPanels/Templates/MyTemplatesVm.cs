@@ -53,7 +53,17 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     current.Close();
                 });
 
-                CreatedByMe.Add(new TemplateCard { TemplateInfo = template, ClickCommand = clickCommand });
+                var rightClickCommand = new BindableCommand(x =>
+                {
+                    var templateCreator = new TemplateCreatorWindow();
+                    templateCreator.ViewModel.Template = template;
+                    var current = Application.Current.MainWindow;
+                    Application.Current.MainWindow = templateCreator;
+                    Application.Current.MainWindow.Show();
+                    current.Close();
+                });
+
+                CreatedByMe.Add(new TemplateCard { TemplateInfo = template, ClickCommand = clickCommand, RightClickCommand = rightClickCommand });
             }
 
             Cards = new List<GroupVIew>
