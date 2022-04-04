@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using DocTemplate.CardViews.View;
 using DocTemplate.Global.Models;
-using DocTemplate.Helpers;
+using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
 {
@@ -17,9 +17,12 @@ namespace DocTemplate.View
     /// </summary>
     public partial class DocumentWindow : Window
     {
+        public DocumentViewModel ViewModel => DataContext as DocumentViewModel;
+
         public DocumentWindow()
         {
             InitializeComponent();
+            ViewModel.ThisWindow = this;
         }
         public Template TemplateInfo
         {

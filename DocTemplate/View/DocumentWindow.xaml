@@ -36,7 +36,7 @@
             </StackPanel>
         </Border>
 
-        <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Margin="5" Text="НазваниеФайла - Шаблон Название *"/>
+        <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Margin="5" Text="{Binding Path=TemplateInfo.Name}"/>
         <FlowDocumentReader Grid.Column="1"  Width="664" Height="921" VerticalAlignment="Center" >
             <FlowDocument Background="White" Foreground="Black" x:Name="flowDocument"/>
         </FlowDocumentReader>
@@ -61,8 +61,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Content="Сохранить" Style="{DynamicResource ControlButton}" Command="{Binding SettingsCommand}" Margin="5"/>
-                        <Button Content="Экспортировать"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5"/>
+                        <Button Content="Сохранить" Style="{DynamicResource ControlButton}" Margin="5"/>
+                        <Button Content="Экспортировать"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Command="{Binding ExportCommand}"/>
                     </Grid>
                     <TextBlock Text="Страниц: 2. Символов: 200. Последнее сохранение: 08.02.2022 12:40" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                 </StackPanel>
