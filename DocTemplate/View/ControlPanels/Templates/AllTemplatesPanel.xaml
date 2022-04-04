@@ -29,7 +29,7 @@
             <CheckBox Content="Искать внутри шаблона" Style="{StaticResource DefaultCheckBox}"/>
             <CheckBox Content="Точное совпадение" Style="{StaticResource DefaultCheckBox}"/>
             <CheckBox Content="Учитывая регистр" Style="{StaticResource DefaultCheckBox}"/>
-            <Button Content="Подключить" Style="{DynamicResource ControlButton}"  VerticalAlignment="Center"/>
+            <Button Content="Найти" Style="{DynamicResource ControlButton}"  VerticalAlignment="Center"/>
         </StackPanel>
         <ListBox Grid.Column="1" ItemsSource="{Binding Cards}" Style="{StaticResource DefautListBox}"/>
     </Grid>

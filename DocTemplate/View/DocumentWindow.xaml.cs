@@ -6,7 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using DocTemplate.CardViews.View;
 using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
 
 namespace DocTemplate.View
 {
@@ -48,7 +50,6 @@ namespace DocTemplate.View
 
                 for (int i = 0; i < templateCount; i++)
                 {
-                    //ищу параграф с необходимым символом
                     var parag = new Paragraph();
                     foreach (Paragraph block in flowDocument.Blocks.Where(x => x.GetType() == typeof(Paragraph)))
                     {
@@ -56,21 +57,24 @@ namespace DocTemplate.View
                         if (blockText.Contains("\u2063"))
                             parag = block;
                     }
+                    var txtRange = new TextRange(parag.ContentStart, parag.ContentEnd);
+                    var textToConvert = txtRange.Text.Split("\u2063")[1];
 
-                    //создаю текстбокс, который будет менят текст
                     TextBox textBox = new TextBox();
                     textBox.TextChanged += (sender, args) =>
                     {
-                        //беру значение из блока
-                        var blockText = new TextRange(parag.ContentStart, parag.ContentEnd);
-                        var separatedstring = blockText.Text.Split("\u2063").ToList();
-                        //вставляю текст из текстбокса
+                        var separatedstring = txtRange.Text.Split("\u2063").ToList();
                         separatedstring[1] = textBox.Text;
-                        //возвращаю в блок
-                        blockText.Text = string.Join("\u2063", separatedstring);
+                        txtRange.Text = string.Join("\u2063", separatedstring);
                     };
 
-                    StackPanel.Children.Add(textBox);
+                    EditableControl editable = new EditableControl
+                    {
+                        ElementName = textToConvert.Substring(textToConvert.IndexOf('«')+1, textToConvert.IndexOf('»')-textToConvert.IndexOf('«')-1),
+                    };
+                    editable.AddElement(textBox);
+
+                    StackPanel.Children.Add(editable);
                 }
 
             }

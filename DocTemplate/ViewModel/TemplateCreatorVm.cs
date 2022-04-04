@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
+using DocTemplate.Global;
 using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
@@ -17,6 +18,7 @@ namespace DocTemplate.ViewModel
         public BindableCommand AddUserCommand { get; set; }
         public BindableCommand OpenEditorCommand { get; set; }
         public BindableCommand SaveAndExitCommand { get; set; }
+        public BindableCommand ReturnCommand { get; set; }
 
         #endregion
 
@@ -112,6 +114,7 @@ namespace DocTemplate.ViewModel
             AddUserCommand = new BindableCommand(x => AddUser());
             OpenEditorCommand = new BindableCommand(x => OpenEditor());
             SaveAndExitCommand = new BindableCommand(x => SaveAndExit());
+            ReturnCommand = new BindableCommand(x => ReturnToWindow());
 
             Thread thread = new Thread(x =>
             {
@@ -167,9 +170,17 @@ namespace DocTemplate.ViewModel
                     ? await Requests.PostWithBodyRequest("Templates", JsonConvert.SerializeObject(Template))
                     : await Requests.PutRequest("Templates", Template.IdTemplate.Value,
                         JsonConvert.SerializeObject(Template));
-                MessageBox.Show(result);
+                if (result != GlobalConstants.SuccessMessage)
+                    MessageBox.Show(result);
             });
             thread.Start();
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
+            ThisWindow.Close();
+        }
+
+        private void ReturnToWindow()
+        {
             Application.Current.MainWindow = new MainWindow();
             Application.Current.MainWindow.Show();
             ThisWindow.Close();

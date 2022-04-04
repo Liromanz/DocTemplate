@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DocTemplate.View"
         xmlns:view="clr-namespace:DocTemplate.CardViews.View;assembly=DocTemplate.CardViews"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:viewModel="clr-namespace:DocTemplate.ViewModel"
         mc:Ignorable="d"
      WindowStartupLocation="CenterScreen"
         Height="1000" Width="1800" Padding="10"
@@ -17,6 +18,9 @@
         WindowStyle="None" ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
+    <Window.DataContext>
+        <viewModel:DocumentViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -26,7 +30,7 @@
 
         <Border Background="{DynamicResource MainColor}" >
             <StackPanel>
-                <view:BackButton VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="-6,10,0,0"/>
+                <view:BackButton VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="-6,10,0,0" ButtonCommand="{Binding ReturnCommand}"/>
                 <Button Content="{StaticResource FileInfo}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
                 <Button Content="{StaticResource FileImport}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
             </StackPanel>
