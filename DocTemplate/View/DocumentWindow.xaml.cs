@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,10 +44,34 @@ namespace DocTemplate.View
                     textRange.Load(stream, DataFormats.Rtf);
                 }
 
-                MessageBox.Show(textRange.Text.IndexOf("\u8291?").ToString());
+                var templateCount = textRange.Text.Count(x => x == '\u2063') / 2;
 
-                TextBox txt = new TextBox();
-                StackPanel.Children.Add(txt);
+                for (int i = 0; i < templateCount; i++)
+                {
+                    //ищу параграф с необходимым символом
+                    var parag = new Paragraph();
+                    foreach (Paragraph block in flowDocument.Blocks.Where(x => x.GetType() == typeof(Paragraph)))
+                    {
+                        var blockText = new TextRange(block.ContentStart, block.ContentEnd).Text;
+                        if (blockText.Contains("\u2063"))
+                            parag = block;
+                    }
+
+                    //создаю текстбокс, который будет менят текст
+                    TextBox textBox = new TextBox();
+                    textBox.TextChanged += (sender, args) =>
+                    {
+                        //беру значение из блока
+                        var blockText = new TextRange(parag.ContentStart, parag.ContentEnd);
+                        var separatedstring = blockText.Text.Split("\u2063").ToList();
+                        //вставляю текст из текстбокса
+                        separatedstring[1] = textBox.Text;
+                        //возвращаю в блок
+                        blockText.Text = string.Join("\u2063", separatedstring);
+                    };
+
+                    StackPanel.Children.Add(textBox);
+                }
 
             }
         }
