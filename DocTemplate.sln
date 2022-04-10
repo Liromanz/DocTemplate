@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocTemplate.Helpers", "DocT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocTemplate.CardViews", "DocTemplate.CardViews\DocTemplate.CardViews.csproj", "{E67F0863-D4A0-43E8-8C53-7BD48B4183A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTemplate.ServerHandler", "DocTemplate.ServerHandler\DocTemplate.ServerHandler.csproj", "{51151019-6409-473D-B302-639E102BAC44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocTemplate.ServerHandler", "DocTemplate.ServerHandler\DocTemplate.ServerHandler.csproj", "{51151019-6409-473D-B302-639E102BAC44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTemplate.Global", "DocTemplate.Global\DocTemplate.Global.csproj", "{0B84F434-3444-4610-BD60-86B61FDC27EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocTemplate.Global", "DocTemplate.Global\DocTemplate.Global.csproj", "{0B84F434-3444-4610-BD60-86B61FDC27EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

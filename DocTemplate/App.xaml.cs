@@ -25,8 +25,6 @@ namespace DocTemplate
             InitializeComponent();
             ColorChanged += App_ColorChanged;
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
-            DocTemplate.Properties.Settings.Default.UserID = Convert.ToInt32(Requests.GetRequest(
-                $"Users/UserById?name={DocTemplate.Properties.Settings.Default.Username}")); 
             if (InternetState.IsConnectedToInternet())
             {
                 var thread = new Thread(() =>
@@ -34,8 +32,9 @@ namespace DocTemplate
                     if (DocTemplate.Properties.Settings.Default.FirstTime)
                     {
                         DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
-                        DocTemplate.Properties.Settings.Default.UserID = Convert.ToInt32(Requests.GetRequest(
-                        $"Users/UserById?name={DocTemplate.Properties.Settings.Default.Username}"));
+                        var idUser = Requests.GetRequest(
+                            $"Users/UserById?name={DocTemplate.Properties.Settings.Default.Username}");
+                        DocTemplate.Properties.Settings.Default.UserID = Convert.ToInt32(idUser);
                         DocTemplate.Properties.Settings.Default.FirstTime = false;
                         DocTemplate.Properties.Settings.Default.Save();
                     }

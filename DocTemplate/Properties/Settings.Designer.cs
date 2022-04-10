@@ -109,6 +109,7 @@ namespace DocTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("17")]
         public int UserID {
             get {
                 return ((int)(this["UserID"]));
