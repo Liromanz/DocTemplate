@@ -1,16 +1,22 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Net;
+using System.Runtime.InteropServices;
 
 namespace DocTemplate.Helpers
 {
     public class InternetState
-    {
-        [DllImport("wininet.dll")]
-        private static extern bool InternetGetConnectedState(out int Description, int ReservedValue);
-
+    { 
         public static bool IsConnectedToInternet()
         {
-            int Desc;
-            return InternetGetConnectedState(out Desc, 0);
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

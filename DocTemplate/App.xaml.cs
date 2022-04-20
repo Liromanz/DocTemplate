@@ -26,6 +26,7 @@ namespace DocTemplate
             ColorChanged += App_ColorChanged;
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
 
+
             if (InternetState.IsConnectedToInternet())
             {
                 var thread = new Thread(() =>
