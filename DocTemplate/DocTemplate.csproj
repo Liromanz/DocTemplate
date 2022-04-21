@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Properties\Resources\Language\" />
-    <Folder Include="ViewModel\Cards\" />
     <Folder Include="ViewModel\ControlPanels\Files\" />
     <Folder Include="View\ControlPanels\Files\" />
   </ItemGroup>

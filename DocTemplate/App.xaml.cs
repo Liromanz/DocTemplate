@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using DocTemplate.Global;
 using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using Newtonsoft.Json;
+using InternetState = DocTemplate.Global.InternetState;
 
 namespace DocTemplate
 {
@@ -39,8 +39,6 @@ namespace DocTemplate
                         DocTemplate.Properties.Settings.Default.FirstTime = false;
                         DocTemplate.Properties.Settings.Default.Save();
                     }
-
-                    DataContainers.PublicTemplates = JsonConvert.DeserializeObject<List<Template>>(Requests.GetRequest("Templates"));
                 });
                 thread.Start();
             }

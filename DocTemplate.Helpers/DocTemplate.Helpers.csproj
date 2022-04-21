@@ -7,6 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocTemplate.Global\DocTemplate.Global.csproj" />
+    <ProjectReference Include="..\DocTemplate.ServerHandler\DocTemplate.ServerHandler.csproj" />
   </ItemGroup>
 
 </Project>

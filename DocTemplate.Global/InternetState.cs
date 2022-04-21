@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace DocTemplate.Helpers
+namespace DocTemplate.Global
 {
     public class InternetState
     { 

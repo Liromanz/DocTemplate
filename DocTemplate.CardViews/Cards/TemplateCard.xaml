@@ -16,16 +16,13 @@
             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding  Path=ClickCommand, ElementName=UserControl}"/>
             <MouseBinding Gesture="RightClick" Command="{Binding  Path=RightClickCommand, ElementName=UserControl}"/>
         </Grid.InputBindings>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="/Properties/Resources/docexample.jpg" Grid.RowSpan="2" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=TemplateInfo.Name, ElementName=UserControl}" FontWeight="Bold" FontSize="25" Margin="5"/>
-        <TextBlock Grid.Column="1" Grid.Row="1"  Text="{Binding Path=TemplateInfo.Tags, ElementName=UserControl}" TextWrapping="Wrap" Margin="5,0,5,5" />
+        <TextBlock Grid.Row="0" Text="{Binding Path=TemplateInfo.Name, ElementName=UserControl}" FontWeight="Bold" FontSize="25" Margin="5" TextWrapping="Wrap" TextAlignment="Center"/>
+        <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}" Background="Black"/>
+        <TextBlock Grid.Row="2"  Text="{Binding Path=TemplateInfo.Tags, ElementName=UserControl}" TextWrapping="Wrap" Margin="5" TextAlignment="Center"/>
     </Grid>
 </UserControl>
