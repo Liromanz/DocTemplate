@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using DocTemplate.Global.Models;
-using DocTemplate.Helpers;
+using DocTemplate.CardViews.Model;
+using DocTemplate.CardViews.View;
 using DocTemplate.ServerHandler.API;
+using DocTemplate.Helpers;
 using Newtonsoft.Json;
-using InternetState = DocTemplate.Global.InternetState;
 
 namespace DocTemplate
 {
@@ -26,6 +27,17 @@ namespace DocTemplate
             ColorChanged += App_ColorChanged;
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
 
+            var groupThread = new Thread(() =>
+            {
+                var path = $@"{Environment.CurrentDirectory}\UserGroupsModel.json";
+                if (!File.Exists(path))
+                {
+                    var stream = File.Create(path);
+                    stream.Close();
+                }
+                DataContainers.UserGroupsModel = JsonConvert.DeserializeObject<ObservableCollection<GroupViewModel>>(File.ReadAllText(path));
+            });
+            groupThread.Start();
 
             if (InternetState.IsConnectedToInternet())
             {
@@ -64,7 +76,6 @@ namespace DocTemplate
             DocTemplate.Properties.Settings.Default.AppTheme = Color;
             DocTemplate.Properties.Settings.Default.Save();
         }
-
         private static void ChangeDictionary(ResourceDictionary dict, string startswith)
         {
             var oldDict = (from d in Current.Resources.MergedDictionaries
@@ -78,6 +89,13 @@ namespace DocTemplate
             }
             else
                 Current.Resources.MergedDictionaries.Add(dict);
+        }
+
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            File.WriteAllText($@"{Environment.CurrentDirectory}\UserGroupsModel.json",
+                JsonConvert.SerializeObject(DataContainers.UserGroupsModel));
         }
     }
 }

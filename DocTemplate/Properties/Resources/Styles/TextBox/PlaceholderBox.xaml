@@ -8,6 +8,7 @@
                         <TextBox Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  x:Name="textSource" 
                                  Background="Transparent" 
+                                 Foreground="White"
                                  BorderThickness="0"
                                  Panel.ZIndex="2" />
                         <TextBox Text="{TemplateBinding Tag}" Background="Transparent"  Panel.ZIndex="1" BorderThickness="0" Padding="0,5,0,5">

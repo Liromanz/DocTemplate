@@ -1,20 +1,25 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.View.DialogWindows;
+using DocTemplate.Helpers;
 
 namespace DocTemplate.CardViews.View
 {
     /// <summary>
     /// Логика взаимодействия для GroupVIew.xaml
     /// </summary>
-    public partial class GroupVIew : UserControl
+    ///
+    [Serializable]
+    public partial class GroupView : UserControl
     {
-        public GroupVIew()
+        public GroupView()
         {
             InitializeComponent();
         }
+
         public string GroupName
         {
             get => (string)GetValue(GroupNameProperty);
@@ -22,7 +27,7 @@ namespace DocTemplate.CardViews.View
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GroupNameProperty =
-            DependencyProperty.Register("GroupName", typeof(string), typeof(GroupVIew), new UIPropertyMetadata(null));
+            DependencyProperty.Register("GroupName", typeof(string), typeof(GroupView), new UIPropertyMetadata(null));
 
         public bool CanEditOrDelete
         {
@@ -31,7 +36,7 @@ namespace DocTemplate.CardViews.View
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CanEditOrDeleteProperty =
-            DependencyProperty.Register("CanEditOrDelete", typeof(bool), typeof(GroupVIew), new UIPropertyMetadata(null));
+            DependencyProperty.Register("CanEditOrDelete", typeof(bool), typeof(GroupView), new UIPropertyMetadata(null));
 
 
         public ObservableCollection<TemplateCard> GroupedTemplates
@@ -41,19 +46,32 @@ namespace DocTemplate.CardViews.View
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GroupedTemplatesProperty =
-            DependencyProperty.Register("GroupedTemplates", typeof(ObservableCollection<TemplateCard>), typeof(GroupVIew), new UIPropertyMetadata(null));
-
+            DependencyProperty.Register("GroupedTemplates", typeof(ObservableCollection<TemplateCard>), typeof(GroupView), new UIPropertyMetadata(null));
+        public BindableCommand ButtonCommand { get; set; }
 
         private void EditGroup(object sender, RoutedEventArgs e)
         {
-            var editDialog = new TypeInDialog();
-            editDialog.ShowDialog();
+            var editDialog = new TypeInDialog{
+                DialogName = "Редактирование группы",
+                Placeholder = "Введите имя группы",
+                ButtonText = "Изменить"
+            };
+            if (editDialog.ShowDialog().HasValue)
+            {
+                GroupName = editDialog.WroteText;
+            }
         }
 
         private void DeleteGroup(object sender, RoutedEventArgs e)
         {
-            var deleteDialog = new YesNoDialog();
-            deleteDialog.ShowDialog();
+            var deleteDialog = new YesNoDialog
+            {
+                DialogName = "Удаление группы",
+                Description = "Вы уверены что хотите удалить группу? Публичные шаблоны из нее будут удалены. Созданные вами шаблоны будут находится в группе \"Созданные мной\"",
+            };
+
+            if(deleteDialog.ShowDialog().HasValue)
+                ButtonCommand.Execute(null);
         }
 
     }

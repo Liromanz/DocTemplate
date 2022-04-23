@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:DocTemplate.CardViews.View.DialogWindows"
         mc:Ignorable="d"
         x:Name="UserControl"
-        Foreground="White" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-        WindowStyle="None" ResizeMode="NoResize" Background="Black" Opacity="50">
-    <Grid  Height="236" Width="582" Background="#413F48">
+        Foreground="White" FontSize="20" 
+        WindowStyle="None" AllowsTransparency="True"  ResizeMode="NoResize" Background="#7F000000" WindowState="Maximized">
+    <Grid  Height="232" Width="582" Background="#413F48">
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -19,8 +19,8 @@
             <Button Content="×" Padding="10,0,10,0" FontSize="23" Background="Transparent" BorderThickness="0" Foreground="White" Click="CloseDialog" Style="{DynamicResource HighlightButton}" HorizontalAlignment="Right"/>
             <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{Binding Path=Description, ElementName=UserControl}" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
-                <Button Content="ОК" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Command="{Binding Path=ButtonCommand, ElementName=UserControl}"/>
-                <Button Content="Отмена" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Click="CloseDialog" />
+                <Button Content="ОК" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Click="OkDialog" MinWidth="100" Margin="0,0,10,0"/>
+                <Button Content="Отмена" Style="{DynamicResource ControlButton}" VerticalAlignment="Bottom" Click="CloseDialog" MinWidth="100"/>
             </StackPanel>
         </Grid>
     </Grid>

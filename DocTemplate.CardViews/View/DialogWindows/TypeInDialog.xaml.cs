@@ -60,6 +60,6 @@ namespace DocTemplate.CardViews.View.DialogWindows
 
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
 
-        private void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
+        public void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
     }
 }

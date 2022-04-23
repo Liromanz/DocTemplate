@@ -6,6 +6,8 @@
              xmlns:viewSettings="clr-namespace:DocTemplate.View.ControlPanels.Settings"
              xmlns:vmTemplates="clr-namespace:DocTemplate.ViewModel.ControlPanels.Templates"
              xmlns:viewTemplates="clr-namespace:DocTemplate.View.ControlPanels.Templates"
+             ShutdownMode="OnMainWindowClose"
+             Exit="App_OnExit"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

@@ -19,7 +19,7 @@ namespace DocTemplate.CardViews.View.DialogWindows
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DialogNameProperty =
-            DependencyProperty.Register("DialogName", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
+            DependencyProperty.Register("DialogName", typeof(string), typeof(YesNoDialog), new UIPropertyMetadata(null));
 
         public string Description
         {
@@ -28,16 +28,9 @@ namespace DocTemplate.CardViews.View.DialogWindows
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
+            DependencyProperty.Register("Description", typeof(string), typeof(YesNoDialog), new UIPropertyMetadata(null));
 
-        public ICommand ButtonCommand
-        {
-            get => (ICommand)GetValue(ButtonCommandProperty);
-            set => SetValue(ButtonCommandProperty, value);
-        }
-        // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ButtonCommandProperty =
-            DependencyProperty.Register("ButtonCommand", typeof(ICommand), typeof(TypeInDialog), new UIPropertyMetadata(null));
+        private void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
 
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
     }
