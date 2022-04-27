@@ -13,8 +13,7 @@
              d:DesignHeight="163" d:DesignWidth="410">
     <Grid>
         <Grid.InputBindings>
-            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding  Path=ClickCommand, ElementName=UserControl}"/>
-            <MouseBinding Gesture="RightClick" Command="{Binding  Path=RightClickCommand, ElementName=UserControl}"/>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ClickCommand, ElementName=UserControl}"/>
         </Grid.InputBindings>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,5 +23,14 @@
         <TextBlock Grid.Row="0" Text="{Binding Path=TemplateInfo.Name, ElementName=UserControl}" FontWeight="Bold" FontSize="25" Margin="5" TextWrapping="Wrap" TextAlignment="Center"/>
         <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}" Background="Black"/>
         <TextBlock Grid.Row="2"  Text="{Binding Path=TemplateInfo.Tags, ElementName=UserControl}" TextWrapping="Wrap" Margin="5" TextAlignment="Center"/>
+        <Grid.ContextMenu>
+            <ContextMenu Style="{DynamicResource DefaultContextMenu}">
+                <MenuItem Header="• Создать новый файл" FontSize="15"  x:Name="MenuCreate" x:FieldModifier="public"/>
+                <MenuItem Header="• Изменить шаблон" FontSize="15"  x:Name="MenuEdit" x:FieldModifier="public" Visibility="Visible"/>
+                <Separator Style="{StaticResource HorizontalSeparator}" Background="Black" Margin="0"/>
+                <MenuItem Header="• Переместить шаблон" FontSize="15"  x:Name="MenuMove" x:FieldModifier="public"/>
+                <MenuItem Header="• Удалить из группы" FontSize="15" x:Name="MenuDelete" x:FieldModifier="public"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
     </Grid>
 </UserControl>

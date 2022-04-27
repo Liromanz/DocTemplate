@@ -30,6 +30,7 @@
                 <ResourceDictionary Source="Properties/Resources/Styles/Separator/VerticalSeparator.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/Separator/HorizontalSeparatop.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/ListBox/DefaultListBox.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/ContextMenu/DefaultContextMenu.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--Связь моделей и представлений-->
             <DataTemplate DataType="{x:Type vmTemplates:AllTemplatesVm}">

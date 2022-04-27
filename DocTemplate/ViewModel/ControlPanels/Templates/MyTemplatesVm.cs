@@ -19,6 +19,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
     {
         #region Команды
         public BindableCommand CreateGroupCommand { get; set; }
+        public BindableCommand DeleteTemplateCommand { get; set; }
 
         #endregion
 
@@ -39,7 +40,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         public MyTemplatesVm()
         {
-            CreateGroupCommand = new BindableCommand(x => { GenerateField(); });
+            CreateGroupCommand = new BindableCommand(x => { CreateGroup(); });
 
             Cards = CreateGroupsFromModel();
 
@@ -52,7 +53,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
-        private void GenerateField()
+        private void CreateGroup()
         {
             TypeInDialog dialog = new TypeInDialog
             {
@@ -67,7 +68,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     GroupName = dialog.WroteText,
                     CanEditOrDelete = true,
                 };
-                group.ButtonCommand = new BindableCommand(x => { Cards.Remove(group);});
+                group.ButtonCommand = new BindableCommand(x => { Cards.Remove(group); });
                 Cards.Add(group);
 
                 DataContainers.UserGroupsModel = CreateModelFromCards(Cards);
@@ -87,7 +88,6 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 };
                 group.ButtonCommand = new BindableCommand(x => { Cards.Remove(group); });
                 userGroups.Add(group);
-
             }
 
             if (!userGroups.Any())
@@ -112,17 +112,19 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
             foreach (var templateModel in templates)
             {
-                var clickCommand = new BindableCommand(x =>
+                var templateCard = new TemplateCard
                 {
-                    var documentWindow = new DocumentWindow { TemplateInfo = templateModel };
-                    documentWindow.SetDataIntoFlowDocument(templateModel.FileText);
-                    var current = Application.Current.MainWindow;
-                    Application.Current.MainWindow = documentWindow;
-                    Application.Current.MainWindow.Show();
-                    current.Close();
-                });
+                    TemplateInfo = templateModel,
+                    ClickCommand = new BindableCommand(x => { OpenCommand(templateModel); }),
+                };
 
-                var rightClickCommand = new BindableCommand(x =>
+                #region Контекстное меню
+
+                templateCard.MenuCreate.Click += (sender, args) => { OpenCommand(templateModel); };
+
+                if (!templateModel.Editors.Contains(Properties.Settings.Default.Username))
+                    templateCard.MenuEdit.Visibility = Visibility.Collapsed;
+                templateCard.MenuEdit.Click += (sender, args) =>
                 {
                     var templateCreator = new TemplateCreatorWindow();
                     templateCreator.ViewModel.Template = templateModel;
@@ -130,10 +132,17 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     Application.Current.MainWindow = templateCreator;
                     Application.Current.MainWindow.Show();
                     current.Close();
-                });
+                };
 
-                templateCards.Add(new TemplateCard
-                    { TemplateInfo = templateModel, ClickCommand = clickCommand, RightClickCommand = rightClickCommand });
+                if (templateModel.IdUser != Properties.Settings.Default.UserID)
+                    templateCard.MenuDelete.Visibility = Visibility.Collapsed;
+                templateCard.MenuDelete.Click += (sender, args) =>
+                { Cards.First(x => x.GroupedTemplates == templateCards).GroupedTemplates.Remove(templateCard); };
+
+                #endregion
+
+                templateCards.Add(templateCard);
+
             }
             return templateCards;
         }
@@ -151,6 +160,16 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 });
             }
             return groups;
+        }
+
+        private void OpenCommand(Template templateModel)
+        {
+            var documentWindow = new DocumentWindow { TemplateInfo = templateModel };
+            documentWindow.SetDataIntoFlowDocument(templateModel.FileText);
+            var current = Application.Current.MainWindow;
+            Application.Current.MainWindow = documentWindow;
+            Application.Current.MainWindow.Show();
+            current.Close();
         }
     }
 }
