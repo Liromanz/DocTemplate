@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
@@ -18,8 +17,8 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
     public class MyTemplatesVm : ObservableObject
     {
         #region Команды
+        public BindableCommand SearchCommand { get; set; }
         public BindableCommand CreateGroupCommand { get; set; }
-        public BindableCommand DeleteTemplateCommand { get; set; }
 
         #endregion
 
@@ -36,11 +35,27 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        private string _search = "";
+        public string Search
+        {
+            get => _search;
+            set
+            {
+                _search = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool SearchByName { get; set; } = true;
+        public bool SearchByTemplate { get; set; }
+        public bool ExactSearch { get; set; }
+        public bool ExactRegister { get; set; }
+
         #endregion
 
         public MyTemplatesVm()
         {
             CreateGroupCommand = new BindableCommand(x => { CreateGroup(); });
+            SearchCommand = new BindableCommand(x => { Cards = CreateGroupsFromModel();});
 
             Cards = CreateGroupsFromModel();
 
@@ -78,7 +93,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
         private ObservableCollection<GroupView> CreateGroupsFromModel()
         {
             var userGroups = new ObservableCollection<GroupView>();
-            foreach (var groupModel in DataContainers.UserGroupsModel)
+            foreach (var groupModel in GetTemplateList())
             {
                 var group = new GroupView
                 {
@@ -197,6 +212,28 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             Application.Current.MainWindow = documentWindow;
             Application.Current.MainWindow.Show();
             current.Close();
+        }
+
+        private List<GroupViewModel> GetTemplateList()
+        {
+            var groups = DataContainers.UserGroupsModel.ToList();
+            if (SearchByName)
+                groups = groups.Where(x => x.GroupName.ToLower().Contains(Search.ToLower())).ToList();
+            if (SearchByTemplate)
+                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name.ToLower().Contains(Search.ToLower()))).ToList();
+            if (SearchByName && ExactSearch)
+                groups = groups.Where(x => x.GroupName.ToLower() == Search.ToLower()).ToList();
+            if (SearchByTemplate && ExactSearch)
+                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name.ToLower() == Search.ToLower())).ToList();
+            if (SearchByName && ExactRegister)
+                groups = groups.Where(x => x.GroupName.Contains(Search)).ToList();
+            if (SearchByTemplate && ExactRegister)
+                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name.Contains(Search))).ToList(); 
+            if (SearchByName && ExactSearch && ExactRegister)
+                groups = groups.Where(x => x.GroupName == Search).ToList();
+            if (SearchByTemplate && ExactSearch && ExactRegister)
+                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name == Search)).ToList();
+            return groups;
         }
     }
 }

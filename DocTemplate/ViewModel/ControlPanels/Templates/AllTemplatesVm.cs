@@ -103,7 +103,6 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         private List<Template> GetTemplateList()
         {
-
             var templates = DataContainers.PublicTemplates;
             if (SearchByName)
                 templates = templates.Where(x => x.Name.ToLower().Contains(Search.ToLower())).ToList();
