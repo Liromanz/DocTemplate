@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DocTemplate.CardViews.Cards;
+using DocTemplate.CardViews.View.DialogWindows;
 using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.View;
@@ -35,7 +36,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             get => _search;
             set
             {
-                _search = value; 
+                _search = value;
                 OnPropertyChanged();
             }
         }
@@ -49,7 +50,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         public AllTemplatesVm()
         {
-            SearchCommand = new BindableCommand(x => { FillListWithTemplate();});
+            SearchCommand = new BindableCommand(x => { FillListWithTemplate(); });
             Cards = new ObservableCollection<AdvancedTemplateCard>();
 
             FillListWithTemplate();
@@ -58,18 +59,45 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
         private void FillListWithTemplate()
         {
             Cards.Clear();
-            foreach (var template in GetTemplateList())
+            var templates = GetTemplateList();
+            foreach (var template in templates)
             {
-                var openCommand = new BindableCommand(x =>
+                var templateCard = new AdvancedTemplateCard
                 {
-                    var documentWindow = new DocumentWindow { TemplateInfo = template };
-                    documentWindow.SetDataIntoFlowDocument(template.FileText);
-                    var current = Application.Current.MainWindow;
-                    Application.Current.MainWindow = documentWindow;
-                    Application.Current.MainWindow.Show();
-                    current.Close();
-                });
-                Cards.Add(new AdvancedTemplateCard { TemplateCard = template, OpenCommand = openCommand });
+                    TemplateCard = template,
+                    OpenCommand = new BindableCommand(x =>
+                    {
+                        var documentWindow = new DocumentWindow { TemplateInfo = template };
+                        documentWindow.SetDataIntoFlowDocument(template.FileText);
+                        var current = Application.Current.MainWindow;
+                        Application.Current.MainWindow = documentWindow;
+                        Application.Current.MainWindow.Show();
+                        current.Close();
+                    })
+                };
+                templateCard.SaveButton.Click += (sender, args) =>
+                {
+                    var items = DataContainers.UserGroupsModel.Select(x => x.GroupName).ToList();
+                    items.Remove("Созданные мной");
+                    if (!items.Any())
+                    {
+                        MessageBox.Show("Нет ни одной группы, куда можно было бы перенести этот шаблон!");
+                        return;
+                    }
+
+                    SelectorDialog dialog = new SelectorDialog
+                    {
+                        DialogName = "Перемещение шаблона",
+                        ButtonText = "Переместить",
+                        Items = items
+                    };
+                    if (dialog.ShowDialog().HasValue)
+                    {
+                        var finalGroup = (string) dialog.SelectionCbx.SelectedItem;
+                        DataContainers.UserGroupsModel.First(x => x.GroupName == finalGroup).GroupedTemplates.Add(template);
+                    }
+                };
+                Cards.Add(templateCard);
             }
         }
 

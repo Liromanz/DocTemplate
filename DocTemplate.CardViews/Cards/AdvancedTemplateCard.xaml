@@ -25,7 +25,7 @@
         <Separator Grid.Column="4" Style="{StaticResource VerticalSeparator}" Background="{DynamicResource BackgroundColor}"/>
         <StackPanel Grid.Column="5" Width="180" VerticalAlignment="Center">
             <Button Content="Открыть" Style="{DynamicResource FocusButton}" Command="{Binding Path=OpenCommand}"/>
-            <Button Content="Сохранить к себе" Style="{DynamicResource ControlButton}"/>
+            <Button Content="Сохранить к себе" Style="{DynamicResource ControlButton}" x:Name="SaveButton" x:FieldModifier="public"/>
         </StackPanel>
     </Grid>
 </UserControl>
