@@ -122,7 +122,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
                 templateCard.MenuCreate.Click += (sender, args) => { OpenCommand(templateModel); };
 
-                if (!templateModel.Editors.Contains(Properties.Settings.Default.Username))
+                if (!templateModel.Editors.Contains(Properties.Settings.Default.Username) && templateModel.Editors != "All")
                     templateCard.MenuEdit.Visibility = Visibility.Collapsed;
                 templateCard.MenuEdit.Click += (sender, args) =>
                 {
@@ -134,10 +134,37 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     current.Close();
                 };
 
+                templateCard.MenuMove.Click += (sender, args) =>
+                {
+                    var items = Cards.Select(x => x.GroupName).ToList();
+                    var startGroup = Cards.First(x => x.GroupedTemplates == templateCards).GroupName;
+                    items.Remove(startGroup);
+                    items.Remove("Созданные мной");
+                    if (!items.Any())
+                    {
+                        MessageBox.Show("Нет ни одной группы, куда можно было бы перенести этот шаблон!");
+                        return;
+                    }
+
+                    SelectorDialog dialog = new SelectorDialog
+                    {
+                        DialogName = "Перемещение шаблона",
+                        ButtonText = "Переместить",
+                        Items = items
+                    };
+                    if (dialog.ShowDialog().HasValue)
+                    {
+                        var finalGroup = (string)dialog.SelectionCbx.SelectedItem;
+                        if (startGroup != "Созданные мной")
+                            Cards.First(x => x.GroupName == startGroup).GroupedTemplates.Remove(templateCard);
+                        Cards.First(x => x.GroupName == finalGroup).GroupedTemplates.Add(templateCard);
+                    }
+                };
+
                 if (templateModel.IdUser != Properties.Settings.Default.UserID)
                     templateCard.MenuDelete.Visibility = Visibility.Collapsed;
                 templateCard.MenuDelete.Click += (sender, args) =>
-                { Cards.First(x => x.GroupedTemplates == templateCards).GroupedTemplates.Remove(templateCard); };
+                    { Cards.First(x => x.GroupedTemplates == templateCards).GroupedTemplates.Remove(templateCard); };
 
                 #endregion
 

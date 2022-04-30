@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Properties/Resources/Styles/ScrollViewer/DefaultScrollViewer.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/CheckBox/DefaultCheckBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/RadioButton/DefaultRadioButton.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/ComboBox/TransparentComboBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/ComboBox/DefaultComboBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/TextBox/DefaultTextBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/TextBox/PlaceholderBox.xaml"/>
