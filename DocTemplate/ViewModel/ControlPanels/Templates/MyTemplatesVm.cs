@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
@@ -55,7 +56,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
         public MyTemplatesVm()
         {
             CreateGroupCommand = new BindableCommand(x => { CreateGroup(); });
-            SearchCommand = new BindableCommand(x => { Cards = CreateGroupsFromModel();});
+            SearchCommand = new BindableCommand(x => { Cards = CreateGroupsFromModel(); });
 
             Cards = CreateGroupsFromModel();
 
@@ -64,6 +65,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 Cards.First().GroupedTemplates = CreateTemplatesFromModel((List<Template>)JsonConvert.DeserializeObject(
                    Requests.GetRequest($"Templates/{Properties.Settings.Default.UserID}"),
                    typeof(List<Template>)));
+                RefreshTemplates((List<Template>)JsonConvert.DeserializeObject(
+                    Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"),
+                    typeof(List<Template>)));
+
                 DataContainers.UserGroupsModel = CreateModelFromCards(Cards);
             }
         }
@@ -204,6 +209,18 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             return groups;
         }
 
+        private void RefreshTemplates(List<Template> cards)
+        {
+            foreach (var groupView in Cards)
+            {
+                foreach (var templateCard in groupView.GroupedTemplates)
+                {
+                    Cards.First(x => x == groupView).GroupedTemplates.First(t => t == templateCard).TemplateInfo =
+                        cards.First(x => x.IdTemplate == templateCard.TemplateInfo.IdTemplate);
+                }
+            }
+        }
+
         private void OpenCommand(Template templateModel)
         {
             var documentWindow = new DocumentWindow { TemplateInfo = templateModel };
@@ -228,7 +245,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             if (SearchByName && ExactRegister)
                 groups = groups.Where(x => x.GroupName.Contains(Search)).ToList();
             if (SearchByTemplate && ExactRegister)
-                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name.Contains(Search))).ToList(); 
+                groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name.Contains(Search))).ToList();
             if (SearchByName && ExactSearch && ExactRegister)
                 groups = groups.Where(x => x.GroupName == Search).ToList();
             if (SearchByTemplate && ExactSearch && ExactRegister)
