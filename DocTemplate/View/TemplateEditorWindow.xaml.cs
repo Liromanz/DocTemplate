@@ -38,19 +38,24 @@ namespace DocTemplate.View
         }
         private void rtf_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd).Text;
-            var allIndexes = textRange.FindAllIndexof('\u2063');
+            var fullText = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd).Text;
+            var allIndexes = fullText.FindAllIndexof('\u2063');
             var cursorPosition = new TextRange(rtf.Document.ContentStart, rtf.Selection.Start).Text.Length;
             for (int i = 0; i < allIndexes.Length - 1; i += 2)
             {
-                if (allIndexes[i] <= cursorPosition && cursorPosition <= allIndexes[i+1] ||
+                if ((allIndexes[i] <= cursorPosition && cursorPosition <= allIndexes[i + 1]) ||
                     new TextRange(rtf.Selection.Start, rtf.Selection.End).Text.Contains('\u2063'))
                 {
                     rtf.IsReadOnly = true;
+                    FieldNameTxt.Text = fullText.Substring(allIndexes[i], allIndexes[i + 1] - allIndexes[i]+1);
+                    EditableGrid.Visibility = Visibility.Visible;
+                    AddingGrid.Visibility = Visibility.Collapsed;
                     break;
                 }
-                else
-                    rtf.IsReadOnly = false;
+
+                rtf.IsReadOnly = false;
+                AddingGrid.Visibility = Visibility.Visible;
+                EditableGrid.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -127,5 +132,40 @@ namespace DocTemplate.View
         private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью");
         #endregion
 
+        #region Редактирование полей
+        private void EditFieldName(object sender, RoutedEventArgs e)
+        {
+            TypeInDialog dialog = new TypeInDialog
+            {
+                DialogName = "Изменение имени поля", 
+                Placeholder = "Введите название этого поля. Для чего оно нужно?", 
+                ButtonText = "Изменить"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
+                var newName = Regex.Replace(FieldNameTxt.Text, @"«.*»", $"«{dialog.WroteText}»");
+                textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, newName);
+                FieldNameTxt.Text = newName;
+            }
+
+        }
+        #endregion
+
+        private void DeleteField(object sender, RoutedEventArgs e)
+        {
+            var deleteDialog = new YesNoDialog
+            {
+                DialogName = "Удаление поля",
+                Description = "Вы уверены что хотите удалить поле? Если вы поставили поле вместо текста, вам придется вписать текст заново.",
+            };
+
+            if (deleteDialog.ShowDialog().HasValue)
+            {
+                var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
+                textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, "");
+            }
+        }
     }
 }
