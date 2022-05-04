@@ -49,38 +49,36 @@ namespace DocTemplate.View
                     textRange.Load(stream, DataFormats.Rtf);
                 }
 
-                var templateCount = textRange.Text.Count(x => x == '\u2063') / 2;
-
-                for (int i = 0; i < templateCount; i++)
+                foreach (var block in flowDocument.Blocks.Where(x => x.GetType() == typeof(Paragraph)))
                 {
-                    var parag = new Paragraph();
-                    foreach (Paragraph block in flowDocument.Blocks.Where(x => x.GetType() == typeof(Paragraph)))
-                    {
-                        var blockText = new TextRange(block.ContentStart, block.ContentEnd).Text;
-                        if (blockText.Contains("\u2063"))
-                            parag = block;
-                    }
-                    var txtRange = new TextRange(parag.ContentStart, parag.ContentEnd);
-                    var textToConvert = txtRange.Text.Split("\u2063")[1];
-
-                    TextBox textBox = new TextBox();
-                    textBox.TextChanged += (sender, args) =>
-                    {
-                        var separatedstring = txtRange.Text.Split("\u2063").ToList();
-                        separatedstring[1] = textBox.Text;
-                        txtRange.Text = string.Join("\u2063", separatedstring);
-                    };
-
-                    EditableControl editable = new EditableControl
-                    {
-                        ElementName = textToConvert.Substring(textToConvert.IndexOf('«')+1, textToConvert.IndexOf('»')-textToConvert.IndexOf('«')-1),
-                    };
-                    editable.AddElement(textBox);
-
-                    StackPanel.Children.Add(editable);
+                    if (new TextRange(block.ContentStart, block.ContentEnd).Text.Contains("\u2063")) 
+                        CreateEditableField(block);
                 }
-
             }
+        }
+
+        private void CreateEditableField(Block block)
+        {
+            var txtRange = new TextRange(block.ContentStart, block.ContentEnd);
+            var textToConvert = txtRange.Text.Split("\u2063")[1];
+
+            #region зависит от типа данных
+            TextBox textBox = new TextBox();
+            textBox.TextChanged += (sender, args) =>
+            {
+                var separatedString = txtRange.Text.Split("\u2063").ToList();
+                separatedString[1] = textBox.Text;
+                txtRange.Text = string.Join("\u2063", separatedString);
+            };
+            #endregion
+
+            EditableControl editable = new EditableControl
+            {
+                ElementName = textToConvert.Substring(textToConvert.IndexOf('«') + 1, textToConvert.IndexOf('»') - textToConvert.IndexOf('«') - 1),
+            };
+            editable.AddElement(textBox);
+
+            StackPanel.Children.Add(editable);
         }
     }
 }
