@@ -151,8 +151,6 @@ namespace DocTemplate.View
             }
 
         }
-        #endregion
-
         private void DeleteField(object sender, RoutedEventArgs e)
         {
             var deleteDialog = new YesNoDialog
@@ -161,11 +159,13 @@ namespace DocTemplate.View
                 Description = "Вы уверены что хотите удалить поле? Если вы поставили поле вместо текста, вам придется вписать текст заново.",
             };
 
-            if (deleteDialog.ShowDialog().HasValue)
+            if (deleteDialog.ShowDialog() == true)
             {
                 var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
                 textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, "");
             }
         }
+        #endregion
+
     }
 }

@@ -172,7 +172,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                         ButtonText = "Переместить",
                         Items = items
                     };
-                    if (dialog.ShowDialog().HasValue)
+                    if (dialog.ShowDialog() == true)
                     {
                         var finalGroup = (string)dialog.SelectionCbx.SelectedItem;
                         if (startGroup != "Созданные мной")

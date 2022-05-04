@@ -146,7 +146,7 @@ namespace DocTemplate.ViewModel
             var editor = new TemplateEditorWindow();
             editor.ViewModel.RtfContent = Template.FileText;
             ThisWindow.Visibility = Visibility.Collapsed;
-            if (editor.ShowDialog().HasValue)
+            if (editor.ShowDialog() == true)
             {
                 Text = editor.ViewModel.RtfContent;
                 Template.FileText = Text;

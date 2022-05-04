@@ -91,7 +91,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                         ButtonText = "Переместить",
                         Items = items
                     };
-                    if (dialog.ShowDialog().HasValue)
+                    if (dialog.ShowDialog() == true)
                     {
                         var finalGroup = (string) dialog.SelectionCbx.SelectedItem;
                         DataContainers.UserGroupsModel.First(x => x.GroupName == finalGroup).GroupedTemplates.Add(template);

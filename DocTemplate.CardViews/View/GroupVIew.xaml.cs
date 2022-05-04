@@ -41,7 +41,7 @@ namespace DocTemplate.CardViews.View
 
         public ObservableCollection<TemplateCard> GroupedTemplates
         {
-            get => (ObservableCollection<TemplateCard>)GetValue(GroupedTemplatesProperty);
+            get => (ObservableCollection<TemplateCard>)GetValue(GroupedTemplatesProperty) ?? new ObservableCollection<TemplateCard>();
             set => SetValue(GroupedTemplatesProperty, value);
         }
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
@@ -56,7 +56,7 @@ namespace DocTemplate.CardViews.View
                 Placeholder = "Введите имя группы",
                 ButtonText = "Изменить"
             };
-            if (editDialog.ShowDialog().HasValue)
+            if (editDialog.ShowDialog() == true)
             {
                 GroupName = editDialog.WroteText;
             }
@@ -70,7 +70,7 @@ namespace DocTemplate.CardViews.View
                 Description = "Вы уверены что хотите удалить группу? Публичные шаблоны из нее будут удалены. Созданные вами шаблоны будут находится в группе \"Созданные мной\"",
             };
 
-            if(deleteDialog.ShowDialog().HasValue)
+            if(deleteDialog.ShowDialog() == true)
                 ButtonCommand.Execute(null);
         }
 
