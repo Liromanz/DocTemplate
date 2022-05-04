@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
+using System.Linq;
+using System.Windows;
+using Forms = System.Windows.Forms;
 using DocTemplate.Helpers;
 
 namespace DocTemplate.ViewModel
@@ -9,6 +11,7 @@ namespace DocTemplate.ViewModel
     {
         #region Команды
         public BindableCommand ImportDocxCommand { get; set; }
+        public BindableCommand ReturnCommand { get; set; }
 
         #endregion
 
@@ -30,16 +33,22 @@ namespace DocTemplate.ViewModel
         public TemplateEditorVm()
         {
             ImportDocxCommand = new BindableCommand(o => ImportDocx());
+            ReturnCommand = new BindableCommand(o => ReturnToWindow());
         }
 
         private void ImportDocx()
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            Forms.OpenFileDialog fileDialog = new Forms.OpenFileDialog();
             fileDialog.Filter = "RTF файлы|*.rtf";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (fileDialog.ShowDialog() == Forms.DialogResult.OK)
             {
                 RtfContent = File.ReadAllText(fileDialog.FileName);
             }
+        }
+
+        private void ReturnToWindow()
+        {
+            Application.Current.Windows.OfType<Window>().Single(x => x.IsActive).Close();
         }
     }
 }

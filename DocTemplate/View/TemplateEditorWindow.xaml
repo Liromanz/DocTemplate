@@ -132,7 +132,7 @@
                 <Button Content="Импорт документа" Style="{DynamicResource ControlButton}" Margin="5" Command="{Binding ImportDocxCommand}"/>
             </StackPanel>
         </Border>
-        <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,10"/>
+        <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10" ButtonCommand="{Binding ReturnCommand}"/>
 
         <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" SelectionChanged="rtf_SelectionChanged">
             <wpf:RichTextBox.TextFormatter>
