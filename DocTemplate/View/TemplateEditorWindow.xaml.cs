@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,6 +7,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using DocTemplate.CardViews.View.DialogWindows;
+using DocTemplate.Helpers;
 using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
@@ -33,6 +35,23 @@ namespace DocTemplate.View
         private void GoBack(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+        private void rtf_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd).Text;
+            var allIndexes = textRange.FindAllIndexof('\u2063');
+            var cursorPosition = new TextRange(rtf.Document.ContentStart, rtf.Selection.Start).Text.Length;
+            for (int i = 0; i < allIndexes.Length - 1; i += 2)
+            {
+                if (allIndexes[i] <= cursorPosition && cursorPosition <= allIndexes[i+1] ||
+                    new TextRange(rtf.Selection.Start, rtf.Selection.End).Text.Contains('\u2063'))
+                {
+                    rtf.IsReadOnly = true;
+                    break;
+                }
+                else
+                    rtf.IsReadOnly = false;
+            }
         }
 
         #region Изменение RTF
@@ -107,5 +126,6 @@ namespace DocTemplate.View
         private void AddComplexNumer(object sender, RoutedEventArgs e) => GenerateField("Номерной список с описанием");
         private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью");
         #endregion
+
     }
 }
