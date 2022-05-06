@@ -35,12 +35,23 @@ namespace DocTemplate.ViewModel
 
         public string CurrentField { get; set; }
 
-        public List<FieldMetadata> FieldMetadatas { get; set; } = new List<FieldMetadata>();
+        private bool _isMultipleEnabled;
+        public bool IsMultipleEnabled
+        {
+            get => _isMultipleEnabled;
+            set
+            {
+                _isMultipleEnabled = value;
+                FieldMetadatas.First(x => x.Name == CurrentField).CanBeMultiple = value;
+                OnPropertyChanged();
+            }
+        }
 
+
+        public List<FieldMetadata> FieldMetadatas { get; set; } = new List<FieldMetadata>();
         public string JsonMetadata { get; set; }
 
         private string _itemCollection = "";
-
         public string ItemCollection
         {
             get => _itemCollection;
@@ -51,7 +62,6 @@ namespace DocTemplate.ViewModel
                 OnPropertyChanged();
             }
         }
-
 
         #endregion
 

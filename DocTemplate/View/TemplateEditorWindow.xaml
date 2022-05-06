@@ -185,9 +185,9 @@
                             <TextBlock Text="Изменение" HorizontalAlignment="Center"  Margin="5"/>
                             <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
                             <TextBlock x:Name="FieldNameTxt" Text="Текстовое поле «Имя»" HorizontalAlignment="Center" />
-                            <CheckBox Visibility="Collapsed" Content="Добавление нескольких атрибутов" Style="{StaticResource DefaultCheckBox}" HorizontalAlignment="Center"
-                                      ToolTip="Этот переключатель стоит включать, например, в нумерации, когда вы не знаете сколько точно пунктов будет в списке. Тогда редактор сможет сам настроить количество элементов в поле"/>
 
+                            <CheckBox x:Name="MultipleAddChk" Visibility="Collapsed" Content="Добавление нескольких атрибутов" Style="{StaticResource DefaultCheckBox}" HorizontalAlignment="Center" IsChecked="{Binding IsMultipleEnabled}"
+                                      ToolTip="Этот переключатель стоит включать, например, в нумерации, когда вы не знаете сколько точно пунктов будет в списке. Тогда редактор сможет сам настроить количество элементов в поле"/>
                             <StackPanel x:Name="ItemCollectionPanel">
                                 <TextBlock  Text="Коллекция списка"/>
                                 <TextBox Text="{Binding ItemCollection}" Style="{StaticResource DefaultTextBox}" ToolTip="Введите через запятую все элементы, которые вы хотите видеть в выборном списке"/>

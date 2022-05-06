@@ -54,17 +54,7 @@ namespace DocTemplate.View
                     FieldNameTxt.Text = fullText.Substring(allIndexes[i], allIndexes[i + 1] - allIndexes[i] + 1);
                     ViewModel.CurrentField = GetFieldName();
 
-                    if (FieldNameTxt.Text.Contains("Текстовое поле"))
-                        ItemCollectionPanel.Visibility = Visibility.Collapsed;
-                    if (FieldNameTxt.Text.Contains("Список"))
-                    {
-                        var collection = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).ItemSource;
-                        if (collection.Length > 1)
-                            ViewModel.ItemCollection = string.Join(", ", collection);
-                        else if (collection.Any())
-                            ViewModel.ItemCollection = collection.First();
-                        ItemCollectionPanel.Visibility = Visibility.Visible;
-                    }
+                    SetInterfaceByType();
 
                     EditableGrid.Visibility = Visibility.Visible;
                     AddingGrid.Visibility = Visibility.Collapsed;
@@ -219,6 +209,31 @@ namespace DocTemplate.View
         {
             var regex = new Regex(@"«.*»");
             return regex.Match(FieldNameTxt.Text).Value.Replace("«", "").Replace("»", "");
+        }
+
+        private void SetInterfaceByType()
+        {
+            if (FieldNameTxt.Text.Contains("Текстовое поле"))
+            {
+                MultipleAddChk.Visibility = Visibility.Visible;
+                ItemCollectionPanel.Visibility = Visibility.Collapsed;
+            }
+            if (FieldNameTxt.Text.Contains("Список"))
+            {
+                var collection = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).ItemSource;
+                if (collection.Length > 1)
+                    ViewModel.ItemCollection = string.Join(", ", collection);
+                else if (collection.Any())
+                    ViewModel.ItemCollection = collection.First();
+                MultipleAddChk.Visibility = Visibility.Collapsed;
+                ItemCollectionPanel.Visibility = Visibility.Visible;
+            }
+            if (FieldNameTxt.Text.Contains("Нумерация"))
+            {
+                MultipleAddChk.Visibility = Visibility.Visible;
+                ItemCollectionPanel.Visibility = Visibility.Collapsed;
+            }
+
         }
 
     }
