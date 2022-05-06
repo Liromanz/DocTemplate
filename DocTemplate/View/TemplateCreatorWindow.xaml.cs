@@ -23,19 +23,5 @@ namespace DocTemplate.View
                 DragMove();
 
         }
-
-        private void GoBack(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow = new MainWindow();
-            Application.Current.MainWindow.Show();
-            Close();
-        }
-
-        private void OpenEditor(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow = new TemplateEditorWindow();
-            Application.Current.MainWindow.Show();
-            Close();
-        }
     }
 }

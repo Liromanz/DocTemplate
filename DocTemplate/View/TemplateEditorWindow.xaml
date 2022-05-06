@@ -134,7 +134,7 @@
         </Border>
         <view:BackButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10" ButtonCommand="{Binding ReturnCommand}"/>
 
-        <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" SelectionChanged="rtf_SelectionChanged">
+        <wpf:RichTextBox Grid.Column="1" FontFamily="Palatino Linotype" FontSize="14" Width="664" Height="921" Name="rtf" SpellCheck.IsEnabled="True" SelectionBrush="{DynamicResource MainColor}" Text="{Binding RtfContent}" SelectionChanged="CursorChanged">
             <wpf:RichTextBox.TextFormatter>
                 <wpf:RtfFormatter />
             </wpf:RichTextBox.TextFormatter>
@@ -149,7 +149,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="ИЗМЕНЯЕМЫЕ ПОЛЯ" HorizontalAlignment="Center" FontSize="30"/>
-                <Grid Grid.Row="1" x:Name="AddingGrid">
+                <Grid Grid.Row="1" x:Name="AddingGrid" >
                     <ScrollViewer Template="{StaticResource DefaultScrollViewer}">
                         <StackPanel>
                             <TextBlock Text="Добавление" HorizontalAlignment="Center" Margin="5"/>
@@ -179,7 +179,7 @@
 
                     </ScrollViewer>
                 </Grid>
-                <Grid Grid.Row="1" x:Name="EditableGrid"  Visibility="Hidden">
+                <Grid Grid.Row="1" x:Name="EditableGrid" Visibility="Hidden" >
                     <ScrollViewer Template="{StaticResource DefaultScrollViewer}">
                         <StackPanel>
                             <TextBlock Text="Изменение" HorizontalAlignment="Center"  Margin="5"/>
@@ -188,6 +188,10 @@
                             <CheckBox Visibility="Collapsed" Content="Добавление нескольких атрибутов" Style="{StaticResource DefaultCheckBox}" HorizontalAlignment="Center"
                                       ToolTip="Этот переключатель стоит включать, например, в нумерации, когда вы не знаете сколько точно пунктов будет в списке. Тогда редактор сможет сам настроить количество элементов в поле"/>
 
+                            <StackPanel x:Name="ItemCollectionPanel">
+                                <TextBlock  Text="Коллекция списка"/>
+                                <TextBox Text="{Binding ItemCollection}" Style="{StaticResource DefaultTextBox}" ToolTip="Введите через запятую все элементы, которые вы хотите видеть в выборном списке"/>
+                            </StackPanel>
                             <Grid Margin="0,0,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>

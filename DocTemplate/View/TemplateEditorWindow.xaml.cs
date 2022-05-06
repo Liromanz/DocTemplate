@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using DocTemplate.CardViews.View.DialogWindows;
+using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.ViewModel;
 
@@ -22,6 +24,7 @@ namespace DocTemplate.View
         public TemplateEditorWindow()
         {
             InitializeComponent();
+            ViewModel.FieldMetadatas = new List<FieldMetadata>();
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
                 FontCB.Items.Add(fontFamily);
         }
@@ -34,20 +37,35 @@ namespace DocTemplate.View
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            Close();
+            ViewModel.SerializeFieldData();
+            DialogResult = true;
         }
-        private void rtf_SelectionChanged(object sender, RoutedEventArgs e)
+        private void CursorChanged(object sender, RoutedEventArgs e)
         {
             var fullText = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd).Text;
             var allIndexes = fullText.FindAllIndexof('\u2063');
             var cursorPosition = new TextRange(rtf.Document.ContentStart, rtf.Selection.Start).Text.Length;
             for (int i = 0; i < allIndexes.Length - 1; i += 2)
             {
-                if ((allIndexes[i] <= cursorPosition && cursorPosition <= allIndexes[i + 1]) ||
+                if (allIndexes[i] <= cursorPosition && cursorPosition <= allIndexes[i + 1] ||
                     new TextRange(rtf.Selection.Start, rtf.Selection.End).Text.Contains('\u2063'))
                 {
                     rtf.IsReadOnly = true;
                     FieldNameTxt.Text = fullText.Substring(allIndexes[i], allIndexes[i + 1] - allIndexes[i] + 1);
+                    ViewModel.CurrentField = GetFieldName();
+
+                    if (FieldNameTxt.Text.Contains("Текстовое поле"))
+                        ItemCollectionPanel.Visibility = Visibility.Collapsed;
+                    if (FieldNameTxt.Text.Contains("Список"))
+                    {
+                        var collection = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).ItemSource;
+                        if (collection.Length > 1)
+                            ViewModel.ItemCollection = string.Join(", ", collection);
+                        else if (collection.Any())
+                            ViewModel.ItemCollection = collection.First();
+                        ItemCollectionPanel.Visibility = Visibility.Visible;
+                    }
+
                     EditableGrid.Visibility = Visibility.Visible;
                     AddingGrid.Visibility = Visibility.Collapsed;
                     break;
@@ -55,6 +73,7 @@ namespace DocTemplate.View
 
                 rtf.IsReadOnly = false;
                 AddingGrid.Visibility = Visibility.Visible;
+                ItemCollectionPanel.Visibility = Visibility.Collapsed;
                 EditableGrid.Visibility = Visibility.Collapsed;
             }
         }
@@ -120,25 +139,29 @@ namespace DocTemplate.View
 
         #region Создание пунктов
 
-        private void GenerateField(string fieldType)
+        private void GenerateField(string fieldTypeName, Type fieldType)
         {
             TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
             if (dialog.ShowDialog() == true)
-                rtf.Selection.Text = $"\u2063{fieldType} «{dialog.WroteText}»\u2063";
+            {
+                ViewModel.FieldMetadatas.Add(new FieldMetadata { Name = dialog.WroteText, FieldType = fieldType });
+                ViewModel.CurrentField = dialog.WroteText;
+                rtf.Selection.Text = $"\u2063{fieldTypeName} «{dialog.WroteText}»\u2063";
+            }
             rtf.Focus();
         }
 
-        private void AddTextBox(object sender, RoutedEventArgs e) => GenerateField("Текстовое поле");
-        private void AddComboBox(object sender, RoutedEventArgs e) => GenerateField("Список");
-        private void AddNumer(object sender, RoutedEventArgs e) => GenerateField("Нумерация");
-        private void AddDate(object sender, RoutedEventArgs e) => GenerateField("Дата");
-        private void AddTextFile(object sender, RoutedEventArgs e) => GenerateField("Текстовый файл");
-        private void AddImage(object sender, RoutedEventArgs e) => GenerateField("Фотография");
-        private void AddCheckBox(object sender, RoutedEventArgs e) => GenerateField("Множественный выбор");
-        private void AddRadioButton(object sender, RoutedEventArgs e) => GenerateField("Единичный выбор");
-        private void AddTable(object sender, RoutedEventArgs e) => GenerateField("Таблица");
-        private void AddComplexNumer(object sender, RoutedEventArgs e) => GenerateField("Номерной список с описанием");
-        private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью");
+        private void AddTextBox(object sender, RoutedEventArgs e) => GenerateField("Текстовое поле", typeof(TextBox));
+        private void AddComboBox(object sender, RoutedEventArgs e) => GenerateField("Список", typeof(ComboBox));
+        private void AddNumer(object sender, RoutedEventArgs e) => GenerateField("Нумерация", typeof(TextBox));
+        private void AddDate(object sender, RoutedEventArgs e) => GenerateField("Дата", typeof(DatePicker));
+        private void AddTextFile(object sender, RoutedEventArgs e) => GenerateField("Текстовый файл", typeof(Button));
+        private void AddImage(object sender, RoutedEventArgs e) => GenerateField("Фотография", typeof(Button));
+        private void AddCheckBox(object sender, RoutedEventArgs e) => GenerateField("Множественный выбор", typeof(CheckBox));
+        private void AddRadioButton(object sender, RoutedEventArgs e) => GenerateField("Единичный выбор", typeof(RadioButton));
+        private void AddTable(object sender, RoutedEventArgs e) => GenerateField("Таблица", typeof(DataGrid));
+        private void AddComplexNumer(object sender, RoutedEventArgs e) => GenerateField("Номерной список с описанием", typeof(TextBox));
+        private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью", typeof(TextBox));
         #endregion
 
         #region Редактирование полей
@@ -153,10 +176,18 @@ namespace DocTemplate.View
 
             if (dialog.ShowDialog() == true)
             {
-                var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
-                var newName = Regex.Replace(FieldNameTxt.Text, @"«.*»", $"«{dialog.WroteText}»");
-                textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, newName);
-                FieldNameTxt.Text = newName;
+                if (ViewModel.FieldMetadatas.Any(x => x.Name == dialog.WroteText))
+                    MessageBox.Show("Поле с таким именем уже существует, имя должно быть уникальное");
+                else
+                {
+
+                    var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
+                    var newName = Regex.Replace(FieldNameTxt.Text, @"«.*»", $"«{dialog.WroteText}»");
+                    ViewModel.CurrentField = GetFieldName();
+                    ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).Name = GetFieldName();
+                    textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, newName);
+                    FieldNameTxt.Text = newName;
+                }
             }
 
         }
@@ -170,11 +201,25 @@ namespace DocTemplate.View
 
             if (deleteDialog.ShowDialog() == true)
             {
+
                 var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
                 textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, "");
+                var fieldData = ViewModel.FieldMetadatas.FirstOrDefault(x => x.Name == GetFieldName());
+                if (fieldData != null)
+                    ViewModel.FieldMetadatas.Remove(fieldData);
+
+                rtf.IsReadOnly = false;
+                AddingGrid.Visibility = Visibility.Visible;
+                EditableGrid.Visibility = Visibility.Collapsed;
             }
         }
         #endregion
+
+        private string GetFieldName()
+        {
+            var regex = new Regex(@"«.*»");
+            return regex.Match(FieldNameTxt.Text).Value.Replace("«", "").Replace("»", "");
+        }
 
     }
 }

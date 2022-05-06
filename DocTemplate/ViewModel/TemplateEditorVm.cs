@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
+using DocTemplate.Global.Models;
 using Forms = System.Windows.Forms;
 using DocTemplate.Helpers;
+using Newtonsoft.Json;
 
 namespace DocTemplate.ViewModel
 {
@@ -20,13 +25,33 @@ namespace DocTemplate.ViewModel
 
         public string RtfContent
         {
-            get { return _rtfContent; }
+            get => _rtfContent;
             set
             {
                 _rtfContent = value;
                 OnPropertyChanged();
             }
         }
+
+        public string CurrentField { get; set; }
+
+        public List<FieldMetadata> FieldMetadatas { get; set; } = new List<FieldMetadata>();
+
+        public string JsonMetadata { get; set; }
+
+        private string _itemCollection = "";
+
+        public string ItemCollection
+        {
+            get => _itemCollection;
+            set
+            {
+                _itemCollection = value; 
+                FieldMetadatas.First(x => x.Name == CurrentField).ItemSource = value.Split(", ");
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -49,6 +74,11 @@ namespace DocTemplate.ViewModel
         private void ReturnToWindow()
         {
             Application.Current.Windows.OfType<Window>().Single(x => x.IsActive).Close();
+        }
+
+        public void SerializeFieldData()
+        {
+            JsonMetadata = JsonConvert.SerializeObject(FieldMetadatas);
         }
     }
 }

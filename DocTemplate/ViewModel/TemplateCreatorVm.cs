@@ -144,12 +144,14 @@ namespace DocTemplate.ViewModel
         private void OpenEditor()
         {
             var editor = new TemplateEditorWindow();
+            editor.ViewModel.FieldMetadatas = JsonConvert.DeserializeObject<List<FieldMetadata>>(Template.FieldMetadata) ?? new List<FieldMetadata>();
             editor.ViewModel.RtfContent = Template.FileText;
             ThisWindow.Visibility = Visibility.Collapsed;
             if (editor.ShowDialog() == true)
             {
                 Text = editor.ViewModel.RtfContent;
                 Template.FileText = Text;
+                Template.FieldMetadata = editor.ViewModel.JsonMetadata;
             }
             ThisWindow.Visibility = Visibility.Visible;
         }
