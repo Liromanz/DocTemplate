@@ -11,5 +11,6 @@ namespace DocTemplate.Global.Models
         public string FileText { get; set; } = "";
         public int IdUser { get; set; }
         public string Tags { get; set; } = "";
+        public string FieldMetadata { get; set; } = "";
     }
 }

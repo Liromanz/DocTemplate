@@ -47,7 +47,7 @@ namespace DocTemplate.View
                     new TextRange(rtf.Selection.Start, rtf.Selection.End).Text.Contains('\u2063'))
                 {
                     rtf.IsReadOnly = true;
-                    FieldNameTxt.Text = fullText.Substring(allIndexes[i], allIndexes[i + 1] - allIndexes[i]+1);
+                    FieldNameTxt.Text = fullText.Substring(allIndexes[i], allIndexes[i + 1] - allIndexes[i] + 1);
                     EditableGrid.Visibility = Visibility.Visible;
                     AddingGrid.Visibility = Visibility.Collapsed;
                     break;
@@ -97,7 +97,16 @@ namespace DocTemplate.View
 
         private void ChangeLineSeparation(object sender, SelectionChangedEventArgs e)
         {
-
+            if (rtf != null && !rtf.Selection.IsEmpty)
+            {
+                var selectedBlocks = rtf.Document.Blocks.Where(x =>
+                    x.ContentStart.CompareTo(rtf.CaretPosition) == -1 && x.ContentEnd.CompareTo(rtf.CaretPosition) == 1).ToArray();
+                foreach (var block in selectedBlocks)
+                {
+                    rtf.SetValue(Block.LineHeightProperty, (double)LineSeparationCB.SelectedItem);
+                    //rtf.Document.Blocks.First(x => x == block).LineHeight = (double)LineSeparationCB.SelectedItem;
+                }
+            }
         }
 
         private void ChangeStrikethrough(object sender, RoutedEventArgs e)
@@ -137,8 +146,8 @@ namespace DocTemplate.View
         {
             TypeInDialog dialog = new TypeInDialog
             {
-                DialogName = "Изменение имени поля", 
-                Placeholder = "Введите название этого поля. Для чего оно нужно?", 
+                DialogName = "Изменение имени поля",
+                Placeholder = "Введите название этого поля. Для чего оно нужно?",
                 ButtonText = "Изменить"
             };
 
