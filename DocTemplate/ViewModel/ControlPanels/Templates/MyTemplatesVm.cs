@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
@@ -62,9 +63,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
             if (InternetState.IsConnectedToInternet())
             {
-                Cards.First().GroupedTemplates = CreateTemplatesFromModel((List<Template>)JsonConvert.DeserializeObject(
-                   Requests.GetRequest($"Templates/{Properties.Settings.Default.UserID}"),
-                   typeof(List<Template>)));
+                UpdateCreatedTemplates();
                 RefreshTemplates((List<Template>)JsonConvert.DeserializeObject(
                     Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"),
                     typeof(List<Template>)));
@@ -221,6 +220,14 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        private void UpdateCreatedTemplates()
+        {
+            foreach (var template in Cards.First().GroupedTemplates)
+            {
+                Requests.PutRequest("Templates", template.TemplateInfo.IdTemplate.Value, JsonConvert.SerializeObject(template.TemplateInfo));
+            }
+        }
+
         private void OpenCommand(Template templateModel)
         {
             var documentWindow = new DocumentWindow { TemplateInfo = templateModel };
@@ -252,5 +259,6 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 groups = groups.Where(x => x.GroupedTemplates.Any(t => t.Name == Search)).ToList();
             return groups;
         }
+
     }
 }

@@ -17,7 +17,7 @@ namespace DocTemplate.CardViews.View
 
         private void CloseApplication(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            Application.Current.Shutdown();
         }
 
         private void MaximizeApplication(object sender, RoutedEventArgs e)

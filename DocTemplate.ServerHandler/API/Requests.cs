@@ -57,13 +57,13 @@ namespace DocTemplate.ServerHandler.API
             }
         }
 
-        public static async Task<string> PutRequest(string tableName, int id, string dataToSend)
+        public static string PutRequest(string tableName, int id, string dataToSend)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 HttpContent content = new StringContent(dataToSend, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}", content);
+                HttpResponseMessage response = client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}", content).Result;
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Conflict:

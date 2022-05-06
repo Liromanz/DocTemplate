@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using DocTemplate.Global;
@@ -111,18 +112,21 @@ namespace DocTemplate.ViewModel
 
         public TemplateCreatorVm()
         {
-            Template = new Template {IdUser = Properties.Settings.Default.UserID};
+            Template = new Template { IdUser = Properties.Settings.Default.UserID };
             AddEditorCommand = new BindableCommand(x => AddEditor());
             AddUserCommand = new BindableCommand(x => AddUser());
             OpenEditorCommand = new BindableCommand(x => OpenEditor());
             SaveAndExitCommand = new BindableCommand(x => SaveAndExit());
             ReturnCommand = new BindableCommand(x => ReturnToWindow());
 
-            Thread thread = new Thread(x =>
+            if (InternetState.IsConnectedToInternet())
             {
-                Usernames = (List<string>)JsonConvert.DeserializeObject(Requests.GetRequest("Users"), typeof(List<string>));
-            });
-            thread.Start();
+                Thread thread = new Thread(x =>
+                {
+                    Usernames = (List<string>)JsonConvert.DeserializeObject(Requests.GetRequest("Users"), typeof(List<string>));
+                });
+                thread.Start();
+            }
         }
 
         private void AddEditor()
@@ -130,7 +134,7 @@ namespace DocTemplate.ViewModel
             if (Usernames.Contains(EditorToAdd))
                 Editors += EditorToAdd + ", ";
             else
-                MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона");
+                MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона или проверьте подключение к интернету.\nБез интернета можно выбрать только свойство \"Все\" или \"Только я\"");
         }
 
         private void AddUser()
@@ -138,7 +142,7 @@ namespace DocTemplate.ViewModel
             if (Usernames.Contains(UserToAdd))
                 Users += UserToAdd + ", ";
             else
-                MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона");
+                MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона или проверьте подключение к интернету.\nБез интернета можно выбрать только свойство \"Все\" или \"Только я\"");
         }
 
         private void OpenEditor()
@@ -165,19 +169,30 @@ namespace DocTemplate.ViewModel
                 return;
             }
 
-            Thread thread = new Thread(async x =>
+            Template.Editors = ParceTemplate(Template.Editors, "Editors");
+            Template.Users = ParceTemplate(Template.Users, "Users");
+            if (InternetState.IsConnectedToInternet())
             {
-                Template.Editors = ParceTemplate(Template.Editors, "Editors");
-                Template.Users = ParceTemplate(Template.Users, "Users");
-                string result;
-                result = Template.IdTemplate == null
-                    ? await Requests.PostWithBodyRequest("Templates", JsonConvert.SerializeObject(Template))
-                    : await Requests.PutRequest("Templates", Template.IdTemplate.Value,
-                        JsonConvert.SerializeObject(Template));
-                if (result != GlobalConstants.SuccessMessage)
-                    MessageBox.Show(result);
-            });
-            thread.Start();
+                Thread thread = new Thread(async x =>
+                {
+                    string result;
+                    result = Template.IdTemplate == null
+                        ? await Requests.PostWithBodyRequest("Templates", JsonConvert.SerializeObject(Template))
+                        : Requests.PutRequest("Templates", Template.IdTemplate.Value,
+                            JsonConvert.SerializeObject(Template));
+                    if (result != GlobalConstants.SuccessMessage)
+                        MessageBox.Show(result);
+                });
+                thread.Start();
+            }
+            else
+            {
+                foreach (var group in DataContainers.UserGroupsModel.Where(x => x.GroupedTemplates.Any(t => t.IdTemplate == Template.IdTemplate)))
+                {
+                    var index = group.GroupedTemplates.FindIndex(x => x.IdTemplate == Template.IdTemplate);
+                    DataContainers.UserGroupsModel.First(x => x == group).GroupedTemplates[index] = Template;
+                }
+            }
             Application.Current.MainWindow = new MainWindow();
             Application.Current.MainWindow.Show();
             ThisWindow.Close();

@@ -107,14 +107,14 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
         }
         private void SaveAll()
         {
-            Thread thread = new Thread(async x =>
+            Thread thread = new Thread(x =>
             {
                 if (Username != _settings.Username)
                 {
-                    var responce = await Requests.PutRequest("Users", DocTemplate.Properties.Settings.Default.UserID,
+                    var response = Requests.PutRequest("Users", DocTemplate.Properties.Settings.Default.UserID,
                         JsonConvert.SerializeObject(new Username
                         { CurrentName = _settings.Username, NewName = Username }));
-                    if (responce == GlobalConstants.SuccessMessage)
+                    if (response == GlobalConstants.SuccessMessage)
                         _settings.Username = Username;
                 }
                 if (FileFormat != _settings.DocFormat)
