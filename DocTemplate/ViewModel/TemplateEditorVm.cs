@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using DocTemplate.Global.Models;
 using Forms = System.Windows.Forms;
 using DocTemplate.Helpers;

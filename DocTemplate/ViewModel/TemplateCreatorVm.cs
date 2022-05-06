@@ -187,6 +187,7 @@ namespace DocTemplate.ViewModel
             }
             else
             {
+                Template.NeedToUpdate = true;
                 foreach (var group in DataContainers.UserGroupsModel.Where(x => x.GroupedTemplates.Any(t => t.IdTemplate == Template.IdTemplate)))
                 {
                     var index = group.GroupedTemplates.FindIndex(x => x.IdTemplate == Template.IdTemplate);

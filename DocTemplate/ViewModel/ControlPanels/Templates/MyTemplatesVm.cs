@@ -64,10 +64,12 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             if (InternetState.IsConnectedToInternet())
             {
                 UpdateCreatedTemplates();
-                RefreshTemplates((List<Template>)JsonConvert.DeserializeObject(
-                    Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"),
+                Cards.First().GroupedTemplates = CreateTemplatesFromModel((List<Template>)JsonConvert.DeserializeObject(
+                    Requests.GetRequest($"Templates/{Properties.Settings.Default.UserID}"),
                     typeof(List<Template>)));
-
+                RefreshTemplates((List<Template>)JsonConvert.DeserializeObject(
+                    Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"), 
+                    typeof(List<Template>)));
                 DataContainers.UserGroupsModel = CreateModelFromCards(Cards);
             }
         }
@@ -222,7 +224,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         private void UpdateCreatedTemplates()
         {
-            foreach (var template in Cards.First().GroupedTemplates)
+            foreach (var template in Cards.First().GroupedTemplates.Where(x => x.TemplateInfo.NeedToUpdate))
             {
                 Requests.PutRequest("Templates", template.TemplateInfo.IdTemplate.Value, JsonConvert.SerializeObject(template.TemplateInfo));
             }

@@ -215,7 +215,7 @@ namespace DocTemplate.View
         {
             if (FieldNameTxt.Text.Contains("Текстовое поле"))
             {
-                MultipleAddChk.Visibility = Visibility.Visible;
+                MultipleAddChk.Visibility = Visibility.Collapsed;
                 ItemCollectionPanel.Visibility = Visibility.Collapsed;
             }
             if (FieldNameTxt.Text.Contains("Список"))
@@ -230,6 +230,7 @@ namespace DocTemplate.View
             }
             if (FieldNameTxt.Text.Contains("Нумерация"))
             {
+                ViewModel.IsMultipleEnabled = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).CanBeMultiple;
                 MultipleAddChk.Visibility = Visibility.Visible;
                 ItemCollectionPanel.Visibility = Visibility.Collapsed;
             }
