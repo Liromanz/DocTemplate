@@ -10,6 +10,7 @@
         xmlns:helpers="clr-namespace:DocTemplate.Helpers;assembly=DocTemplate.Helpers"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:converters="clr-namespace:DocTemplate.Properties.Resources.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1800" Padding="10"
@@ -169,28 +170,59 @@
                                 <Button Content="Множ. выбор" Style="{DynamicResource ControlButton}" Margin="5" Click="AddCheckBox"/>
                                 <Button Content="Единичный выбор"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddRadioButton"/>
                             </WrapPanel>
-                            <TextBlock Text="Составные объекты" Margin="5"/>
-                            <WrapPanel ItemWidth="231">
-                                <Button Content="Таблица" Style="{DynamicResource ControlButton}" Margin="5" Click="AddTable"/>
-                                <Button Content="Список с описанием"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddComplexNumer"/>
-                                <Button Content="Картинка с подписью"  Style="{DynamicResource ControlButton}" Margin="5" Click="AddComplexImage"/>
-                            </WrapPanel>
                         </StackPanel>
 
                     </ScrollViewer>
                 </Grid>
-                <Grid Grid.Row="1" x:Name="EditableGrid" Visibility="Hidden" >
+                <Grid Grid.Row="1" x:Name="EditableGrid"  Visibility="Hidden" >
                     <ScrollViewer Template="{StaticResource DefaultScrollViewer}">
                         <StackPanel>
                             <TextBlock Text="Изменение" HorizontalAlignment="Center"  Margin="5"/>
                             <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
                             <TextBlock x:Name="FieldNameTxt" Text="Текстовое поле «Имя»" HorizontalAlignment="Center" />
 
-                            <CheckBox x:Name="MultipleAddChk" Visibility="Collapsed" Content="Добавление нескольких атрибутов" Style="{StaticResource DefaultCheckBox}" HorizontalAlignment="Center" IsChecked="{Binding IsMultipleEnabled}"
+                            <CheckBox x:Name="MultipleAddChk" Content="Добавление нескольких атрибутов" Style="{StaticResource DefaultCheckBox}" HorizontalAlignment="Center" IsChecked="{Binding IsMultipleEnabled}"
                                       ToolTip="Этот переключатель стоит включать, например, в нумерации, когда вы не знаете сколько точно пунктов будет в списке. Тогда редактор сможет сам настроить количество элементов в поле"/>
                             <StackPanel x:Name="ItemCollectionPanel">
-                                <TextBlock  Text="Коллекция списка"/>
+                                <TextBlock  Text="Значения для выбора"/>
                                 <TextBox Text="{Binding ItemCollection}" Style="{StaticResource DefaultTextBox}" ToolTip="Введите через запятую все элементы, которые вы хотите видеть в выборном списке"/>
+                            </StackPanel>
+                            <StackPanel x:Name="DataMaskPanel">
+                                <TextBlock  Text="Маска даты"/>
+                                <ComboBox SelectedItem="{Binding DateType}"  Style="{DynamicResource DefaultComboBox}">
+                                    <ComboBox.ItemsSource>
+                                        <x:Array Type="{x:Type sys:String}">
+                                            <sys:String>30.12.2020</sys:String>
+                                            <sys:String>12.30.2020</sys:String>
+                                            <sys:String>30/12/2020</sys:String>
+                                            <sys:String>«30» декабря 2020</sys:String>
+                                            <sys:String>Тридцатое декабря две тысяча двадцатого года</sys:String>
+                                        </x:Array>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel x:Name="FileTypePanel">
+                                <TextBlock  Text="Тип файла"/>
+                                <StackPanel Visibility="{Binding IsImage, Mode=TwoWay, Converter={StaticResource BooleanToVisibility}}">
+                                    <WrapPanel ItemWidth="150">
+                                        <CheckBox x:Name="JPGChk" Content="JPG|.jpg" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="PNGChk" Content="PNG|.png" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="BMPChk" Content="BMP|.bmp" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="SVGChk" Content="SVG|.svg" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="TIFFChk" Content="TIFF|.tiff" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="ICOChk" Content="ICO|.ico" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                    </WrapPanel>
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding IsImage, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityInverted}}">
+                                    <WrapPanel ItemWidth="150">
+                                        <CheckBox x:Name="TXTChk" Content="Текст|.txt" Style="{StaticResource DefaultCheckBox}"  Checked="AddFileType"/>
+                                        <CheckBox x:Name="CSChk" Content="CS|.cs" Style="{StaticResource DefaultCheckBox}"  Checked="AddFileType"/>
+                                        <CheckBox x:Name="XAMLChk" Content="XAML|.xaml" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="HTMLChk" Content="HTML|.html" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                        <CheckBox x:Name="PDFChk" Content="PDF|.pdf" Style="{StaticResource DefaultCheckBox}"  Checked="AddFileType"/>
+                                        <CheckBox x:Name="AllChk" Content="Все файлы|.*" Style="{StaticResource DefaultCheckBox}" Checked="AddFileType"/>
+                                    </WrapPanel>
+                                </StackPanel>
                             </StackPanel>
                             <Grid Margin="0,0,0,20">
                                 <Grid.ColumnDefinitions>

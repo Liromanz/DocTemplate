@@ -20,10 +20,13 @@ namespace DocTemplate.View
     public partial class TemplateEditorWindow : Window
     {
         public TemplateEditorVm ViewModel => DataContext as TemplateEditorVm;
-
+        private CheckBox[] _imageTypes;
+        private CheckBox[] _fileTypes;
         public TemplateEditorWindow()
         {
             InitializeComponent();
+            _imageTypes = new[]{ JPGChk, PNGChk, BMPChk, SVGChk, TIFFChk, ICOChk };
+            _fileTypes = new[]{ TXTChk, CSChk, XAMLChk, HTMLChk, PDFChk, AllChk };
             ViewModel.FieldMetadatas = new List<FieldMetadata>();
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
                 FontCB.Items.Add(fontFamily);
@@ -149,9 +152,6 @@ namespace DocTemplate.View
         private void AddImage(object sender, RoutedEventArgs e) => GenerateField("Фотография", typeof(Button));
         private void AddCheckBox(object sender, RoutedEventArgs e) => GenerateField("Множественный выбор", typeof(CheckBox));
         private void AddRadioButton(object sender, RoutedEventArgs e) => GenerateField("Единичный выбор", typeof(RadioButton));
-        private void AddTable(object sender, RoutedEventArgs e) => GenerateField("Таблица", typeof(DataGrid));
-        private void AddComplexNumer(object sender, RoutedEventArgs e) => GenerateField("Номерной список с описанием", typeof(TextBox));
-        private void AddComplexImage(object sender, RoutedEventArgs e) => GenerateField("Картинка с подписью", typeof(TextBox));
         #endregion
 
         #region Редактирование полей
@@ -191,7 +191,6 @@ namespace DocTemplate.View
 
             if (deleteDialog.ShowDialog() == true)
             {
-
                 var textRange = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
                 textRange.Text = textRange.Text.Replace(FieldNameTxt.Text, "");
                 var fieldData = ViewModel.FieldMetadatas.FirstOrDefault(x => x.Name == GetFieldName());
@@ -213,29 +212,56 @@ namespace DocTemplate.View
 
         private void SetInterfaceByType()
         {
-            if (FieldNameTxt.Text.Contains("Текстовое поле"))
-            {
-                MultipleAddChk.Visibility = Visibility.Collapsed;
-                ItemCollectionPanel.Visibility = Visibility.Collapsed;
-            }
-            if (FieldNameTxt.Text.Contains("Список"))
+            MultipleAddChk.Visibility = Visibility.Collapsed;
+            ItemCollectionPanel.Visibility = Visibility.Collapsed;
+            DataMaskPanel.Visibility = Visibility.Collapsed;
+            FileTypePanel.Visibility = Visibility.Collapsed;
+
+            if (FieldNameTxt.Text.Contains("Список") || FieldNameTxt.Text.Contains("Множественный выбор") || FieldNameTxt.Text.Contains("Единичный выбор"))
             {
                 var collection = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).ItemSource;
                 if (collection.Length > 1)
                     ViewModel.ItemCollection = string.Join(", ", collection);
                 else if (collection.Any())
                     ViewModel.ItemCollection = collection.First();
-                MultipleAddChk.Visibility = Visibility.Collapsed;
                 ItemCollectionPanel.Visibility = Visibility.Visible;
             }
             if (FieldNameTxt.Text.Contains("Нумерация"))
             {
                 ViewModel.IsMultipleEnabled = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).CanBeMultiple;
                 MultipleAddChk.Visibility = Visibility.Visible;
-                ItemCollectionPanel.Visibility = Visibility.Collapsed;
+            }
+
+            if (FieldNameTxt.Text.Contains("Дата"))
+            {
+                ViewModel.DateType = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).DateMask;
+                DataMaskPanel.Visibility = Visibility.Visible;
+            }
+
+            if (FieldNameTxt.Text.Contains("Текстовый файл"))
+            {
+                ViewModel.IsImage = false;
+                foreach (var checkBox in _fileTypes)
+                {
+                    if (ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).FileTypes
+                        .Contains((string) checkBox.Content))
+                        checkBox.IsChecked = true;
+                }
+                ViewModel.FileTypes = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).FileTypes;
+                FileTypePanel.Visibility = Visibility.Visible;
+
+            }
+            if (FieldNameTxt.Text.Contains("Фотография"))
+            {
+                ViewModel.IsImage = true;
+                FileTypePanel.Visibility = Visibility.Visible;
             }
 
         }
 
+        private void AddFileType(object sender, RoutedEventArgs e)
+        {
+            ViewModel.FileTypes += (sender as CheckBox).Content + "|";
+        }
     }
 }

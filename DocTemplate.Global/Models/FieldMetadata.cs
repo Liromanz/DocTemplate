@@ -9,7 +9,8 @@ namespace DocTemplate.Global.Models
         public string Name { get; set; }
         public bool CanBeMultiple { get; set; }
         public string[] ItemSource { get; set; } = {""};
-        public string FileTypes { get; set; }
+        public string DateMask { get; set; }
+        public string FileTypes { get; set; } = "";
 
     }
 }

@@ -60,6 +60,43 @@ namespace DocTemplate.ViewModel
             }
         }
 
+        private string _dateType;
+
+        public string DateType
+        {
+            get => _dateType;
+            set
+            {
+                _dateType = value;
+                FieldMetadatas.First(x => x.Name == CurrentField).DateMask = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isImage;
+        public bool IsImage
+        {
+            get => _isImage;
+            set
+            {
+                _isImage = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        private string _fileTypes;
+
+        public string FileTypes
+        {
+            get => _fileTypes;
+            set
+            {
+                _fileTypes = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         public TemplateEditorVm()
@@ -85,6 +122,9 @@ namespace DocTemplate.ViewModel
 
         public void SerializeFieldData()
         {
+            if (FileTypes.EndsWith('|'))
+                FileTypes = FileTypes.Substring(FileTypes.Length - 1);
+            FieldMetadatas.First(x => x.Name == CurrentField).FileTypes = FileTypes;
             JsonMetadata = JsonConvert.SerializeObject(FieldMetadatas);
         }
     }

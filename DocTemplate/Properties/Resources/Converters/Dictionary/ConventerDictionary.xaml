@@ -3,4 +3,6 @@
                     xmlns:converters="clr-namespace:DocTemplate.Properties.Resources.Converters">
     <converters:RadioButtonToString x:Key="RadioButtonToString"/>
     <converters:StringToBoolean x:Key="StringToBoolean"/>
+    <converters:BooleanToVisibility x:Key="BooleanToVisibility" True="Visible" False="Collapsed"/>
+    <converters:BooleanToVisibility x:Key="BooleanToVisibilityInverted" True="Collapsed" False="Visible"/>
 </ResourceDictionary>
