@@ -90,10 +90,13 @@
                 <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Расположение файлов по умолчанию"/>
                 <TextBlock Grid.Row="2" Text="Автосохранение каждые" />
 
-                <ComboBox Grid.Column="1" Style="{DynamicResource DefaultComboBox}" SelectedValue="{Binding FileFormat, Mode=TwoWay}" SelectedIndex="0">
-                    <ComboBoxItem>.docx</ComboBoxItem>
-                    <ComboBoxItem>.pdf</ComboBoxItem>
-                    <ComboBoxItem>.txt</ComboBoxItem>
+                <ComboBox Grid.Column="1" Style="{DynamicResource DefaultComboBox}" SelectedItem="{Binding FileFormat, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <system:String>.docx</system:String>
+                        <system:String>.pdf</system:String>
+                        <system:String>.txt</system:String>
+                        <system:String>.rtf</system:String>
+                    </ComboBox.Items>
                 </ComboBox>
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                     <TextBox Width="230" Style="{StaticResource DefaultTextBox}" Margin="0,0,10,0" Text="{Binding FilePath}"/>

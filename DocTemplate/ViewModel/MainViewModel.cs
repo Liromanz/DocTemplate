@@ -17,7 +17,6 @@ namespace DocTemplate.ViewModel
         #region Верски
         public AllTemplatesVm AllTemplatesVm { get; set; }
         public MyTemplatesVm MyTemplatesVm { get; set; }
-        public SettingsVm SettingsVm { get; set; }
         public HelpVm HelpVm { get; set; }
 
         #endregion
@@ -51,12 +50,11 @@ namespace DocTemplate.ViewModel
 
             AllTemplatesVm = new AllTemplatesVm();
             MyTemplatesVm = new MyTemplatesVm();
-            SettingsVm = new SettingsVm();
             HelpVm = new HelpVm();
 
             AllTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(AllTemplatesVm); });
             MyTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(MyTemplatesVm); });
-            SettingsCommand = new BindableCommand(o => { ChangeCurrentView(SettingsVm); });
+            SettingsCommand = new BindableCommand(o => { ChangeCurrentView(new SettingsVm()); });
             HelpCommand = new BindableCommand(o => { ChangeCurrentView(HelpVm); });
         }
 

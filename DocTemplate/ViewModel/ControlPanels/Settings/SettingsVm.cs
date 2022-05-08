@@ -87,7 +87,6 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
             FilePath = _settings.FilePath;
             AutoSave = _settings.AutoSave;
             MarkEditable = _settings.MarkEditable;
-
         }
 
         private void ChangeColor(string tag)

@@ -47,6 +47,7 @@ namespace DocTemplate
                         DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
                         DocTemplate.Properties.Settings.Default.UserID = Convert.ToInt32(Requests.GetRequest(
                         $"Users/UserById?name={DocTemplate.Properties.Settings.Default.Username}"));
+                        DocTemplate.Properties.Settings.Default.DocFormat = ".docx";
                         DocTemplate.Properties.Settings.Default.FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                         DocTemplate.Properties.Settings.Default.FirstTime = false;
                         DocTemplate.Properties.Settings.Default.Save();
