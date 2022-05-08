@@ -109,7 +109,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
             {
                 if (Username != _settings.Username && InternetState.IsConnectedToInternet())
                 {
-                    var response = Requests.PutRequest("Users", DocTemplate.Properties.Settings.Default.UserID,
+                    var response = Requests.PutRequest("Users", Properties.Settings.Default.UserID, false,
                         JsonConvert.SerializeObject(new Username
                         { CurrentName = _settings.Username, NewName = Username }));
                     if (response == GlobalConstants.SuccessMessage)

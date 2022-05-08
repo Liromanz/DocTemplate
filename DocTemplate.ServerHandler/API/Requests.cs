@@ -57,13 +57,13 @@ namespace DocTemplate.ServerHandler.API
             }
         }
 
-        public static string PutRequest(string tableName, int id, string dataToSend)
+        public static string PutRequest(string tableName, int id, bool needToAddIdToUrl, string dataToSend)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 HttpContent content = new StringContent(dataToSend, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}", content).Result;
+                HttpResponseMessage response = client.PutAsync($"{GlobalConstants.UrlBase}/{tableName}{(needToAddIdToUrl ? $"/{id}" : "")}", content).Result;
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Conflict:
@@ -71,6 +71,8 @@ namespace DocTemplate.ServerHandler.API
                     case HttpStatusCode.NotFound:
                         return GlobalConstants.NotFoundMessage;
                     case HttpStatusCode.NoContent:
+                        return GlobalConstants.SuccessMessage;
+                    case HttpStatusCode.OK:
                         return GlobalConstants.SuccessMessage;
                     default:
                         return GlobalConstants.UnsetErrorMessage;

@@ -249,7 +249,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
         {
             foreach (var template in Cards.First().GroupedTemplates.Where(x => x.TemplateInfo.NeedToUpdate))
             {
-                Requests.PutRequest("Templates", template.TemplateInfo.IdTemplate.Value, JsonConvert.SerializeObject(template.TemplateInfo));
+                Requests.PutRequest("Templates", template.TemplateInfo.IdTemplate.Value, true, JsonConvert.SerializeObject(template.TemplateInfo));
             }
         }
 

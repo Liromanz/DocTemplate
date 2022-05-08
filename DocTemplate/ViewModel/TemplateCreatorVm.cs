@@ -178,7 +178,7 @@ namespace DocTemplate.ViewModel
                     string result;
                     result = Template.IdTemplate == null
                         ? await Requests.PostWithBodyRequest("Templates", JsonConvert.SerializeObject(Template))
-                        : Requests.PutRequest("Templates", Template.IdTemplate.Value,
+                        : Requests.PutRequest("Templates", Template.IdTemplate.Value, false,
                             JsonConvert.SerializeObject(Template));
                     if (result != GlobalConstants.SuccessMessage)
                         MessageBox.Show(result);
