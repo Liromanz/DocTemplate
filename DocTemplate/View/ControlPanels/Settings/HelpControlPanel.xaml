@@ -1,0 +1,353 @@
+﻿<UserControl x:Class="DocTemplate.View.ControlPanels.Settings.HelpControlPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocTemplate.View.ControlPanels.Settings"
+             mc:Ignorable="d" 
+             Foreground="White"
+             FontSize="20"
+             d:DesignHeight="1080" d:DesignWidth="1446">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
+                <TextBlock Text="Знакомство" Margin="40,0,40,0" MouseDown="GreetingPanelClick"/>
+                <TextBlock Text="Публичные шаблоны" Margin="40,0,40,0"  MouseDown="PublicPanelClick"/>
+                <TextBlock Text="Работа с группами" Margin="40,0,40,0"  MouseDown="GroupPanelClick"/>
+                <TextBlock Text="Редактирование документа" Margin="40,0,40,0" MouseDown="DocumentPanelClick"/>
+                <TextBlock Text="Создание шаблона" Margin="40,0,40,0" MouseDown="TemplatePanelClick"/>
+                <TextBlock Text="Работа без интернета" Margin="40,0,40,0" MouseDown="InternetPanelClick"/>
+                <TextBlock Text="Параметры" Margin="40,0,40,0" MouseDown="SettingPanelClick"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}"/>
+        <Grid Grid.Row="2" x:Name="MeetingPanel" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ЗНАКОМСТВО" FontSize="25" Margin="0,0,0,20"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                     При запуске приложения мы видим пустое основное поле программы и боковое меню для навигации в приложении. Из этого меню можно перейти в 3 основные окна: «Все шаблоны», «Мои шаблоны», «Создать», а также два вспомогательных окно – «Параметры» и «Помощь». <LineBreak/>
+                     <LineBreak/>
+                     Для первого запуска необходимо подключение к интернету. Дальше программой можно пользоваться как с интернетом, так и без. <LineBreak/>
+                     <LineBreak/>
+                     Пункт «Все шаблоны» хранит в себе поиск по шаблонам и список всех общедоступных шаблонов в формате «Имя» | «Темы» | «Кнопки для взаимодействия». Для взаимодействия с ними есть кнопки «Открыть» и «Сохранить к себе».
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/2.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/3.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextAlignment="Right" TextWrapping="Wrap">
+                    В пункте «Мои шаблоны» мы видим похожий поиск, создание новых групп, и уже измененное отображение шаблонов. По умолчанию существует группа «Созданная мной», куда выгружаются все созданные пользователем шаблоны. С шаблонами можно взаимодействовать с помощью контекстного меню через ПКМ. <LineBreak/>
+                    <LineBreak/>
+                    При нажатии на кнопку «Параметры» можно изменить настройки самой программы. На этой панели мы видим возможные расцветки приложения, а также такие изменяемые поля, как имя пользователя, формат экспорта документа, расположение файла по умолчанию и время автосохранения <LineBreak/>
+                    <LineBreak/>
+                    Окно «Помощь» поможет вам поближе познакомиться с программой и узнать побольше о функционале. Сейчас вы находитесь в этом окне!
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="PublicPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ПУБЛИЧНЫЕ ШАБЛОНЫ" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                    Перейдем в пункт «Все шаблоны». Здесь мы можем увидеть все общедоступные для редактирования шаблоны в виде карточек с краткой информацие об образце. Шаблон документа можно открыть или сохранить к себе в группу, которая хранится в пункте «Мои шаблоны». Кроме шаблонов на экране присутствует настраиваемый поиск. Для открытия шаблона необходимо нажать на кнопку «Открыть». <LineBreak/>
+                     <LineBreak/>
+                     Для сохранения шаблона в свою группу необходимо нажать на кнопку «Сохранить к себе». После этого откроется окно с списком всех созданных вами групп. Если групп нет, список будет пустой. Для добавления необходимо выбрать группу и нажать кнопку «Сохранить»<LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/5.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/4.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextAlignment="Right" TextWrapping="Wrap">
+                    Также в окне присутствует поиск по всем шаблонам. Поиск можно настроить несколькими параметрами: поиск по названию, темам, точное совпадение и поиск, учитывая регистр. Для поиска можно выбирать сразу несколько настроек одновременно. Чтобы начать поиск, необходимо нажать на кнопку «Найти»<LineBreak/>
+                    <LineBreak/>
+                    Поиск по названию ищет любое название шаблона, где есть введенное пользователем слово. Поиск по темам делает то же самое, но вместо названия идет поиск по темам (центральный столбец). Точное название ищет точное совпадение, а учет регистра сравнивает каждую букву и ищет точно также, как вписал пользователь<LineBreak/>
+                    <LineBreak/>
+                    Чтобы вернуть полный список, очистите поле поиска и нажмите кнопку «Найти»
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="GroupPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="РАБОТА С ГРУППАМИ" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                     Перейдем в пункт «Мои шаблоны». Окно визуально похоже на предыдущее, но краткая информация о шаблонах перечислена в виде сокращенных окон без кнопок, только название и темы. В пункте также присутствует поиск по группам и шаблонам.<LineBreak/>
+                     <LineBreak/>
+                     По умолчанию существует только одна группа - «Созданные мной». Ее нельзя ни удалить, ни изменить. В этой группе хранятся все созданные пользователем шаблоны<LineBreak/>
+                     <LineBreak/>
+                     Для создания новой группы необходимо нажать на кнопку «Создать группу» и ввести название. Изменить имя можно с помощью иконки ручки, которая находится напротив имени группы, а удалить группу - с помощью иконки крестика. Вместе с группой удалятся все ее содержимое
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/6.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/7.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock  TextAlignment="Right" TextWrapping="Wrap">
+                    Настроить шаблон внутри группы можно с помощью контекстного меню, которое открывается при нажатии правой кнопки мыши. Внутри этого меню можно создать новый файл (перейти в редактирование шаблона как документа), изменить шаблон (только если вас указали как редактора!), переместить шаблон в другую группу и удалить шаблон из группы. <LineBreak/>
+                    <LineBreak/>
+                    В случае, если вы являетесь владельцем шаблона и хотите полностью удалить шаблон, нужно удалить шаблон в группе «Созданные мной». Появится диалоговое окно с подтверждением, и, при нажатии «ОК», шаблон будет удален <LineBreak/>
+                    <LineBreak/>
+                    Если вы просто хотите открыть шаблон как документ и начать его редактирование, можете просто дважды нажать левой кнопкой мыши по шаблону.
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="DocumentEditPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="РЕДАКТИРОВАНИЕ ДОКУМЕНТА" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                        В окно редактирования шаблона как документ можно перейти, нажав дважды ЛКМ по шаблону в окне «Мои группы», либо нажав кнопку «Открыть» в окне «Все шаблоны». Вместо обычного текстового редактора и текстовых обозначения изменяемых полей появляется поля в правой части окна. При вводе данных в эти поля, данные меняются прямо в документе.<LineBreak/>
+                     <LineBreak/>
+                       Все значения, которые были заполнены редактором в окне создания, также переносятся в эти поля в разном виде, например, как значения списка, или как маска даты. Поля типа "Текстовое поле" и "Нумерация" могут быть расширены, нажав клавишу Enter. Условное обозначение изменяемого поля (Текстовое поле, Нумерация), уходит только после того, как значение было изменено хотя бы раз<LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/10.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/11.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock  TextAlignment="Right" TextWrapping="Wrap">
+                        Сам документ можно экспортировать в четырех форматах: DOCX, RTF, PDF и TXT. Для начала экспорта необходимо нажать на кнопку «Экспортировать». Появится проводник с открытой папкой для сохранения файлов, первым форматом файла будет предпочитаемый пользователем тип. Эти параметры можно изменить в настройках программы. <LineBreak/> 
+                        <LineBreak/>
+                        В проводнике мы должны выбрать расположение файла, куда мы хотим его сохранить, ввести имя файла, а также выбрать формат. После ввода всех данных необходимо нажать «Сохранить».<LineBreak/>
+                        <LineBreak/>
+                        В случае, если вы хотите напечатать файл прямо из программы, существует кнопка «Печать». При ее нажатии открывается системное окно печати, где можно настроить копии, страницы, место печати и подобное <LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="TemplateCreationPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="СОЗДАНИЕ ДОКУМЕНТА" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                     После нажатия на пункт «Изменить шаблон» открывается окно создания и изменения шаблонов. Такое же окно открывается, если мы в главном меню нажмем на пункт «Создать», единственное отличие – при создании все поля будут пустыми и настроены по умолчанию. При изменении поля заполняются значениями, хранящамися в сохраненном шаблоне. <LineBreak/>
+                     <LineBreak/>
+                     В данном окне можно изменить название шаблона, указать темы для краткого описания содержимого шаблона, а также настроить редакторов и читателей шаблона. На данном этапе шаблон можно сохранить или открыть редактор самого документа. Для открытия редактора необходимо нажать на кнопку «Открыть редактор».
+                     <LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/8.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/9.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock  TextAlignment="Right" TextWrapping="Wrap">
+                        При нажатии на эту кнопку появляется окно редактирования документа. Документ можно как писать с нуля, так и импортировать уже существующий документ в формате RTF, нажав кнопку «Импорт документа». Все базовые настройки работы с текстом представлены в левой панели окна. <LineBreak/>
+                        <LineBreak/>
+                        Создавая этот шаблон, пользователь должен понимать, что читатели документа не смогут его изменять. Для того, чтобы создать изменяемые поля, пользователь должен выбрать одно из перечисленных вариантов полей в правой части окна. Для того, чтобы вставить поле, необходимо поставить курсор в документе, куда мы хотим вставить поле, либо выбрать текст, который заменится на изменяемое поле. Затем, выбираем тип изменяемого поля и вносим его название. <LineBreak/>
+                        <LineBreak/>
+                        Также мы можем настроить изменяемое поле для читателей. Для этого необходимо нажать на созданное поле внутри документа. Панель справа изменится на окно изменения поля. Для каждого типа поля эти настройки индивидуальны. Пользователь может настроить все необходимые пункты, а затем снова вернуться к редактированию документа, нажав на текст. <LineBreak/>
+                        <LineBreak/>
+                        Как только мы закончили изменять наш документ, необходимо нажать «Сохранить и выйти». Пользователь вернется на окно создания и изменения окна, где он может просмотреть измененную версию документа. Если пользователя все устраивает, он должен также нажать на кнопку «Сохранить и выйти».
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="WithoutInternetPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="РАБОТА БЕЗ ИНТЕРНЕТА" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                        Программа также может работать без интернета. Однако для этого нужно сохранить шаблоны в любую группу. Для этого необходимо перейти в пункт «Все шаблоны» и нажать на кнопку «Сохранить к себе» и выбрать необходимую группу. После сохранения шаблон будет доступен без интернета.<LineBreak/>
+                       <LineBreak/>
+                        Функционал ограничен только окном «Мои настройки», откуда можно открывать шаблон как документ, а также его менять<LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/12.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/13.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock  TextAlignment="Right" TextWrapping="Wrap">
+                    При изменении шаблона стоит учитывать, что половина функционала "Кому доступно чтение" и "Кому доступно редактировоание" недоступно - можно указать только пункты «Все» или «Только я». В остальном функционал редактирования документа и изменения параметров доступен<LineBreak/>
+                    <LineBreak/>
+                    Если вы изменили шаблон, пока ваш интернет был отключен, он обновится в базе данных и появится у пользователей сразу же, как будет доступен интернет. Ничего делать для этого не нужно, все будет сделано автоматически.<LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="SettingsPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="40,40,40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ПАРАМЕТРЫ" FontSize="25" Margin="0,0,0,20"/>
+
+                <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock TextWrapping="Wrap">
+                        На главном меню перейдем в окно "Параметры". Нажав на них, мы увидим настройки программы: цвет приложения, имя пользователя, формат экспорта документов, расположение файлов по умолчанию, время автосохранения, а также выделение изменяемых полей. Пользователь может настроить каждое из этих полей. <LineBreak/>
+                       <LineBreak/>
+                        Для изменения цвета программы можно не нажимать на кнопку «Сохранить» в правом нижнем углу - изменения применятся моментально и будут сохранены при следующем входе в приложение<LineBreak/>
+                        <LineBreak/>
+                        Пункт «Имя пользователя» отвечает за отображаемое имя человека, который использует эту программу. Имя должно быть уникальное, оно используется для хранения созданных вами шаблонов
+                    </TextBlock>
+                </ScrollViewer>
+                <Image Grid.Column="2" Grid.Row="1" Source="/Properties/Resources/Images/14.png"  Margin="10"/>
+
+            </Grid>
+            <Grid Margin="40,0,40,40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="/Properties/Resources/Images/15.png" Margin="10"/>
+
+                <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Hidden">
+                    <TextBlock  TextAlignment="Right" TextWrapping="Wrap">
+                    Пункт «Формат экспорта документов» отвечает за предпочитаемый способ экспорта документа. Выбранный формат будет всегда отображаться как самый первый пункт при экспорте документа из программы<LineBreak/>
+                    <LineBreak/>
+                    Пункт «Расположение файлов по умолчанию» выбирает предпочитаемое место для экспорта документов. По умолчанию это папка «Документы» на вашем компьютере. Для изменения необходимо нажать кнопку «Обзор» и выбрать нужную папку <LineBreak/>
+                    <LineBreak/>
+                    Пункт «Автосохранение каждые» позволяет настроить время автосохранения шаблона во время его создания или редактирования. После всех введенных изменений необходимо нажать на кнопку «Сохранить» в правом нижнем углу<LineBreak/>
+                    <LineBreak/>
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -44,6 +44,9 @@
             <DataTemplate DataType="{x:Type vmSettings:SettingsVm}">
                 <viewSettings:SettingsControlPanel />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vmSettings:HelpVm}">
+                <viewSettings:HelpControlPanel />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -188,11 +188,11 @@ namespace DocTemplate.ViewModel
             else
             {
                 Template.NeedToUpdate = true;
-                foreach (var group in DataContainers.UserGroupsModel.Where(x => x.GroupedTemplates.Any(t => t.IdTemplate == Template.IdTemplate)))
-                {
-                    var index = group.GroupedTemplates.FindIndex(x => x.IdTemplate == Template.IdTemplate);
-                    DataContainers.UserGroupsModel.First(x => x == group).GroupedTemplates[index] = Template;
-                }
+            }
+            foreach (var group in DataContainers.UserGroupsModel.Where(x => x.GroupedTemplates.Any(t => t.IdTemplate == Template.IdTemplate)))
+            {
+                var index = group.GroupedTemplates.FindIndex(x => x.IdTemplate == Template.IdTemplate);
+                DataContainers.UserGroupsModel.First(x => x == group).GroupedTemplates[index] = Template;
             }
             Application.Current.MainWindow = new MainWindow();
             Application.Current.MainWindow.Show();

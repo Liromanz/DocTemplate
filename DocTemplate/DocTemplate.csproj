@@ -18,6 +18,20 @@
     <None Remove="Properties\Resources\Icons\list-number.png" />
     <None Remove="Properties\Resources\Icons\list-point.png" />
     <None Remove="Properties\Resources\Icons\list-romanumber.png" />
+    <None Remove="Properties\Resources\Images\10.png" />
+    <None Remove="Properties\Resources\Images\11.png" />
+    <None Remove="Properties\Resources\Images\12.png" />
+    <None Remove="Properties\Resources\Images\13.png" />
+    <None Remove="Properties\Resources\Images\14.png" />
+    <None Remove="Properties\Resources\Images\15.png" />
+    <None Remove="Properties\Resources\Images\2.png" />
+    <None Remove="Properties\Resources\Images\3.png" />
+    <None Remove="Properties\Resources\Images\4.png" />
+    <None Remove="Properties\Resources\Images\5.png" />
+    <None Remove="Properties\Resources\Images\6.png" />
+    <None Remove="Properties\Resources\Images\7.png" />
+    <None Remove="Properties\Resources\Images\8.png" />
+    <None Remove="Properties\Resources\Images\9.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +97,51 @@
     <Resource Include="Properties\Resources\Icons\list-romanumber.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Properties\Resources\Images\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\Resources\Images\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Properties\Resources\Images\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

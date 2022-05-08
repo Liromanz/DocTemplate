@@ -10,6 +10,7 @@ namespace DocTemplate.ViewModel
         public BindableCommand AllTemplatesCommand { get; set; }
         public BindableCommand MyTemplatesCommand { get; set; }
         public BindableCommand SettingsCommand { get; set; }
+        public BindableCommand HelpCommand { get; set; }
 
         #endregion
 
@@ -17,6 +18,7 @@ namespace DocTemplate.ViewModel
         public AllTemplatesVm AllTemplatesVm { get; set; }
         public MyTemplatesVm MyTemplatesVm { get; set; }
         public SettingsVm SettingsVm { get; set; }
+        public HelpVm HelpVm { get; set; }
 
         #endregion
 
@@ -50,10 +52,12 @@ namespace DocTemplate.ViewModel
             AllTemplatesVm = new AllTemplatesVm();
             MyTemplatesVm = new MyTemplatesVm();
             SettingsVm = new SettingsVm();
+            HelpVm = new HelpVm();
 
             AllTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(AllTemplatesVm); });
             MyTemplatesCommand = new BindableCommand(o => { ChangeCurrentView(MyTemplatesVm); });
             SettingsCommand = new BindableCommand(o => { ChangeCurrentView(SettingsVm); });
+            HelpCommand = new BindableCommand(o => { ChangeCurrentView(HelpVm); });
         }
 
         private void ChangeCurrentView(object viewToChange)
