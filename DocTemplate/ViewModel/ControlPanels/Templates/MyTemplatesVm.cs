@@ -1,4 +1,5 @@
-﻿using DocTemplate.CardViews.Cards;
+﻿using System;
+using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
 using DocTemplate.CardViews.View;
 using DocTemplate.CardViews.View.DialogWindows;
@@ -9,6 +10,7 @@ using DocTemplate.View;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -183,7 +185,30 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                 if (templateModel.IdUser != Properties.Settings.Default.UserID)
                     templateCard.MenuDelete.Visibility = Visibility.Collapsed;
                 templateCard.MenuDelete.Click += (sender, args) =>
-                    { Cards.First(x => x.GroupedTemplates == templateCards).GroupedTemplates.Remove(templateCard); };
+                {
+                    var group = Cards.First(x => x.GroupedTemplates == templateCards);
+                    if (group.GroupName != "Созданные мной")
+                        Cards.First(x => x.GroupedTemplates == templateCards).GroupedTemplates.Remove(templateCard);
+                    else if (InternetState.IsConnectedToInternet())
+                    {
+                        var deleteDialog = new YesNoDialog
+                        {
+                            DialogName = "Удаление поля",
+                            Description = "Вы уверены что хотите удалить свой шаблон? Это действие необратимо",
+                        };
+                        if (deleteDialog.ShowDialog() == true)
+                        {
+                            Requests.DeleteRequest("Templates", templateCard.TemplateInfo.IdTemplate.Value);
+                            var remainGroups = Cards.Where(x => x.GroupedTemplates.Contains(templateCard));
+                            if (remainGroups.Any())
+                                foreach (var remainGroup in remainGroups)
+                                    Cards.First(x => x == remainGroup).GroupedTemplates.Remove(templateCard);
+
+                            File.WriteAllText($@"{Environment.CurrentDirectory}\UserGroupsModel.json",
+                                JsonConvert.SerializeObject(CreateModelFromCards(Cards)));
+                        }
+                    }
+                };
 
                 #endregion
 

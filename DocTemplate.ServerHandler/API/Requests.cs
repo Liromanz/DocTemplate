@@ -81,12 +81,12 @@ namespace DocTemplate.ServerHandler.API
                 return GlobalConstants.ErrorMessage + e.Message;
             }
         }
-        public static async Task<string> DeleteRequest(string tableName, int id)
+        public static string DeleteRequest(string tableName, int id)
         {
             try
             {
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.DeleteAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}");
+                HttpResponseMessage response = client.DeleteAsync($"{GlobalConstants.UrlBase}/{tableName}/{id}").Result;
                 return response.StatusCode.ToString();
             }
             catch (Exception e)
