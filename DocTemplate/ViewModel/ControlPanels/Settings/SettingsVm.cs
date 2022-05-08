@@ -1,13 +1,12 @@
-﻿using System.Threading;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using DocTemplate.Global;
 using DocTemplate.Helpers;
 using DocTemplate.Model.API;
 using DocTemplate.ServerHandler.API;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace DocTemplate.ViewModel.ControlPanels.Settings
 {

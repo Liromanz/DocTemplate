@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using DocTemplate.CardViews.Cards;
+﻿using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
 using DocTemplate.CardViews.View;
 using DocTemplate.CardViews.View.DialogWindows;
@@ -11,6 +7,10 @@ using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using DocTemplate.View;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 
 namespace DocTemplate.ViewModel.ControlPanels.Templates
 {
@@ -66,7 +66,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     Requests.GetRequest($"Templates/{Properties.Settings.Default.UserID}"),
                     typeof(List<Template>)));
                 RefreshTemplates((List<Template>)JsonConvert.DeserializeObject(
-                    Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"), 
+                    Requests.GetRequest($"Templates/UserAccess/{Properties.Settings.Default.Username}"),
                     typeof(List<Template>)));
                 DataContainers.UserGroupsModel = CreateModelFromCards(Cards);
             }

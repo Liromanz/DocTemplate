@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DocTemplate.CardViews.View.DialogWindows;
+using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
+using DocTemplate.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -7,10 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using DocTemplate.CardViews.View.DialogWindows;
-using DocTemplate.Global.Models;
-using DocTemplate.Helpers;
-using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
 {
@@ -25,7 +25,7 @@ namespace DocTemplate.View
         public TemplateEditorWindow()
         {
             InitializeComponent();
-            _fileTypes = new[]{ TXTChk, CSChk, XAMLChk, HTMLChk, PDFChk, AllChk };
+            _fileTypes = new[] { TXTChk, CSChk, XAMLChk, HTMLChk, PDFChk, AllChk };
             ViewModel.FieldMetadatas = new List<FieldMetadata>();
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
                 FontCB.Items.Add(fontFamily);
@@ -243,7 +243,7 @@ namespace DocTemplate.View
                 foreach (var checkBox in _fileTypes)
                 {
                     if (ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).FileTypes
-                        .Contains((string) checkBox.Content))
+                        .Contains((string)checkBox.Content))
                         checkBox.IsChecked = true;
                 }
                 ViewModel.FileTypes = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).FileTypes;

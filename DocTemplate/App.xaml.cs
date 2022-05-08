@@ -1,14 +1,13 @@
-﻿using System;
+﻿using DocTemplate.CardViews.Model;
+using DocTemplate.Helpers;
+using DocTemplate.ServerHandler.API;
+using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using DocTemplate.CardViews.Model;
-using DocTemplate.CardViews.View;
-using DocTemplate.ServerHandler.API;
-using DocTemplate.Helpers;
-using Newtonsoft.Json;
 
 namespace DocTemplate
 {

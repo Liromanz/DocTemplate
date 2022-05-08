@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
-using DocTemplate.Helpers;
+﻿using DocTemplate.Helpers;
 using DocTemplate.ViewModel.ControlPanels.Templates;
+using System.Windows.Controls;
 
 namespace DocTemplate.View.ControlPanels.Templates
 {
@@ -14,7 +14,7 @@ namespace DocTemplate.View.ControlPanels.Templates
         public MyTemplatesPanel()
         {
             Unloaded += (sender, args) => DataContainers.UserGroupsModel = ViewModel.CreateModelFromCards(ViewModel.Cards);
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
     }

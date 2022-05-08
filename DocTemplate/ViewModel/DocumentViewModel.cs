@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Security.RightsManagement;
-using System.Windows;
-using System.Windows.Documents;
-using DocTemplate.Global.Models;
-using Forms = System.Windows.Forms;
+﻿using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.View;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows;
+using System.Windows.Documents;
+using Forms = System.Windows.Forms;
 
 namespace DocTemplate.ViewModel
 {

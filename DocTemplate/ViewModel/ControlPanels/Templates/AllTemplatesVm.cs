@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using DocTemplate.CardViews.Cards;
+﻿using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.View.DialogWindows;
 using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.View;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 
 namespace DocTemplate.ViewModel.ControlPanels.Templates
 {
@@ -93,7 +93,7 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
                     };
                     if (dialog.ShowDialog() == true)
                     {
-                        var finalGroup = (string) dialog.SelectionCbx.SelectedItem;
+                        var finalGroup = (string)dialog.SelectionCbx.SelectedItem;
                         DataContainers.UserGroupsModel.First(x => x.GroupName == finalGroup).GroupedTemplates.Add(template);
                     }
                 };

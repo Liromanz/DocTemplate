@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using DocTemplate.Global;
+﻿using DocTemplate.Global;
 using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using DocTemplate.View;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Windows;
 
 namespace DocTemplate.ViewModel
 {

@@ -1,6 +1,11 @@
-﻿using System;
+﻿using DocTemplate.CardViews.View;
+using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
+using DocTemplate.ViewModel;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,15 +13,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using Newtonsoft.Json;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using DocTemplate.CardViews.View;
-using DocTemplate.Global.Models;
-using DocTemplate.Helpers;
-using DocTemplate.ViewModel;
-using Microsoft.Win32;
-using Image = System.Drawing.Image;
 
 namespace DocTemplate.View
 {

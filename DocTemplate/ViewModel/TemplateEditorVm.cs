@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DocTemplate.Global.Models;
+using DocTemplate.Helpers;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using DocTemplate.Global.Models;
 using Forms = System.Windows.Forms;
-using DocTemplate.Helpers;
-using Newtonsoft.Json;
 
 namespace DocTemplate.ViewModel
 {
@@ -54,7 +54,7 @@ namespace DocTemplate.ViewModel
             get => _itemCollection;
             set
             {
-                _itemCollection = value; 
+                _itemCollection = value;
                 FieldMetadatas.First(x => x.Name == CurrentField).ItemSource = value.Split(", ");
                 OnPropertyChanged();
             }
@@ -79,12 +79,12 @@ namespace DocTemplate.ViewModel
             get => _isImage;
             set
             {
-                _isImage = value; 
+                _isImage = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _fileTypes="";
+        private string _fileTypes = "";
 
         public string FileTypes
         {

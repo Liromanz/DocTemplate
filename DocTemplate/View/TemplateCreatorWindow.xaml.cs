@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using DocTemplate.ViewModel;
+using System.Windows;
 using System.Windows.Input;
-using DocTemplate.ViewModel;
 
 namespace DocTemplate.View
 {

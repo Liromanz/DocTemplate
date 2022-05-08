@@ -8,7 +8,7 @@ namespace DocTemplate.Properties.Resources.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string name = (string) value;
+            string name = (string)value;
             return name == parameter.ToString();
         }
 
