@@ -8,10 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="81" d:DesignWidth="442"
              x:Name="UserControl">
-    <Grid Height="80" x:Name="ControlGrid">
+    <Grid  x:Name="ControlGrid">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Path=ElementName, ElementName=UserControl}" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
     </Grid>

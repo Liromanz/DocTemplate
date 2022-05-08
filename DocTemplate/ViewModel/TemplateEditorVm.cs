@@ -32,14 +32,14 @@ namespace DocTemplate.ViewModel
 
         public string CurrentField { get; set; }
 
-        private bool _isMultipleEnabled;
-        public bool IsMultipleEnabled
+        private string _numerType;
+        public string NumerType
         {
-            get => _isMultipleEnabled;
+            get => _numerType;
             set
             {
-                _isMultipleEnabled = value;
-                FieldMetadatas.First(x => x.Name == CurrentField).CanBeMultiple = value;
+                _numerType = value;
+                FieldMetadatas.First(x => x.Name == CurrentField).NumerType = value;
                 OnPropertyChanged();
             }
         }
@@ -84,7 +84,7 @@ namespace DocTemplate.ViewModel
             }
         }
 
-        private string _fileTypes;
+        private string _fileTypes="";
 
         public string FileTypes
         {
@@ -123,7 +123,7 @@ namespace DocTemplate.ViewModel
         public void SerializeFieldData()
         {
             if (FileTypes.EndsWith('|'))
-                FileTypes = FileTypes.Substring(FileTypes.Length - 1);
+                FileTypes = FileTypes.Substring(0, FileTypes.Length - 1);
             FieldMetadatas.First(x => x.Name == CurrentField).FileTypes = FileTypes;
             JsonMetadata = JsonConvert.SerializeObject(FieldMetadatas);
         }

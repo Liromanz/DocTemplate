@@ -2,51 +2,39 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="DefaultRadioButton" TargetType="{x:Type RadioButton}">
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="0,10,0,10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <BulletDecorator Background="Transparent">
                         <BulletDecorator.Bullet>
-                            <Border x:Name="Border" 
-                                    CornerRadius="45"
-                                    Width="23" 
-                                    Height="23"  
-                                    Margin="0,10,0,10"
-                                    Background="Transparent"
-                                    BorderThickness="1"
-                                    BorderBrush="White">
-                                <Path 
-                                     Width="7" Height="7" 
-                                     x:Name="CheckMark"
-                                     SnapsToDevicePixels="False" 
-                                     Stroke="{DynamicResource MainColor}"
-                                     StrokeThickness="2"
-                                     Data="M 0 0 L 7 7 M 0 7 L 7 0" />
-                            </Border>
+                            <Grid Width="20" Height="20">
+                                <Ellipse x:Name="Border" StrokeThickness="1" Stroke="White"/>
+                                <Ellipse x:Name="CheckMark"
+                                         Margin="5" Visibility="Collapsed"
+                                         Fill="{DynamicResource FocusColor}"/>
+                            </Grid>
                         </BulletDecorator.Bullet>
-                        <ContentPresenter Margin="10,0,0,0"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"
-                                            RecognizesAccessKey="True"/>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="CheckMark">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True" />
                     </BulletDecorator>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="false">
-                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource FocusColor}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainColor}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource FocusColor}" />
-                            <Setter Property="Foreground" Value="{DynamicResource FocusColor}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

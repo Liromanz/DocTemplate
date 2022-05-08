@@ -25,7 +25,6 @@ namespace DocTemplate.View
         public TemplateEditorWindow()
         {
             InitializeComponent();
-            _imageTypes = new[]{ JPGChk, PNGChk, BMPChk, SVGChk, TIFFChk, ICOChk };
             _fileTypes = new[]{ TXTChk, CSChk, XAMLChk, HTMLChk, PDFChk, AllChk };
             ViewModel.FieldMetadatas = new List<FieldMetadata>();
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
@@ -212,7 +211,7 @@ namespace DocTemplate.View
 
         private void SetInterfaceByType()
         {
-            MultipleAddChk.Visibility = Visibility.Collapsed;
+            NumerTypePanel.Visibility = Visibility.Collapsed;
             ItemCollectionPanel.Visibility = Visibility.Collapsed;
             DataMaskPanel.Visibility = Visibility.Collapsed;
             FileTypePanel.Visibility = Visibility.Collapsed;
@@ -228,8 +227,8 @@ namespace DocTemplate.View
             }
             if (FieldNameTxt.Text.Contains("Нумерация"))
             {
-                ViewModel.IsMultipleEnabled = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).CanBeMultiple;
-                MultipleAddChk.Visibility = Visibility.Visible;
+                ViewModel.NumerType = ViewModel.FieldMetadatas.First(x => x.Name == GetFieldName()).NumerType;
+                NumerTypePanel.Visibility = Visibility.Visible;
             }
 
             if (FieldNameTxt.Text.Contains("Дата"))
@@ -251,12 +250,6 @@ namespace DocTemplate.View
                 FileTypePanel.Visibility = Visibility.Visible;
 
             }
-            if (FieldNameTxt.Text.Contains("Фотография"))
-            {
-                ViewModel.IsImage = true;
-                FileTypePanel.Visibility = Visibility.Visible;
-            }
-
         }
 
         private void AddFileType(object sender, RoutedEventArgs e)

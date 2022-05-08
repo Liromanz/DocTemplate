@@ -51,7 +51,6 @@
                 <TextBlock Text="ПОЛЯ В ДОКУМЕНТЕ" HorizontalAlignment="Center" FontSize="30"/>
                 <ScrollViewer Grid.Row="1" Template="{StaticResource DefaultScrollViewer}">
                     <StackPanel x:Name="StackPanel">
-
                     </StackPanel>
                 </ScrollViewer>
                 <StackPanel Grid.Row="2"  VerticalAlignment="Bottom">

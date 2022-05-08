@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Security.RightsManagement;
 using System.Windows;
 using System.Windows.Documents;
+using DocTemplate.Global.Models;
 using Forms = System.Windows.Forms;
 using DocTemplate.Helpers;
 using DocTemplate.View;
@@ -16,6 +19,8 @@ namespace DocTemplate.ViewModel
 
         #region Переменные
         public DocumentWindow ThisWindow { get; set; }
+        public List<FieldMetadata> FieldMetadatas { get; set; } = new List<FieldMetadata>();
+
         #endregion
 
         public DocumentViewModel()

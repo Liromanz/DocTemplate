@@ -7,7 +7,7 @@ namespace DocTemplate.Global.Models
     {
         public Type FieldType { get; set; } 
         public string Name { get; set; }
-        public bool CanBeMultiple { get; set; }
+        public string NumerType { get; set; }
         public string[] ItemSource { get; set; } = {""};
         public string DateMask { get; set; }
         public string FileTypes { get; set; } = "";
