@@ -61,7 +61,6 @@
                         <Button Content="Экспортировать"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Command="{Binding ExportCommand}"/>
                         <Button Content="Печать"  Style="{DynamicResource ControlButton}" Grid.Column="2" Margin="5" Command="{Binding PrintCommand}"/>
                     </Grid>
-                    <TextBlock x:Name="InfoTxt"  Text="Страниц: 2. Символов: 200" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>

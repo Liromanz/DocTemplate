@@ -3,6 +3,7 @@ using DocTemplate.Helpers;
 using DocTemplate.View;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using Forms = System.Windows.Forms;
@@ -41,7 +42,13 @@ namespace DocTemplate.ViewModel
         private void ExportDocument()
         {
             Forms.SaveFileDialog fileDialog = new Forms.SaveFileDialog();
-            fileDialog.Filter = "Word файл|*.docx|PDF файл|*.pdf|Текстовый файл|*.txt|RTF файл|*.rtf";
+            var filters = new List<string> {"Word файл|*.docx", "PDF файл|*.pdf", "Текстовый файл|*.txt", "RTF файл|*.rtf"};
+            var filter = filters.First(x => x.Contains(Properties.Settings.Default.DocFormat));
+            filters.Remove(filter);
+            filters.Insert(0,filter);
+            fileDialog.Filter = string.Join('|', filters);
+
+            fileDialog.InitialDirectory = Properties.Settings.Default.FilePath;
             if (fileDialog.ShowDialog() == Forms.DialogResult.OK)
             {
                 using (FileStream fs = new FileStream(Path.GetTempPath() + "filetosave.rtf", FileMode.OpenOrCreate, FileAccess.Write))
