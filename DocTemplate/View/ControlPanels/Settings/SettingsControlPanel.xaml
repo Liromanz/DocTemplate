@@ -72,9 +72,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Имя пользователя" />
-                <TextBlock Grid.Row="1" Text="Если вы хотите подключить уже существующий аккаунт, нажмите сюда" TextWrapping="Wrap"/>
                 <TextBox Grid.Column="1" Text="{Binding Username}" Style="{StaticResource DefaultTextBox}"/>
-                <Button Grid.Row="1" Grid.Column="1" Content="Подключить" Style="{DynamicResource ControlButton}"  VerticalAlignment="Center"/>
             </Grid>
             <TextBlock Text="ФАЙЛ"/>
             <Grid Width="750" HorizontalAlignment="Left" Margin="40,0">

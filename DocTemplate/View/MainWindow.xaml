@@ -41,11 +41,6 @@
                 <Button Content="•    Все шаблоны" Style="{DynamicResource MenuButton}" Command="{Binding AllTemplatesCommand}"/>
                 <Button Content="•    Мои шаблоны" Style="{DynamicResource MenuButton}" Command="{Binding MyTemplatesCommand}"/>
                 <Button Content="•    Создать" Style="{DynamicResource MenuButton}" Click="CreateTemplate"/>
-                <TextBlock Text="ФАЙЛ" Padding="5"/>
-                <Button Content="•    Открыть" Style="{DynamicResource MenuButton}" />
-                <Button Content="•    Сохранить" Style="{DynamicResource MenuButton}"/>
-                <Button Content="•    Сохранить как" Style="{DynamicResource MenuButton}"/>
-                <Button Content="•    Печать" Style="{DynamicResource MenuButton}"/>
             </StackPanel>
             <Grid Grid.Row="3" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>

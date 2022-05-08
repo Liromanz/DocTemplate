@@ -29,15 +29,11 @@
         </Grid.ColumnDefinitions>
 
         <Border Background="{DynamicResource MainColor}" >
-            <StackPanel>
-                <view:BackButton VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="-6,10,0,0" ButtonCommand="{Binding ReturnCommand}"/>
-                <Button Content="{StaticResource FileInfo}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
-                <Button Content="{StaticResource FileImport}" Style="{DynamicResource SwitcherButton}"  HorizontalAlignment="Left"  Height="40" VerticalAlignment="Top" Margin="4"></Button>
-            </StackPanel>
+            <view:BackButton VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="-6,10,0,0" ButtonCommand="{Binding ReturnCommand}"/>
         </Border>
 
         <TextBlock Grid.Column="1"  HorizontalAlignment="Center" Margin="5" Text="{Binding Path=TemplateInfo.Name}"/>
-        <FlowDocumentReader Grid.Column="1"  Width="664" Height="921" VerticalAlignment="Center" >
+        <FlowDocumentReader Grid.Column="1"  Width="664" Height="921" VerticalAlignment="Center">
             <FlowDocument Background="White" Foreground="Black" x:Name="flowDocument"/>
         </FlowDocumentReader>
 
@@ -59,11 +55,13 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Button Content="Сохранить" Style="{DynamicResource ControlButton}" Margin="5"/>
                         <Button Content="Экспортировать"  Style="{DynamicResource ControlButton}" Grid.Column="1" Margin="5" Command="{Binding ExportCommand}"/>
+                        <Button Content="Печать"  Style="{DynamicResource ControlButton}" Grid.Column="2" Margin="5" Command="{Binding PrintCommand}"/>
                     </Grid>
-                    <TextBlock Text="Страниц: 2. Символов: 200. Последнее сохранение: 08.02.2022 12:40" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                    <TextBlock x:Name="InfoTxt"  Text="Страниц: 2. Символов: 200" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>

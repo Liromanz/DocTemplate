@@ -14,6 +14,7 @@ namespace DocTemplate.ViewModel
         #region Команды
         public BindableCommand ReturnCommand { get; set; }
         public BindableCommand ExportCommand { get; set; }
+        public BindableCommand PrintCommand { get; set; }
         #endregion
 
         #region Переменные
@@ -26,6 +27,7 @@ namespace DocTemplate.ViewModel
         {
             ReturnCommand = new BindableCommand(x => ReturnToWindow());
             ExportCommand = new BindableCommand(x => ExportDocument());
+            PrintCommand = new BindableCommand(x => PrintDocument());
         }
 
         private void ReturnToWindow()
@@ -73,6 +75,11 @@ namespace DocTemplate.ViewModel
                 MessageBox.Show("Файл сохранен!");
                 File.Delete(Path.GetTempPath() + "filetosave.rtf");
             }
+        }
+
+        private void PrintDocument()
+        {
+            Printing.DoThePrint(ThisWindow.flowDocument);
         }
     }
 }

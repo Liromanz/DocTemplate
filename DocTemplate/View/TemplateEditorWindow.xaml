@@ -122,13 +122,6 @@
 
                 <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
 
-                <TextBlock Text="Вставка" HorizontalAlignment="Center"/>
-                <Button Content="Таблица" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
-                <Button Content="Фотография" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
-                <Button Content="Разрыв страницы" Style="{DynamicResource ControlButton}" Margin="5" Click="GoBack"/>
-
-                <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
-
                 <TextBlock Text="Импорт" HorizontalAlignment="Center"/>
                 <Button Content="Импорт документа" Style="{DynamicResource ControlButton}" Margin="5" Command="{Binding ImportDocxCommand}"/>
             </StackPanel>
@@ -229,7 +222,6 @@
                 <StackPanel Grid.Row="2"  VerticalAlignment="Bottom">
                     <Separator Style="{StaticResource HorizontalSeparator}" Margin="10"/>
                     <Button Content="Сохранить и выйти" Style="{DynamicResource ControlButton}" Margin="10" Click="GoBack"/>
-                    <TextBlock Text="Страниц: 2. Символов: 200. Последнее сохранение: 08.02.2022 12:40" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>

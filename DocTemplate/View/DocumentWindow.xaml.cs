@@ -58,7 +58,6 @@ namespace DocTemplate.View
                 {
                     textRange.Load(stream, DataFormats.Rtf);
                 }
-
                 foreach (var block in flowDocument.Blocks.Where(x => x.GetType() == typeof(Paragraph)))
                 {
                     if (new TextRange(block.ContentStart, block.ContentEnd).Text.Contains("\u2063"))
@@ -239,6 +238,7 @@ namespace DocTemplate.View
 
             return editable;
         }
+
         private string GetFieldName(string fullName)
         {
             var regex = new Regex(@"«.*»");
