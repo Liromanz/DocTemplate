@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Style="{StaticResource HorizontalScrollViewer}">
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
                 <TextBlock Text="Знакомство" Margin="40,0,40,0" MouseDown="GreetingPanelClick"/>
                 <TextBlock Text="Публичные шаблоны" Margin="40,0,40,0"  MouseDown="PublicPanelClick"/>

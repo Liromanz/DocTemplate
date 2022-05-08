@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Properties/Resources/Converters/Dictionary/ConventerDictionary.xaml"/>
 
                 <ResourceDictionary Source="Properties/Resources/Styles/ScrollViewer/DefaultScrollViewer.xaml"/>
+                <ResourceDictionary Source="Properties/Resources/Styles/ScrollViewer/HorizontalScrollViewer.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/CheckBox/DefaultCheckBox.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/RadioButton/DefaultRadioButton.xaml"/>
                 <ResourceDictionary Source="Properties/Resources/Styles/ComboBox/TransparentComboBox.xaml"/>
