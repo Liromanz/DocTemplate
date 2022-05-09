@@ -163,10 +163,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Properties\Resources\Colors\Light.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Properties\Resources\Styles\ComboBox\TransparentComboBox.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

@@ -33,7 +33,6 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <view:ColorSelector Grid.Column="0" ThemeName="Персик" BackgroundColor="#413F48" MainColor="#ED927F">
                     <view:ColorSelector.InputBindings>
@@ -53,11 +52,6 @@
                 <view:ColorSelector Grid.Column="3" ThemeName="Пляж" BackgroundColor="#464543" MainColor="#456576">
                     <view:ColorSelector.InputBindings>
                         <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Beach" Gesture="LeftClick"/>
-                    </view:ColorSelector.InputBindings>
-                </view:ColorSelector>
-                <view:ColorSelector Grid.Column="4" ThemeName="Светлый" BackgroundColor="#FFFFFF" MainColor="#999999">
-                    <view:ColorSelector.InputBindings>
-                        <MouseBinding Command="{Binding ChangeColorCommand}" CommandParameter="Light" Gesture="LeftClick"/>
                     </view:ColorSelector.InputBindings>
                 </view:ColorSelector>
             </Grid>
