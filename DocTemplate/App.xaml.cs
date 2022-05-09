@@ -3,11 +3,13 @@ using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using DocTemplate.Global.Models;
 
 namespace DocTemplate
 {
@@ -34,7 +36,7 @@ namespace DocTemplate
                     var stream = File.Create(path);
                     stream.Close();
                 }
-                DataContainers.UserGroupsModel = JsonConvert.DeserializeObject<ObservableCollection<GroupViewModel>>(File.ReadAllText(path));
+                DataContainers.UserGroupsModel = JsonConvert.DeserializeObject<ObservableCollection<GroupViewModel>>(File.ReadAllText(path)) ?? new ObservableCollection<GroupViewModel>();
             });
             groupThread.Start();
 
@@ -42,6 +44,7 @@ namespace DocTemplate
             {
                 var thread = new Thread(() =>
                 {
+                    DataContainers.PublicTemplates = new List<Template>();
                     if (DocTemplate.Properties.Settings.Default.FirstTime)
                     {
                         DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
