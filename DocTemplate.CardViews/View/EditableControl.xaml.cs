@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using DocTemplate.CardViews.View.DialogWindows;
 
 namespace DocTemplate.CardViews.View
 {
@@ -29,7 +27,7 @@ namespace DocTemplate.CardViews.View
             textBox.Style = TryFindResource("DefaultTextBox") as Style;
             textBox.Height = double.NaN;
             ControlGrid.Children.Add(textBox);
-            textBox.SetValue(Grid.RowProperty,1);
+            textBox.SetValue(Grid.RowProperty, 1);
         }
         public void AddComboBox(ComboBox comboBox)
         {

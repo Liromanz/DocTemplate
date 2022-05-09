@@ -11,8 +11,8 @@ namespace DocTemplate.Helpers
     {
         public static List<Template> PublicTemplates =>
             InternetState.IsConnectedToInternet() ?
-                JsonConvert.DeserializeObject<List<Template>>(Requests.GetRequest("Templates"))?? new List<Template>() :
-                new List<Template>() ;
+                JsonConvert.DeserializeObject<List<Template>>(Requests.GetRequest("Templates")) ?? new List<Template>() :
+                new List<Template>();
 
         public static ObservableCollection<GroupViewModel> UserGroupsModel = new ObservableCollection<GroupViewModel>();
     }

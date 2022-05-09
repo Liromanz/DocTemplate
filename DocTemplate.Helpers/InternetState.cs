@@ -3,7 +3,7 @@
 namespace DocTemplate.Helpers
 {
     public class InternetState
-    { 
+    {
         public static bool IsConnectedToInternet()
         {
             try

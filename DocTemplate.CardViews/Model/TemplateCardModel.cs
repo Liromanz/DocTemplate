@@ -1,6 +1,6 @@
-﻿using System;
-using DocTemplate.Global.Models;
+﻿using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
+using System;
 
 namespace DocTemplate.CardViews.Model
 {

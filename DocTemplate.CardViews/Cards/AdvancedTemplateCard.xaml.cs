@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using DocTemplate.Global.Models;
+﻿using DocTemplate.Global.Models;
 using DocTemplate.Helpers;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DocTemplate.CardViews.Cards
 {

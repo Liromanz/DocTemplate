@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,6 +33,6 @@ namespace DocTemplate.CardViews.View
                 currentWindow.WindowState = WindowState.Minimized;
         }
 
-        
+
     }
 }

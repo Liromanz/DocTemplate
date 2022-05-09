@@ -1,5 +1,4 @@
-﻿using System;
-using DocTemplate.CardViews.Cards;
+﻿using DocTemplate.CardViews.Cards;
 using DocTemplate.CardViews.Model;
 using DocTemplate.CardViews.View;
 using DocTemplate.CardViews.View.DialogWindows;
@@ -8,6 +7,7 @@ using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using DocTemplate.View;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;

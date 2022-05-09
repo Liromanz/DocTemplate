@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DocTemplate.CardViews.Cards;
+using DocTemplate.CardViews.View.DialogWindows;
+using DocTemplate.Helpers;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using DocTemplate.CardViews.Cards;
-using DocTemplate.CardViews.View.DialogWindows;
-using DocTemplate.Helpers;
 
 namespace DocTemplate.CardViews.View
 {
@@ -51,7 +51,8 @@ namespace DocTemplate.CardViews.View
 
         private void EditGroup(object sender, RoutedEventArgs e)
         {
-            var editDialog = new TypeInDialog{
+            var editDialog = new TypeInDialog
+            {
                 DialogName = "Редактирование группы",
                 Placeholder = "Введите имя группы",
                 ButtonText = "Изменить"
@@ -70,7 +71,7 @@ namespace DocTemplate.CardViews.View
                 Description = "Вы уверены что хотите удалить группу? Публичные шаблоны из нее будут удалены. Созданные вами шаблоны будут находится в группе \"Созданные мной\"",
             };
 
-            if(deleteDialog.ShowDialog() == true)
+            if (deleteDialog.ShowDialog() == true)
                 ButtonCommand.Execute(null);
         }
 

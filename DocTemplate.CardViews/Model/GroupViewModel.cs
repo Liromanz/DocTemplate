@@ -1,8 +1,6 @@
-﻿using System;
+﻿using DocTemplate.Global.Models;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using DocTemplate.CardViews.Cards;
-using DocTemplate.Global.Models;
 
 namespace DocTemplate.CardViews.Model
 {

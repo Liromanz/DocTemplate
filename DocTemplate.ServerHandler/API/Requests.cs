@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DocTemplate.Global;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using DocTemplate.Global;
 
 namespace DocTemplate.ServerHandler.API
 {
