@@ -15,7 +15,7 @@
         MaxWidth="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"
         Foreground="White" 
         BorderThickness="1" BorderBrush="{DynamicResource MainColor}"
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" 
+        WindowStyle="None" ResizeMode="CanResizeWithGrip"  Title="DocTemplate"
         AllowsTransparency="True"
         FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
     <Window.DataContext>

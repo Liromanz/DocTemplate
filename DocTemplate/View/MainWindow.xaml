@@ -14,7 +14,7 @@
         MaxWidth="{Binding Source={x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"
         Foreground="White" 
         BorderThickness="1" BorderBrush="{DynamicResource MainColor}"
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" 
+        WindowStyle="None" ResizeMode="CanResizeWithGrip"  Title="DocTemplate"
         AllowsTransparency="True"
         FontSize="20" Background="{DynamicResource BackgroundColor}" MouseDown="DragWindow">
     <Window.DataContext>
@@ -34,7 +34,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="DocTemplate v0.1" Padding="5" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="DocTemplate v1.0" Padding="5" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
             <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparator}" />
             <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
                 <TextBlock Text="ШАБЛОНЫ" Padding="5"/>

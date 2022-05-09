@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>DocTemplate.ico</ApplicationIcon>
+    <Authors>Sofia Skorogudaeva</Authors>
+    <Description></Description>
   </PropertyGroup>
 
   <ItemGroup>
