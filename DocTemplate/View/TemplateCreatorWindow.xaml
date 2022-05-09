@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
             <view:BackButton VerticalAlignment="Center" ButtonCommand="{Binding ReturnCommand}"/>
-            <TextBlock  Text="НАЗВАНИЕ" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock  Text="{Binding Template.Name, Mode=TwoWay}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <view:WindowManager HorizontalAlignment="Right" VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Row="1" Margin="20">

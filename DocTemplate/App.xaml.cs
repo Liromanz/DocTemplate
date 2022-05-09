@@ -3,13 +3,11 @@ using DocTemplate.Helpers;
 using DocTemplate.ServerHandler.API;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using DocTemplate.Global.Models;
 
 namespace DocTemplate
 {
@@ -29,15 +27,15 @@ namespace DocTemplate
             Color = DocTemplate.Properties.Settings.Default.AppTheme;
 
             var groupThread = new Thread(() =>
-            {
-                var path = $@"{Environment.CurrentDirectory}\UserGroupsModel.json";
-                if (!File.Exists(path))
-                {
-                    var stream = File.Create(path);
-                    stream.Close();
-                }
-                DataContainers.UserGroupsModel = JsonConvert.DeserializeObject<ObservableCollection<GroupViewModel>>(File.ReadAllText(path)) ?? new ObservableCollection<GroupViewModel>();
-            });
+                        {
+                            var path = $@"{Environment.CurrentDirectory}\UserGroupsModel.json";
+                            if (!File.Exists(path))
+                            {
+                                var stream = File.Create(path);
+                                stream.Close();
+                            }
+                            DataContainers.UserGroupsModel = JsonConvert.DeserializeObject<ObservableCollection<GroupViewModel>>(File.ReadAllText(path)) ?? new ObservableCollection<GroupViewModel>();
+                        });
             groupThread.Start();
 
             if (InternetState.IsConnectedToInternet())

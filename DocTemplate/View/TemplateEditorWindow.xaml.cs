@@ -20,7 +20,6 @@ namespace DocTemplate.View
     public partial class TemplateEditorWindow : Window
     {
         public TemplateEditorVm ViewModel => DataContext as TemplateEditorVm;
-        private CheckBox[] _imageTypes;
         private CheckBox[] _fileTypes;
         public TemplateEditorWindow()
         {
