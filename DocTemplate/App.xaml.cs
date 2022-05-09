@@ -44,7 +44,6 @@ namespace DocTemplate
             {
                 var thread = new Thread(() =>
                 {
-                    DataContainers.PublicTemplates = new List<Template>();
                     if (DocTemplate.Properties.Settings.Default.FirstTime)
                     {
                         DocTemplate.Properties.Settings.Default.Username = Requests.PostRequest("Users").Result;
