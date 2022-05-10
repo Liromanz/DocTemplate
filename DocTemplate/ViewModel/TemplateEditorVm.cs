@@ -122,10 +122,15 @@ namespace DocTemplate.ViewModel
 
         public void SerializeFieldData()
         {
-            if (FileTypes.EndsWith('|'))
-                FileTypes = FileTypes.Substring(0, FileTypes.Length - 1);
-            FieldMetadatas.First(x => x.Name == CurrentField).FileTypes = FileTypes;
-            JsonMetadata = JsonConvert.SerializeObject(FieldMetadatas);
+            if (FieldMetadatas.Any())
+            {
+                if (FileTypes.EndsWith('|'))
+                    FileTypes = FileTypes.Substring(0, FileTypes.Length - 1);
+                FieldMetadatas.FirstOrDefault(x => x.Name == CurrentField).FileTypes = FileTypes;
+                JsonMetadata = JsonConvert.SerializeObject(FieldMetadatas);
+            }
+            else
+                JsonMetadata = JsonConvert.SerializeObject("");
         }
     }
 }
