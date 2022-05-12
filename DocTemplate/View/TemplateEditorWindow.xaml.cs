@@ -135,9 +135,14 @@ namespace DocTemplate.View
             TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
             if (dialog.ShowDialog() == true)
             {
-                ViewModel.FieldMetadatas.Add(new FieldMetadata { Name = dialog.WroteText, FieldType = fieldType });
-                ViewModel.CurrentField = dialog.WroteText;
-                rtf.Selection.Text = $"\u2063{fieldTypeName} «{dialog.WroteText}»\u2063";
+                if (ViewModel.FieldMetadatas.All(x => x.Name != dialog.WroteText))
+                {
+                    ViewModel.FieldMetadatas.Add(new FieldMetadata { Name = dialog.WroteText, FieldType = fieldType });
+                    ViewModel.CurrentField = dialog.WroteText;
+                    rtf.Selection.Text = $"\u2063{fieldTypeName} «{dialog.WroteText}»\u2063";
+                }
+                else
+                    MessageBox.Show("Имя поля должно быть уникальным!");
             }
             rtf.Focus();
         }
@@ -147,7 +152,6 @@ namespace DocTemplate.View
         private void AddNumer(object sender, RoutedEventArgs e) => GenerateField("Нумерация", typeof(TextBox));
         private void AddDate(object sender, RoutedEventArgs e) => GenerateField("Дата", typeof(DatePicker));
         private void AddTextFile(object sender, RoutedEventArgs e) => GenerateField("Текстовый файл", typeof(Button));
-        private void AddImage(object sender, RoutedEventArgs e) => GenerateField("Фотография", typeof(Button));
         private void AddCheckBox(object sender, RoutedEventArgs e) => GenerateField("Множественный выбор", typeof(CheckBox));
         private void AddRadioButton(object sender, RoutedEventArgs e) => GenerateField("Единичный выбор", typeof(RadioButton));
         #endregion
