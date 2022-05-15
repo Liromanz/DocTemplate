@@ -54,6 +54,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public MyTemplatesVm()
         {
             CreateGroupCommand = new BindableCommand(x => { CreateGroup(); });
@@ -74,6 +77,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        /// <summary>
+        /// Создание новой группы
+        /// </summary>
         private void CreateGroup()
         {
             TypeInDialog dialog = new TypeInDialog
@@ -96,6 +102,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        /// <summary>
+        /// Создать карточку группы из моделей групп
+        /// </summary>
+        /// <returns>Лист с карточками групп</returns>
         private ObservableCollection<GroupView> CreateGroupsFromModel()
         {
             var userGroups = new ObservableCollection<GroupView>();
@@ -126,6 +136,11 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             return userGroups;
         }
 
+        /// <summary>
+        /// Создать карточки шаблонов из модели шаблона
+        /// </summary>
+        /// <param name="templates">Лист с шаблонами</param>
+        /// <returns>Лист с карточками шаблонов</returns>
         private ObservableCollection<TemplateCard> CreateTemplatesFromModel(List<Template> templates)
         {
             var templateCards = new ObservableCollection<TemplateCard>();
@@ -218,6 +233,11 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             return templateCards;
         }
 
+        /// <summary>
+        /// Создание модели из карточек
+        /// </summary>
+        /// <param name="cards">Карточки групп</param>
+        /// <returns>Лист с моделью групп</returns>
         public ObservableCollection<GroupViewModel> CreateModelFromCards(ObservableCollection<GroupView> cards)
         {
             var groups = new ObservableCollection<GroupViewModel>();
@@ -233,6 +253,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             return groups;
         }
 
+        /// <summary>
+        /// Обновить шаблоны
+        /// </summary>
+        /// <param name="cards">Модели шаблонов</param>
         private void RefreshTemplates(List<Template> cards)
         {
             foreach (var groupView in Cards)
@@ -245,6 +269,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        /// <summary>
+        /// Обновление шаблонов, которые были изменены без интернета
+        /// </summary>
         private void UpdateCreatedTemplates()
         {
             foreach (var template in Cards.First().GroupedTemplates.Where(x => x.TemplateInfo.NeedToUpdate))
@@ -253,6 +280,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        /// <summary>
+        /// Открытие шаблона
+        /// </summary>
+        /// <param name="templateModel">Модель шаблона</param>
         private void OpenCommand(Template templateModel)
         {
             var documentWindow = new DocumentWindow { TemplateInfo = templateModel };
@@ -263,6 +294,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             current.Close();
         }
 
+        /// <summary>
+        /// Поиск по моим шаблонам
+        /// </summary>
+        /// <returns></returns>
         private List<GroupViewModel> GetTemplateList()
         {
             var groups = DataContainers.UserGroupsModel.ToList();

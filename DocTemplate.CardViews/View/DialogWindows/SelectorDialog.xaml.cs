@@ -8,6 +8,9 @@ namespace DocTemplate.CardViews.View.DialogWindows
     /// </summary>
     public partial class SelectorDialog : Window
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public SelectorDialog()
         {
             InitializeComponent();
@@ -40,8 +43,18 @@ namespace DocTemplate.CardViews.View.DialogWindows
         public static readonly DependencyProperty ButtonTextProperty =
             DependencyProperty.Register("ButtonText", typeof(string), typeof(SelectorDialog), new UIPropertyMetadata(null));
 
+        /// <summary>
+        /// Метод для закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
 
+        /// <summary>
+        /// Метод для сохранения результатов окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
     }
 }

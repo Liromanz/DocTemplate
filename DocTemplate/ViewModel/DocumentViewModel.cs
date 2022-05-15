@@ -24,6 +24,9 @@ namespace DocTemplate.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public DocumentViewModel()
         {
             ReturnCommand = new BindableCommand(x => ReturnToWindow());
@@ -31,6 +34,9 @@ namespace DocTemplate.ViewModel
             PrintCommand = new BindableCommand(x => PrintDocument());
         }
 
+        /// <summary>
+        /// Возвращение обратно в окно
+        /// </summary>
         private void ReturnToWindow()
         {
             var window = Application.Current.MainWindow;
@@ -39,6 +45,9 @@ namespace DocTemplate.ViewModel
             window.Close();
         }
 
+        /// <summary>
+        /// Экспорт документа на компьютер
+        /// </summary>
         private void ExportDocument()
         {
             Forms.SaveFileDialog fileDialog = new Forms.SaveFileDialog();
@@ -84,6 +93,9 @@ namespace DocTemplate.ViewModel
             }
         }
 
+        /// <summary>
+        /// Печать документа
+        /// </summary>
         private void PrintDocument()
         {
             Printing.DoThePrint(ThisWindow.flowDocument);

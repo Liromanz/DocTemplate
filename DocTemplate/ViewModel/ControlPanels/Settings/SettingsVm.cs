@@ -80,6 +80,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public SettingsVm()
         {
             Username = _settings.Username;
@@ -89,20 +92,38 @@ namespace DocTemplate.ViewModel.ControlPanels.Settings
             MarkEditable = _settings.MarkEditable;
         }
 
+        /// <summary>
+        /// Изменение цвета прогарммы
+        /// </summary>
+        /// <param name="tag">Необходимый цвет</param>
         private void ChangeColor(string tag)
         {
             App.Color = tag;
         }
 
+        /// <summary>
+        /// Добавление минут в автосохранение
+        /// </summary>
         private void AddMinutes() => AutoSave += 10;
-        private void TakeMinutes() => AutoSave = AutoSave <= 0 ? AutoSave = 0 : AutoSave - 10;
 
+        /// <summary>
+        /// Вычитание минут из автосохранения
+        /// </summary>
+        private void TakeMinutes() => AutoSave = AutoSave <= 0 ? AutoSave = 0 : AutoSave - 10;
+        
+        /// <summary>
+        /// Открытие проводника для выбора пути по умолчанию
+        /// </summary>
         private void OpenFolder()
         {
             FolderBrowserDialog folder = new FolderBrowserDialog();
             if (folder.ShowDialog() == DialogResult.OK)
                 FilePath = folder.SelectedPath;
         }
+
+        /// <summary>
+        /// Сохранение настроек
+        /// </summary>
         private void SaveAll()
         {
             Thread thread = new Thread(x =>

@@ -48,6 +48,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public AllTemplatesVm()
         {
             SearchCommand = new BindableCommand(x => { FillListWithTemplate(); });
@@ -55,7 +58,9 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
 
             FillListWithTemplate();
         }
-
+        /// <summary>
+        /// Заполнение интерфейса публичными шаблонами
+        /// </summary>
         private void FillListWithTemplate()
         {
             Cards.Clear();
@@ -101,6 +106,10 @@ namespace DocTemplate.ViewModel.ControlPanels.Templates
             }
         }
 
+        /// <summary>
+        /// Поиск шаблонов по параметрам
+        /// </summary>
+        /// <returns></returns>
         private List<Template> GetTemplateList()
         {
             var templates = DataContainers.PublicTemplates;

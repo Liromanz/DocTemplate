@@ -15,6 +15,9 @@ namespace DocTemplate.CardViews.View
     [Serializable]
     public partial class GroupView : UserControl
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public GroupView()
         {
             InitializeComponent();
@@ -49,6 +52,11 @@ namespace DocTemplate.CardViews.View
             DependencyProperty.Register("GroupedTemplates", typeof(ObservableCollection<TemplateCard>), typeof(GroupView), new UIPropertyMetadata(null));
         public BindableCommand ButtonCommand { get; set; }
 
+        /// <summary>
+        /// Изменение группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditGroup(object sender, RoutedEventArgs e)
         {
             var editDialog = new TypeInDialog
@@ -62,7 +70,11 @@ namespace DocTemplate.CardViews.View
                 GroupName = editDialog.WroteText;
             }
         }
-
+        /// <summary>
+        /// Удаление группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteGroup(object sender, RoutedEventArgs e)
         {
             var deleteDialog = new YesNoDialog

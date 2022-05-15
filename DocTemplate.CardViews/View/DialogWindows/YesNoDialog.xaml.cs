@@ -7,6 +7,9 @@ namespace DocTemplate.CardViews.View.DialogWindows
     /// </summary>
     public partial class YesNoDialog : Window
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public YesNoDialog()
         {
             InitializeComponent();
@@ -29,8 +32,17 @@ namespace DocTemplate.CardViews.View.DialogWindows
         public static readonly DependencyProperty DescriptionProperty =
             DependencyProperty.Register("Description", typeof(string), typeof(YesNoDialog), new UIPropertyMetadata(null));
 
+        /// <summary>
+        /// Метод для сохранения результатов окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
-
+        /// <summary>
+        /// Метод для закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
     }
 }

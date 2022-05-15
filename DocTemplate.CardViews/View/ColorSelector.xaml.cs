@@ -6,6 +6,9 @@ namespace DocTemplate.CardViews.View
 {
     public partial class ColorSelector : UserControl
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public ColorSelector()
         {
             InitializeComponent();
@@ -36,15 +39,5 @@ namespace DocTemplate.CardViews.View
         // Using a DependencyProperty as the backing store for ThemeName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ThemeNameProperty =
             DependencyProperty.Register("ThemeName", typeof(string), typeof(ColorSelector), new UIPropertyMetadata(null));
-
-        public string ColorName
-        {
-            get => (string)GetValue(ColorNameProperty);
-            set => SetValue(ColorNameProperty, value);
-        }
-        // Using a DependencyProperty as the backing store for BackgroundColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColorNameProperty =
-            DependencyProperty.Register("ColorName", typeof(Brush), typeof(ColorSelector), new UIPropertyMetadata(null));
-
     }
 }

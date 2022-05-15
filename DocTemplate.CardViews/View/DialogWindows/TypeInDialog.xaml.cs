@@ -7,6 +7,9 @@ namespace DocTemplate.CardViews.View.DialogWindows
     /// </summary>
     public partial class TypeInDialog : Window
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public TypeInDialog()
         {
             InitializeComponent();
@@ -56,8 +59,18 @@ namespace DocTemplate.CardViews.View.DialogWindows
         public static readonly DependencyProperty ButtonTextProperty =
             DependencyProperty.Register("ButtonText", typeof(string), typeof(TypeInDialog), new UIPropertyMetadata(null));
 
+        /// <summary>
+        /// Метод для закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseDialog(object sender, RoutedEventArgs e) => Close();
 
+        /// <summary>
+        /// Метод для сохранения результатов окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OkDialog(object sender, RoutedEventArgs e) => DialogResult = true;
     }
 }

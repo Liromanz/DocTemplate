@@ -10,6 +10,9 @@ namespace DocTemplate.CardViews.Cards
     /// </summary>
     public partial class AdvancedTemplateCard : UserControl
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public AdvancedTemplateCard()
         {
             InitializeComponent();

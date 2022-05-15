@@ -6,6 +6,10 @@ namespace DocTemplate.Helpers
 {
     public class Printing
     {
+        /// <summary>
+        /// Метод для печати
+        /// </summary>
+        /// <param name="document">Текстовый редактор</param>
         public static void DoThePrint(FlowDocument document)
         {
             System.IO.MemoryStream s = new System.IO.MemoryStream();

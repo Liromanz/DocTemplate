@@ -9,6 +9,9 @@ namespace DocTemplate.CardViews.View
     /// </summary>
     public partial class BackButton : UserControl
     {
+        /// <summary>
+        /// Метод для инициализации пользовательского элемента
+        /// </summary>
         public BackButton()
         {
             InitializeComponent();

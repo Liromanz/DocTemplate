@@ -110,6 +110,9 @@ namespace DocTemplate.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public TemplateCreatorVm()
         {
             Template = new Template { IdUser = Properties.Settings.Default.UserID };
@@ -129,6 +132,9 @@ namespace DocTemplate.ViewModel
             }
         }
 
+        /// <summary>
+        /// Добавление пользователя редактора
+        /// </summary>
         private void AddEditor()
         {
             if (Usernames.Contains(EditorToAdd))
@@ -137,6 +143,9 @@ namespace DocTemplate.ViewModel
                 MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона или проверьте подключение к интернету.\nБез интернета можно выбрать только свойство \"Все\" или \"Только я\"");
         }
 
+        /// <summary>
+        /// Добавление пользователя просмотрщика
+        /// </summary>
         private void AddUser()
         {
             if (Usernames.Contains(UserToAdd))
@@ -145,6 +154,9 @@ namespace DocTemplate.ViewModel
                 MessageBox.Show("Такого пользователя нет. Если вы уверены, что он есть, перезайдите в окно создания шаблона или проверьте подключение к интернету.\nБез интернета можно выбрать только свойство \"Все\" или \"Только я\"");
         }
 
+        /// <summary>
+        /// Открытие текстового редактора
+        /// </summary>
         private void OpenEditor()
         {
             var editor = new TemplateEditorWindow();
@@ -160,6 +172,9 @@ namespace DocTemplate.ViewModel
             ThisWindow.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Сохранение и выход
+        /// </summary>
         private void SaveAndExit()
         {
             var validation = ValidationErrorMessage();
@@ -199,6 +214,9 @@ namespace DocTemplate.ViewModel
             ThisWindow.Close();
         }
 
+        /// <summary>
+        /// Возвращение в первоначальное окно
+        /// </summary>
         private void ReturnToWindow()
         {
             Application.Current.MainWindow = new MainWindow();
@@ -206,6 +224,10 @@ namespace DocTemplate.ViewModel
             ThisWindow.Close();
         }
 
+        /// <summary>
+        /// Валидация модели
+        /// </summary>
+        /// <returns>Сообщение о валидации</returns>
         private string ValidationErrorMessage()
         {
             if (Template.Name.Length < 3 || Template.Name.Length > 255) return "Поле \"Имя\" должно иметь длину не менее 3 символов и не более 100";
@@ -215,6 +237,12 @@ namespace DocTemplate.ViewModel
             return String.Empty;
         }
 
+        /// <summary>
+        /// Парсер доступности шаблона
+        /// </summary>
+        /// <param name="permission">Разрешение</param>
+        /// <param name="typePermission">Тип разрешения</param>
+        /// <returns></returns>
         private string ParceTemplate(string permission, string typePermission)
         {
             switch (permission)

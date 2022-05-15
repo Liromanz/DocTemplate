@@ -7,6 +7,9 @@ namespace DocTemplate.View.ControlPanels.Templates
     /// </summary>
     public partial class AllTemplatesPanel : UserControl
     {
+        /// <summary>
+        /// Метод для инициализации панели
+        /// </summary>
         public AllTemplatesPanel()
         {
             InitializeComponent();

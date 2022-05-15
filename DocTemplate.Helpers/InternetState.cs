@@ -4,6 +4,10 @@ namespace DocTemplate.Helpers
 {
     public class InternetState
     {
+        /// <summary>
+        /// Проверка подключения компьютера к интернету
+        /// </summary>
+        /// <returns>Ответ да-нет</returns>
         public static bool IsConnectedToInternet()
         {
             try

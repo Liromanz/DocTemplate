@@ -11,6 +11,9 @@ namespace DocTemplate.View.ControlPanels.Templates
     {
         public MyTemplatesVm ViewModel => DataContext as MyTemplatesVm;
 
+        /// <summary>
+        /// Метод для инициализации панели
+        /// </summary>
         public MyTemplatesPanel()
         {
             Unloaded += (sender, args) => DataContainers.UserGroupsModel = ViewModel.CreateModelFromCards(ViewModel.Cards);

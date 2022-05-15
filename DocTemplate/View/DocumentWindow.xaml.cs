@@ -24,6 +24,9 @@ namespace DocTemplate.View
     {
         public DocumentViewModel ViewModel => DataContext as DocumentViewModel;
 
+        /// <summary>
+        /// Метод для инициализации окна
+        /// </summary>
         public DocumentWindow()
         {
             InitializeComponent();
@@ -43,12 +46,21 @@ namespace DocTemplate.View
         public static readonly DependencyProperty TemplateInfoProperty =
             DependencyProperty.Register("TemplateInfo", typeof(Template), typeof(DocumentWindow), new UIPropertyMetadata(null));
 
+        /// <summary>
+        /// Метод для переноса окна мышкой
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
 
+        /// <summary>
+        /// Выгрузка RTF текста в FlowDocument
+        /// </summary>
+        /// <param name="text">RTF текст</param>
         public void SetDataIntoFlowDocument(string text)
         {
             if (!string.IsNullOrEmpty(text))
@@ -66,6 +78,10 @@ namespace DocTemplate.View
             }
         }
 
+        /// <summary>
+        /// Создание изменяемого поля
+        /// </summary>
+        /// <param name="block">Блок, куда должно быть вставлено поле</param>
         private void CreateEditableField(Block block)
         {
             var editable = SelectFieldType(new TextRange(block.ContentStart, block.ContentEnd));
@@ -73,6 +89,11 @@ namespace DocTemplate.View
             StackPanel.Children.Add(editable);
         }
 
+        /// <summary>
+        /// Определение типа изменяемого поля
+        /// </summary>
+        /// <param name="txtRange">Текст, где находится изменяемое поле</param>
+        /// <returns>Готовое изменяемое поле</returns>
         private EditableControl SelectFieldType(TextRange txtRange)
         {
             var textBlocks = txtRange.Text.Split("\u2063");
@@ -239,6 +260,11 @@ namespace DocTemplate.View
             return editable;
         }
 
+        /// <summary>
+        /// Взятие имени поля из текста
+        /// </summary>
+        /// <param name="fullName">Текст, откуда идет взятие</param>
+        /// <returns>Имя изменяемого поля</returns>
         private string GetFieldName(string fullName)
         {
             var regex = new Regex(@"«.*»");

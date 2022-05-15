@@ -99,12 +99,18 @@ namespace DocTemplate.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public TemplateEditorVm()
         {
             ImportDocxCommand = new BindableCommand(o => ImportDocx());
             ReturnCommand = new BindableCommand(o => ReturnToWindow());
         }
 
+        /// <summary>
+        /// Импорт документа
+        /// </summary>
         private void ImportDocx()
         {
             Forms.OpenFileDialog fileDialog = new Forms.OpenFileDialog();
@@ -115,11 +121,17 @@ namespace DocTemplate.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возврат на окно
+        /// </summary>
         private void ReturnToWindow()
         {
             Application.Current.Windows.OfType<Window>().Single(x => x.IsActive).Close();
         }
 
+        /// <summary>
+        /// Сериализация данных о полях
+        /// </summary>
         public void SerializeFieldData()
         {
             if (FieldMetadatas.Any())

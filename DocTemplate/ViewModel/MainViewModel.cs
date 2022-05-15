@@ -24,7 +24,7 @@ namespace DocTemplate.ViewModel
         private bool _nothingSelected;
         public bool NothingSelected
         {
-            get { return _nothingSelected; }
+            get => _nothingSelected;
             set
             {
                 _nothingSelected = value;
@@ -43,7 +43,9 @@ namespace DocTemplate.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Класс для связи модели с окном
+        /// </summary>
         public MainViewModel()
         {
             NothingSelected = true;
@@ -58,6 +60,10 @@ namespace DocTemplate.ViewModel
             HelpCommand = new BindableCommand(o => { ChangeCurrentView(HelpVm); });
         }
 
+        /// <summary>
+        /// Изменение модели для отображения
+        /// </summary>
+        /// <param name="viewToChange">Модель для отображения</param>
         private void ChangeCurrentView(object viewToChange)
         {
             CurrentView = viewToChange;

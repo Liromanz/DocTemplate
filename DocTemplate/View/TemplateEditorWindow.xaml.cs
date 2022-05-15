@@ -21,6 +21,10 @@ namespace DocTemplate.View
     {
         public TemplateEditorVm ViewModel => DataContext as TemplateEditorVm;
         private CheckBox[] _fileTypes;
+
+        /// <summary>
+        /// Метод для инициализации окна
+        /// </summary>
         public TemplateEditorWindow()
         {
             InitializeComponent();
@@ -30,17 +34,33 @@ namespace DocTemplate.View
                 FontCB.Items.Add(fontFamily);
         }
 
+        /// <summary>
+        /// Метод для переноса окна мышкой
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
 
+        /// <summary>
+        /// Закрытие окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoBack(object sender, RoutedEventArgs e)
         {
             ViewModel.SerializeFieldData();
             DialogResult = true;
         }
+
+        /// <summary>
+        /// Перемещение курсора и переключение интерфейса в зависимости от позиции курсора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CursorChanged(object sender, RoutedEventArgs e)
         {
             var fullText = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd).Text;
@@ -71,12 +91,22 @@ namespace DocTemplate.View
 
         #region Изменение RTF
 
+        /// <summary>
+        /// Проверка на то, что в текстовое поле можно вводить только цифры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckNumeric(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Изменение шрифта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeFontFamily(object sender, SelectionChangedEventArgs e)
         {
             if (FontCB.SelectedIndex != -1 && !rtf.Selection.IsEmpty)
@@ -84,6 +114,11 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
+        /// <summary>
+        /// Изменение фонового цвета текста
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeBackgroundColor(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             if (SelectionCB.SelectedColor != null && !rtf.Selection.IsEmpty)
@@ -91,6 +126,11 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
+        /// <summary>
+        /// Изменение цвета текста
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeForegroundColor(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             if (TextCB.SelectedColor != null && !rtf.Selection.IsEmpty)
@@ -98,6 +138,11 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
+        /// <summary>
+        /// Изменение размера шрифта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeFontSize(object sender, RoutedEventArgs e)
         {
             if (SizeTB.Text != String.Empty && !rtf.Selection.IsEmpty)
@@ -105,6 +150,11 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
+        /// <summary>
+        /// Изменение межстрочного интервала
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeLineSeparation(object sender, SelectionChangedEventArgs e)
         {
             if (rtf != null && !rtf.Selection.IsEmpty)
@@ -119,6 +169,11 @@ namespace DocTemplate.View
             }
         }
 
+        /// <summary>
+        /// Изменение зачеркнутости текста
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeStrikethrough(object sender, RoutedEventArgs e)
         {
             if (!rtf.Selection.IsEmpty)
@@ -130,6 +185,11 @@ namespace DocTemplate.View
 
         #region Создание пунктов
 
+        /// <summary>
+        /// Создание изменяемого поля в текста
+        /// </summary>
+        /// <param name="fieldTypeName">Имя типа поля</param>
+        /// <param name="fieldType">Тип поля</param>
         private void GenerateField(string fieldTypeName, Type fieldType)
         {
             TypeInDialog dialog = new TypeInDialog { DialogName = "Добавление нового поля", Placeholder = "Введите название этого поля. Для чего оно нужно?", ButtonText = "Создать" };
@@ -147,6 +207,9 @@ namespace DocTemplate.View
             rtf.Focus();
         }
 
+        /// <summary>
+        /// Добавление различных полей в зависимости от нажатой кнопки
+        /// </summary>
         private void AddTextBox(object sender, RoutedEventArgs e) => GenerateField("Текстовое поле", typeof(TextBox));
         private void AddComboBox(object sender, RoutedEventArgs e) => GenerateField("Список", typeof(ComboBox));
         private void AddNumer(object sender, RoutedEventArgs e) => GenerateField("Нумерация", typeof(TextBox));
@@ -157,6 +220,11 @@ namespace DocTemplate.View
         #endregion
 
         #region Редактирование полей
+        /// <summary>
+        /// Изменение имени поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditFieldName(object sender, RoutedEventArgs e)
         {
             TypeInDialog dialog = new TypeInDialog
@@ -183,6 +251,12 @@ namespace DocTemplate.View
             }
 
         }
+
+        /// <summary>
+        /// Удаление поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteField(object sender, RoutedEventArgs e)
         {
             var deleteDialog = new YesNoDialog
@@ -206,12 +280,19 @@ namespace DocTemplate.View
         }
         #endregion
 
+        /// <summary>
+        /// Взятие имени поля из текста
+        /// </summary>
+        /// <returns>Имя изменяемого поля</returns>
         private string GetFieldName()
         {
             var regex = new Regex(@"«.*»");
             return regex.Match(FieldNameTxt.Text).Value.Replace("«", "").Replace("»", "");
         }
 
+        /// <summary>
+        /// Настройка интерфейса в зависимости от типа изменяемого поля
+        /// </summary>
         private void SetInterfaceByType()
         {
             NumerTypePanel.Visibility = Visibility.Collapsed;
@@ -255,6 +336,11 @@ namespace DocTemplate.View
             }
         }
 
+        /// <summary>
+        /// Выделение всех типов файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddFileType(object sender, RoutedEventArgs e)
         {
             ViewModel.FileTypes += (sender as CheckBox).Content + "|";

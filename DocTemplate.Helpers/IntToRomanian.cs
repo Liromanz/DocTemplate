@@ -2,6 +2,11 @@
 {
     public static class IntToRomanian
     {
+        /// <summary>
+        /// Конвертер арабских цифр в римские
+        /// </summary>
+        /// <param name="num">Арабский номер</param>
+        /// <returns>Римский номер</returns>
         public static string IntToRoman(int num)
         {
             string romanResult = string.Empty;

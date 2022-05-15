@@ -20,6 +20,9 @@ namespace DocTemplate
         public static event EventHandler ColorChanged;
         #endregion
 
+        /// <summary>
+        /// Метод для старта программы
+        /// </summary>
         public App()
         {
             InitializeComponent();
@@ -72,11 +75,23 @@ namespace DocTemplate
                 ColorChanged(Application.Current, new EventArgs());
             }
         }
+
+        /// <summary>
+        /// Изменение цвета программы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void App_ColorChanged(Object sender, EventArgs e)
         {
             DocTemplate.Properties.Settings.Default.AppTheme = Color;
             DocTemplate.Properties.Settings.Default.Save();
         }
+
+        /// <summary>
+        /// Изменение ресурса для чтения цвета
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="startswith"></param>
         private static void ChangeDictionary(ResourceDictionary dict, string startswith)
         {
             var oldDict = (from d in Current.Resources.MergedDictionaries
@@ -93,6 +108,11 @@ namespace DocTemplate
         }
 
 
+        /// <summary>
+        /// Событие при закрытии приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void App_OnExit(object sender, ExitEventArgs e)
         {
             File.WriteAllText($@"{Environment.CurrentDirectory}\UserGroupsModel.json",
